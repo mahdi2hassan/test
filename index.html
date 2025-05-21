@@ -163,6 +163,14 @@
             margin-bottom: 15px;
             padding: 10px;
             font-size: 1rem;
+            border: 1px solid #ced4da;
+        }
+
+        .form-group label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2a5298;
+            margin-bottom: 5px;
         }
 
         .btn-success {
@@ -178,6 +186,13 @@
 
         .btn-success:hover {
             background: #218838;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9rem;
+            display: none;
+            margin-top: 5px;
         }
 
         /* Footer */
@@ -278,13 +293,21 @@
                                                                             <button type="button" class="close" data-dismiss="modal">×</button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <select name="ctl00$ContentPlaceHolder1$PrepCatDropDown" id="ContentPlaceHolder1_PrepCatDropDown" class="form-control">
-                                                                                <option value="0">--اختر المرحلة--</option>
-                                                                                <option value="1">الصف الأول الإعدادي</option>
-                                                                                <option value="2">الصف الثاني الإعدادي</option>
-                                                                                <option value="3">الصف الثالث الإعدادي</option>
-                                                                            </select>
-                                                                            <input name="ctl00$ContentPlaceHolder1$PrepTxtCode" type="text" id="ContentPlaceHolder1_PrepTxtCode" class="form-control" placeholder="الكود" required>
+                                                                            <div class="form-group">
+                                                                                <label for="ContentPlaceHolder1_PrepCatDropDown">اختر المرحلة</label>
+                                                                                <select name="ctl00$ContentPlaceHolder1$PrepCatDropDown" id="ContentPlaceHolder1_PrepCatDropDown" class="form-control">
+                                                                                    <option value="0">--اختر المرحلة--</option>
+                                                                                    <option value="1">الصف الأول الإعدادي</option>
+                                                                                    <option value="2">الصف الثاني الإعدادي</option>
+                                                                                    <option value="3">الصف الثالث الإعدادي</option>
+                                                                                </select>
+                                                                                <div class="error-message" id="prep-stage-error">يرجى اختيار المرحلة</div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="ContentPlaceHolder1_PrepTxtCode">الكود</label>
+                                                                                <input name="ctl00$ContentPlaceHolder1$PrepTxtCode" type="text" id="ContentPlaceHolder1_PrepTxtCode" class="form-control" placeholder="أدخل الكود" required>
+                                                                                <div class="error-message" id="prep-code-error">يرجى إدخال الكود</div>
+                                                                            </div>
                                                                             <input type="submit" name="ctl00$ContentPlaceHolder1$PrepBtnSubmit" value="تسجيل" id="ContentPlaceHolder1_PrepBtnSubmit" class="btn btn-success">
                                                                         </div>
                                                                     </div>
@@ -309,13 +332,21 @@
                                                                             <button type="button" class="close" data-dismiss="modal">×</button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <select name="ctl00$ContentPlaceHolder1$SecCatDropDown" id="ContentPlaceHolder1_SecCatDropDown" class="form-control">
-                                                                                <option value="0">--اختر المرحلة--</option>
-                                                                                <option value="1">الصف الأول الثانوي</option>
-                                                                                <option value="2">الصف الثاني الثانوي</option>
-                                                                                <option value="3">الصف الثالث الثانوي</option>
-                                                                            </select>
-                                                                            <input name="ctl00$ContentPlaceHolder1$SecTxtCode" type="text" id="ContentPlaceHolder1_SecTxtCode" class="form-control" placeholder="الكود" required>
+                                                                            <div class="form-group">
+                                                                                <label for="ContentPlaceHolder1_SecCatDropDown">اختر المرحلة</label>
+                                                                                <select name="ctl00$ContentPlaceHolder1$SecCatDropDown" id="ContentPlaceHolder1_SecCatDropDown" class="form-control">
+                                                                                    <option value="0">--اختر المرحلة--</option>
+                                                                                    <option value="1">الصف الأول الثانوي</option>
+                                                                                    <option value="2">الصف الثاني الثانوي</option>
+                                                                                    <option value="3">الصف الثالث الثانوي</option>
+                                                                                </select>
+                                                                                <div class="error-message" id="sec-stage-error">يرجى اختيار المرحلة</div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="ContentPlaceHolder1_SecTxtCode">الكود</label>
+                                                                                <input name="ctl00$ContentPlaceHolder1$SecTxtCode" type="text" id="ContentPlaceHolder1_SecTxtCode" class="form-control" placeholder="أدخل الكود" required>
+                                                                                <div class="error-message" id="sec-code-error">يرجى إدخال الكود</div>
+                                                                            </div>
                                                                             <input type="submit" name="ctl00$ContentPlaceHolder1$SecBtnSubmit" value="تسجيل" id="ContentPlaceHolder1_SecBtnSubmit" class="btn btn-success">
                                                                         </div>
                                                                     </div>
@@ -378,6 +409,54 @@
             }
             
             setInterval(rotateWords, 3000); // Rotate every 3 seconds
+
+            // Form validation for preparatory modal
+            $('#ContentPlaceHolder1_PrepBtnSubmit').click(function(e) {
+                const stage = $('#ContentPlaceHolder1_PrepCatDropDown').val();
+                const code = $('#ContentPlaceHolder1_PrepTxtCode').val().trim();
+                let valid = true;
+
+                // Reset error messages
+                $('#prep-stage-error').hide();
+                $('#prep-code-error').hide();
+
+                if (stage === '0') {
+                    $('#prep-stage-error').show();
+                    valid = false;
+                }
+                if (!code) {
+                    $('#prep-code-error').show();
+                    valid = false;
+                }
+
+                if (!valid) {
+                    e.preventDefault(); // Prevent form submission if validation fails
+                }
+            });
+
+            // Form validation for secondary modal
+            $('#ContentPlaceHolder1_SecBtnSubmit').click(function(e) {
+                const stage = $('#ContentPlaceHolder1_SecCatDropDown').val();
+                const code = $('#ContentPlaceHolder1_SecTxtCode').val().trim();
+                let valid = true;
+
+                // Reset error messages
+                $('#sec-stage-error').hide();
+                $('#sec-code-error').hide();
+
+                if (stage === '0') {
+                    $('#sec-stage-error').show();
+                    valid = false;
+                }
+                if (!code) {
+                    $('#sec-code-error').show();
+                    valid = false;
+                }
+
+                if (!valid) {
+                    e.preventDefault(); // Prevent form submission if validation fails
+                }
+            });
         });
     </script>
 </body>
