@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -17,11 +17,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <style>
+        :root {
+            --primary: #1e3c72;
+            --secondary: #2a5298;
+            --accent: #ffd700;
+            --text: #ffffff;
+            --background: #f4f6f9;
+        }
+
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f4f6f9;
+            background-color: var(--background);
             direction: rtl;
             text-align: right;
+            margin: 0;
+            overflow-x: hidden;
         }
 
         /* Banner Section */
@@ -29,43 +39,49 @@
             position: relative;
             width: 100%;
             height: 100vh;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .background-area img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.3;
+            opacity: 0.2;
             position: absolute;
             top: 0;
             left: 0;
+            z-index: 0;
         }
 
         .banner-content {
             position: relative;
             z-index: 1;
-            color: #fff;
+            color: var(--text);
             text-align: center;
-            padding-top: 10vh;
+            padding: 20px;
         }
 
         .banner-content .logo {
-            width: 120px;
+            width: 150px;
             height: auto;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
         }
 
         .banner-content h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         .banner-content h1 .cd-words-wrapper {
             display: inline-block;
-            color: #ffd700;
+            color: var(--accent);
             position: relative;
             vertical-align: middle;
         }
@@ -76,116 +92,164 @@
             white-space: nowrap;
             top: 0;
             right: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         .cd-words-wrapper b.is-visible {
             display: inline-block;
             position: relative;
             opacity: 1;
-            animation: fadeIn 0.5s ease-in-out;
+            transform: translateY(0);
+            animation: slideIn 0.5s ease-in-out;
         }
 
-        @keyframes fadeIn {
+        @keyframes slideIn {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
         /* Course Selection Cards */
+        .choose-course-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
         .choose-course-wrapper .item-course {
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 25px;
             margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .choose-course-wrapper .item-course:hover {
             transform: translateY(-10px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
         }
 
         .icon-circle {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .icon-background {
-            background: #2a5298;
-            width: 60px;
-            height: 60px;
+            background: var(--secondary);
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
-            font-size: 1.8rem;
-            transition: background 0.3s ease;
+            color: var(--text);
+            font-size: 2rem;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
         .item-course:hover .icon-background {
-            background: #1e3c72;
+            background: var(--primary);
+            transform: scale(1.1);
         }
 
         .name-course a {
-            color: #2a5298;
-            font-weight: 600;
+            color: var(--secondary);
+            font-weight: 700;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            transition: color 0.3s ease;
         }
 
         .name-course a:hover {
-            color: #1e3c72;
+            color: var(--primary);
         }
 
         /* Modal Styling */
         .modal-content {
-            border-radius: 15px;
-            padding: 20px;
-            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            border: none;
         }
 
         .modal-header {
             border-bottom: none;
             justify-content: flex-end;
+            position: relative;
         }
 
         .modal-title {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            color: #2a5298;
+            color: var(--primary);
             width: 100%;
             text-align: center;
         }
 
-        .form-control {
-            border-radius: 10px;
-            margin-bottom: 15px;
-            padding: 10px;
-            font-size: 1rem;
-            border: 1px solid #ced4da;
+        .modal-body {
+            padding: 20px;
         }
 
         .form-group label {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            color: #2a5298;
-            margin-bottom: 5px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            margin-bottom: 20px;
+            padding: 12px;
+            font-size: 1.1rem;
+            border: 1px solid var(--secondary);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 8px rgba(30, 60, 114, 0.3);
         }
 
         .btn-success {
             background: #28a745;
             border: none;
-            border-radius: 10px;
-            padding: 10px 20px;
-            font-size: 1rem;
+            border-radius: 12px;
+            padding: 12px;
+            font-size: 1.1rem;
             font-weight: 600;
-            transition: background 0.3s ease;
             width: 100%;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s ease;
         }
 
         .btn-success:hover {
             background: #218838;
+        }
+
+        .btn-success.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #fff;
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
         .error-message {
@@ -197,49 +261,54 @@
 
         /* Footer */
         .footer {
-            background: #2a5298;
-            color: #fff;
-            padding: 20px 0;
+            background: var(--primary);
+            color: var(--text);
+            padding: 30px 0;
             text-align: center;
+            font-size: 1rem;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .footer .col-md-6 {
-            font-size: 0.9rem;
             margin-bottom: 10px;
         }
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             .banner-content h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
 
             .banner-content .logo {
-                width: 100px;
+                width: 120px;
             }
 
-            .choose-course-wrapper .item-course {
-                padding: 15px;
+            .choose-course-wrapper {
+                grid-template-columns: 1fr;
             }
 
             .icon-background {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
             }
         }
 
         @media (max-width: 576px) {
             .banner-content h1 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
 
             .banner-content {
-                padding-top: 5vh;
+                padding-top: 8vh;
             }
 
-            .footer .col-md-6 {
-                font-size: 0.8rem;
+            .modal-content {
+                padding: 20px;
+            }
+
+            .footer {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -267,6 +336,7 @@
                                             <span class="cd-words-wrapper">
                                                 <b class="is-visible">منصة التعليم الحديث</b>
                                                 <b>اختار المرحلة</b>
+                                                <b>تعلم بسهولة وسرعة</b>
                                             </span>
                                         </h1>
                                     </div>
@@ -276,40 +346,38 @@
                                 <div class="banner-readmore">
                                     <div class="section section-padding choose-course">
                                         <div class="container">
-                                            <div class="choose-course-wrapper row">
+                                            <div class="choose-course-wrapper">
                                                 <!-- Preparatory Stage Login -->
-                                                <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <div class="item-course item-1">
-                                                        <div class="icon-circle">
-                                                            <div class="icon-background"><i class="fas fa-graduation-cap"></i></div>
-                                                        </div>
-                                                        <div class="name-course">
-                                                            <a class="login-trigger" href="#" data-target="#preparatory-login" data-toggle="modal">تسجيل دخول المرحلة الإعدادية</a>
-                                                            <div id="preparatory-login" class="modal fade" role="dialog">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h4 class="modal-title">تسجيل الدخول للمرحلة الإعدادية</h4>
-                                                                            <button type="button" class="close" data-dismiss="modal">×</button>
+                                                <div class="item-course item-1">
+                                                    <div class="icon-circle">
+                                                        <div class="icon-background"><i class="fas fa-graduation-cap"></i></div>
+                                                    </div>
+                                                    <div class="name-course">
+                                                        <a class="login-trigger" href="#" data-target="#preparatory-login" data-toggle="modal">تسجيل دخول المرحلة الإعدادية</a>
+                                                        <div id="preparatory-login" class="modal fade" role="dialog">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title">تسجيل الدخول للمرحلة الإعدادية</h4>
+                                                                        <button type="button" class="close" data-dismiss="modal">×</button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="form-group">
+                                                                            <label for="ContentPlaceHolder1_PrepCatDropDown">اختر المرحلة</label>
+                                                                            <select name="ctl00$ContentPlaceHolder1$PrepCatDropDown" id="ContentPlaceHolder1_PrepCatDropDown" class="form-control">
+                                                                                <option value="0">--اختر المرحلة--</option>
+                                                                                <option value="1">الصف الأول الإعدادي</option>
+                                                                                <option value="2">الصف الثاني الإعدادي</option>
+                                                                                <option value="3">الصف الثالث الإعدادي</option>
+                                                                            </select>
+                                                                            <div class="error-message" id="prep-stage-error">يرجى اختيار المرحلة</div>
                                                                         </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="form-group">
-                                                                                <label for="ContentPlaceHolder1_PrepCatDropDown">اختر المرحلة</label>
-                                                                                <select name="ctl00$ContentPlaceHolder1$PrepCatDropDown" id="ContentPlaceHolder1_PrepCatDropDown" class="form-control">
-                                                                                    <option value="0">--اختر المرحلة--</option>
-                                                                                    <option value="1">الصف الأول الإعدادي</option>
-                                                                                    <option value="2">الصف الثاني الإعدادي</option>
-                                                                                    <option value="3">الصف الثالث الإعدادي</option>
-                                                                                </select>
-                                                                                <div class="error-message" id="prep-stage-error">يرجى اختيار المرحلة</div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="ContentPlaceHolder1_PrepTxtCode">الكود</label>
-                                                                                <input name="ctl00$ContentPlaceHolder1$PrepTxtCode" type="text" id="ContentPlaceHolder1_PrepTxtCode" class="form-control" placeholder="أدخل الكود" required>
-                                                                                <div class="error-message" id="prep-code-error">يرجى إدخال الكود</div>
-                                                                            </div>
-                                                                            <input type="submit" name="ctl00$ContentPlaceHolder1$PrepBtnSubmit" value="تسجيل" id="ContentPlaceHolder1_PrepBtnSubmit" class="btn btn-success">
+                                                                        <div class="form-group">
+                                                                            <label for="ContentPlaceHolder1_PrepTxtCode">الكود</label>
+                                                                            <input name="ctl00$ContentPlaceHolder1$PrepTxtCode" type="text" id="ContentPlaceHolder1_PrepTxtCode" class="form-control" placeholder="أدخل الكود" required>
+                                                                            <div class="error-message" id="prep-code-error">يرجى إدخال الكود</div>
                                                                         </div>
+                                                                        <input type="submit" name="ctl00$ContentPlaceHolder1$PrepBtnSubmit" value="تسجيل" id="ContentPlaceHolder1_PrepBtnSubmit" class="btn btn-success">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -317,38 +385,36 @@
                                                     </div>
                                                 </div>
                                                 <!-- Secondary Stage Login -->
-                                                <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <div class="item-course item-2">
-                                                        <div class="icon-circle">
-                                                            <div class="icon-background"><i class="fas fa-graduation-cap"></i></div>
-                                                        </div>
-                                                        <div class="name-course">
-                                                            <a class="login-trigger" href="#" data-target="#secondary-login" data-toggle="modal">تسجيل دخول المرحلة الثانوية</a>
-                                                            <div id="secondary-login" class="modal fade" role="dialog">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h4 class="modal-title">تسجيل الدخول للمرحلة الثانوية</h4>
-                                                                            <button type="button" class="close" data-dismiss="modal">×</button>
+                                                <div class="item-course item-2">
+                                                    <div class="icon-circle">
+                                                        <div class="icon-background"><i class="fas fa-graduation-cap"></i></div>
+                                                    </div>
+                                                    <div class="name-course">
+                                                        <a class="login-trigger" href="#" data-target="#secondary-login" data-toggle="modal">تسجيل دخول المرحلة الثانوية</a>
+                                                        <div id="secondary-login" class="modal fade" role="dialog">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title">تسجيل الدخول للمرحلة الثانوية</h4>
+                                                                        <button type="button" class="close" data-dismiss="modal">×</button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="form-group">
+                                                                            <label for="ContentPlaceHolder1_SecCatDropDown">اختر المرحلة</label>
+                                                                            <select name="ctl00$ContentPlaceHolder1$SecCatDropDown" id="ContentPlaceHolder1_SecCatDropDown" class="form-control">
+                                                                                <option value="0">--اختر المرحلة--</option>
+                                                                                <option value="1">الصف الأول الثانوي</option>
+                                                                                <option value="2">الصف الثاني الثانوي</option>
+                                                                                <option value="3">الصف الثالث الثانوي</option>
+                                                                            </select>
+                                                                            <div class="error-message" id="sec-stage-error">يرجى اختيار المرحلة</div>
                                                                         </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="form-group">
-                                                                                <label for="ContentPlaceHolder1_SecCatDropDown">اختر المرحلة</label>
-                                                                                <select name="ctl00$ContentPlaceHolder1$SecCatDropDown" id="ContentPlaceHolder1_SecCatDropDown" class="form-control">
-                                                                                    <option value="0">--اختر المرحلة--</option>
-                                                                                    <option value="1">الصف الأول الثانوي</option>
-                                                                                    <option value="2">الصف الثاني الثانوي</option>
-                                                                                    <option value="3">الصف الثالث الثانوي</option>
-                                                                                </select>
-                                                                                <div class="error-message" id="sec-stage-error">يرجى اختيار المرحلة</div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="ContentPlaceHolder1_SecTxtCode">الكود</label>
-                                                                                <input name="ctl00$ContentPlaceHolder1$SecTxtCode" type="text" id="ContentPlaceHolder1_SecTxtCode" class="form-control" placeholder="أدخل الكود" required>
-                                                                                <div class="error-message" id="sec-code-error">يرجى إدخال الكود</div>
-                                                                            </div>
-                                                                            <input type="submit" name="ctl00$ContentPlaceHolder1$SecBtnSubmit" value="تسجيل" id="ContentPlaceHolder1_SecBtnSubmit" class="btn btn-success">
+                                                                        <div class="form-group">
+                                                                            <label for="ContentPlaceHolder1_SecTxtCode">الكود</label>
+                                                                            <input name="ctl00$ContentPlaceHolder1$SecTxtCode" type="text" id="ContentPlaceHolder1_SecTxtCode" class="form-control" placeholder="أدخل الكود" required>
+                                                                            <div class="error-message" id="sec-code-error">يرجى إدخال الكود</div>
                                                                         </div>
+                                                                        <input type="submit" name="ctl00$ContentPlaceHolder1$SecBtnSubmit" value="تسجيل" id="ContentPlaceHolder1_SecBtnSubmit" class="btn btn-success">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -356,14 +422,12 @@
                                                     </div>
                                                 </div>
                                                 <!-- Instructions -->
-                                                <div class="col-md-4 col-sm-6 col-xs-12">
-                                                    <div class="item-course item-3">
-                                                        <div class="icon-circle">
-                                                            <div class="icon-background"><i class="fas fa-info"></i></div>
-                                                        </div>
-                                                        <div class="name-course">
-                                                            <a href="StudentGuide.pdf" target="_blank">تعليمات الاستخدام</a>
-                                                        </div>
+                                                <div class="item-course item-3">
+                                                    <div class="icon-circle">
+                                                        <div class="icon-background"><i class="fas fa-info"></i></div>
+                                                    </div>
+                                                    <div class="name-course">
+                                                        <a href="StudentGuide.pdf" target="_blank">تعليمات الاستخدام</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -379,7 +443,7 @@
             <div class="footer">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6 col-xs-12">جميع الحقوق محفوظة © منصات مهدي حسن</div>
+                        <div class="col-md-6 col-xs-12">جميع الحقوق محفوظة © منصات مهدي حسن 2025</div>
                         <div class="col-md-6 col-xs-12">عدد الزوار: 123456 زائر</div>
                     </div>
                 </div>
@@ -410,7 +474,7 @@
             
             setInterval(rotateWords, 3000); // Rotate every 3 seconds
 
-            // Form validation for preparatory modal
+            // Form validation and loading animation for preparatory modal
             $('#ContentPlaceHolder1_PrepBtnSubmit').click(function(e) {
                 const stage = $('#ContentPlaceHolder1_PrepCatDropDown').val();
                 const code = $('#ContentPlaceHolder1_PrepTxtCode').val().trim();
@@ -431,10 +495,13 @@
 
                 if (!valid) {
                     e.preventDefault(); // Prevent form submission if validation fails
+                } else {
+                    $(this).addClass('loading').prop('disabled', true);
+                    setTimeout(() => $(this).removeClass('loading').prop('disabled', false), 2000); // Simulate loading
                 }
             });
 
-            // Form validation for secondary modal
+            // Form validation and loading animation for secondary modal
             $('#ContentPlaceHolder1_SecBtnSubmit').click(function(e) {
                 const stage = $('#ContentPlaceHolder1_SecCatDropDown').val();
                 const code = $('#ContentPlaceHolder1_SecTxtCode').val().trim();
@@ -455,6 +522,9 @@
 
                 if (!valid) {
                     e.preventDefault(); // Prevent form submission if validation fails
+                } else {
+                    $(this).addClass('loading').prop('disabled', true);
+                    setTimeout(() => $(this).removeClass('loading').prop('disabled', false), 2000); // Simulate loading
                 }
             });
         });
