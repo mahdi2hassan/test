@@ -63,9 +63,31 @@
             margin-bottom: 1.5rem;
         }
 
-        .banner-content h1 span {
+        .banner-content h1 .cd-words-wrapper {
             display: inline-block;
             color: #ffd700;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        .cd-words-wrapper b {
+            display: none;
+            position: absolute;
+            white-space: nowrap;
+            top: 0;
+            right: 0;
+        }
+
+        .cd-words-wrapper b.is-visible {
+            display: inline-block;
+            position: relative;
+            opacity: 1;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         /* Course Selection Cards */
@@ -151,6 +173,7 @@
             font-size: 1rem;
             font-weight: 600;
             transition: background 0.3s ease;
+            width: 100%;
         }
 
         .btn-success:hover {
@@ -167,6 +190,7 @@
 
         .footer .col-md-6 {
             font-size: 0.9rem;
+            margin-bottom: 10px;
         }
 
         /* Responsive Adjustments */
@@ -226,9 +250,8 @@
                                         <h1 class="title1">
                                             التعليم الحديث<br>
                                             <span class="cd-words-wrapper">
-                                                <b class="is-visible"> منصة التعليم الحديث  </b>
-                                                <b>تمكين الطالب من التحصيل الدراسي بطريقة مختلفة</b>                  <b>رفع الواجبات الدراسية</b>
-                                                <b>إجراء الاختبارات الإلكترونية</b>
+                                                <b class="is-visible">منصة التعليم الحديث</b>
+                                                <b>اختار المرحلة</b>
                                             </span>
                                         </h1>
                                     </div>
@@ -239,31 +262,31 @@
                                     <div class="section section-padding choose-course">
                                         <div class="container">
                                             <div class="choose-course-wrapper row">
-                                                <!-- Student Login -->
+                                                <!-- Preparatory Stage Login -->
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                                     <div class="item-course item-1">
                                                         <div class="icon-circle">
                                                             <div class="icon-background"><i class="fas fa-graduation-cap"></i></div>
                                                         </div>
                                                         <div class="name-course">
-                                                            <a class="login-trigger" href="#" data-target="#login" data-toggle="modal">تسجيل دخول الطلاب</a>
-                                                            <div id="login" class="modal fade" role="dialog">
+                                                            <a class="login-trigger" href="#" data-target="#preparatory-login" data-toggle="modal">تسجيل دخول المرحلة الإعدادية</a>
+                                                            <div id="preparatory-login" class="modal fade" role="dialog">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h4 class="modal-title">تسجيل الدخول للطلاب</h4>
-                                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                            <h4 class="modal-title">تسجيل الدخول للمرحلة الإعدادية</h4>
+                                                                            <button type="button" class="close" data-dismiss="modal">×</button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <select name="ctl00$ContentPlaceHolder1$CatDropDown" id="ContentPlaceHolder1_CatDropDown" class="form-control">
-                                                                                <option value="0">--اختر الكلية--</option>
-                                                                                <option value="1">كلية التربية</option>
-                                                                                <option value="2">كلية التكنولوجيا والتعليم</option>
-                                                                                <!-- Add other options as needed -->
+                                                                            <select name="ctl00$ContentPlaceHolder1$PrepCatDropDown" id="ContentPlaceHolder1_PrepCatDropDown" class="form-control">
+                                                                                <option value="0">--اختر المرحلة--</option>
+                                                                                <option value="1">الصف الأول الإعدادي</option>
+                                                                                <option value="2">الصف الثاني الإعدادي</option>
+                                                                                <option value="3">الصف الثالث الإعدادي</option>
                                                                             </select>
-                                                                            <input name="ctl00$ContentPlaceHolder1$txtmail" type="text" id="ContentPlaceHolder1_txtmail" class="form-control" placeholder="الرقم القومي باللغة الإنجليزية" onkeydown="return (!(event.keyCode>=65 && event.keyCode<=90) && event.keyCode!=32);">
-                                                                            <input name="ctl00$ContentPlaceHolder1$txtPassword" type="password" id="ContentPlaceHolder1_txtPassword" class="form-control" placeholder="كلمة المرور" required>
-                                                                            <input type="submit" name="ctl00$ContentPlaceHolder1$BtnSubmit" value="تسجيل" id="ContentPlaceHolder1_BtnSubmit" class="btn btn-success">
+                                                                            <input name="ctl00$ContentPlaceHolder1$PrepTxtmail" type="text" id="ContentPlaceHolder1_PrepTxtmail" class="form-control" placeholder="الرقم القومي باللغة الإنجليزية" onkeydown="return (!(event.keyCode>=65 && event.keyCode<=90) && event.keyCode!=32);">
+                                                                            <input name="ctl00$ContentPlaceHolder1$PrepTxtPassword" type="password" id="ContentPlaceHolder1_PrepTxtPassword" class="form-control" placeholder="كلمة المرور" required>
+                                                                            <input type="submit" name="ctl00$ContentPlaceHolder1$PrepBtnSubmit" value="تسجيل" id="ContentPlaceHolder1_PrepBtnSubmit" class="btn btn-success">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -271,14 +294,35 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- Faculty Login -->
+                                                <!-- Secondary Stage Login -->
                                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                                     <div class="item-course item-2">
                                                         <div class="icon-circle">
-                                                            <div class="icon-background"><i class="fas fa-users"></i></div>
+                                                            <div class="icon-background"><i class="fas fa-graduation-cap"></i></div>
                                                         </div>
                                                         <div class="name-course">
-                                                            <a href="backend/main">تسجيل دخول أعضاء هيئة التدريس</a>
+                                                            <a class="login-trigger" href="#" data-target="#secondary-login" data-toggle="modal">تسجيل دخول المرحلة الثانوية</a>
+                                                            <div id="secondary-login" class="modal fade" role="dialog">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title">تسجيل الدخول للمرحلة الثانوية</h4>
+                                                                            <button type="button" class="close" data-dismiss="modal">×</button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <select name="ctl00$ContentPlaceHolder1$SecCatDropDown" id="ContentPlaceHolder1_SecCatDropDown" class="form-control">
+                                                                                <option value="0">--اختر المرحلة--</option>
+                                                                                <option value="1">الصف الأول الثانوي</option>
+                                                                                <option value="2">الصف الثاني الثانوي</option>
+                                                                                <option value="3">الصف الثالث الثانوي</option>
+                                                                            </select>
+                                                                            <input name="ctl00$ContentPlaceHolder1$SecTxtmail" type="text" id="ContentPlaceHolder1_SecTxtmail" class="form-control" placeholder="الرقم القومي باللغة الإنجليزية" onkeydown="return (!(event.keyCode>=65 && event.keyCode<=90) && event.keyCode!=32);">
+                                                                            <input name="ctl00$ContentPlaceHolder1$SecTxtPassword" type="password" id="ContentPlaceHolder1_SecTxtPassword" class="form-control" placeholder="كلمة المرور" required>
+                                                                            <input type="submit" name="ctl00$ContentPlaceHolder1$SecBtnSubmit" value="تسجيل" id="ContentPlaceHolder1_SecBtnSubmit" class="btn btn-success">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -289,7 +333,7 @@
                                                             <div class="icon-background"><i class="fas fa-info"></i></div>
                                                         </div>
                                                         <div class="name-course">
-                                                            <a href="StudentGuide.pdf" target="_blank">ملاحظات</a>
+                                                            <a href="StudentGuide.pdf" target="_blank">تعليمات الاستخدام</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -306,8 +350,8 @@
             <div class="footer">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6 col-xs-12">مهدي حسن</div>
-                       
+                        <div class="col-md-6 col-xs-12">جميع الحقوق محفوظة © منصات مهدي حسن</div>
+                        <div class="col-md-6 col-xs-12">عدد الزوار: 123456 زائر</div>
                     </div>
                 </div>
             </div>
@@ -323,6 +367,20 @@
         function noBack() { window.history.forward(); }
         window.onload = noBack;
         window.onpageshow = function(evt) { if (evt.persisted) noBack(); };
+
+        // Text rotation animation
+        $(document).ready(function() {
+            const words = $('.cd-words-wrapper b');
+            let currentWord = 0;
+            
+            function rotateWords() {
+                words.eq(currentWord).removeClass('is-visible');
+                currentWord = (currentWord + 1) % words.length;
+                words.eq(currentWord).addClass('is-visible');
+            }
+            
+            setInterval(rotateWords, 3000); // Rotate every 3 seconds
+        });
     </script>
 </body>
 </html>
