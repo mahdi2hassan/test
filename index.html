@@ -41,31 +41,24 @@
             overflow-x: hidden;
         }
 
-        /* Animated Background */
+        /* Transparent Background */
         .background-area {
             position: relative;
             width: 100%;
             min-height: 100vh;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: transparent; /* خلفية شفافة */
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             padding: 2rem;
-            animation: gradientShift 12s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); }
-            50% { background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%); }
-            100% { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); }
         }
 
         .background-area img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.08;
+            opacity: 0.05; /* تقليل شفافية الصورة لتأثير خافت */
             position: absolute;
             top: 0;
             left: 0;
@@ -79,6 +72,10 @@
             text-align: center;
             max-width: 90%;
             margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1); /* خلفية خفيفة لتحسين الوضوح */
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(5px);
         }
 
         .banner-content .logo {
@@ -410,9 +407,8 @@
                 <div class="container">
                     <span>جميع الحقوق محفوظة © منصة كورسات بلس 2025</span>
                     <div class="social-icons">
-                        <a href="https://facebook.com" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://twitter.com" aria-label="تويتر"><i class="fab fa-twitter"></i></a>
-                        <a href="https://instagram.com" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/mahdi2hassan" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/+201007586279" aria-label="واتساب"><i class="fab fa-whatsapp"></i></a>
                         <a href="http://t.me/plusinmathbot" aria-label="تيليجرام"><i class="fab fa-telegram-plane"></i></a>
                     </div>
                     <span>عدد الزوار: 123456 زائر</span>
@@ -422,7 +418,7 @@
     </form>
 
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3. IDictionary<string, object> min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Initialize AOS
