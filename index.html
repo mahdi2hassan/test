@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>منصات مهدي حسن</title>
-    <meta name="description" content="منصة إلكترونية تعليمية للطلاب">
+    <title>منصة كورسات بلس</title>
+    <meta name="description" content="منصة إلكترونية لتعليم الكورسات بسهولة وسرعة">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     
     <!-- Fonts -->
@@ -70,10 +70,11 @@
             height: auto;
             margin-bottom: 30px;
             filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+            border-radius: 50%;
         }
 
         .banner-content h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 900;
             margin-bottom: 2rem;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -109,154 +110,61 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* Course Selection Cards */
-        .choose-course-wrapper {
+        /* Tools Grid */
+        .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 20px;
-            padding: 20px 0;
+            padding: 30px 0;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .choose-course-wrapper .item-course {
+        .tool-item {
             background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 20px;
+            border-radius: 50%;
+            aspect-ratio: 1/1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: var(--secondary);
         }
 
-        .choose-course-wrapper .item-course:hover {
-            transform: translateY(-10px);
+        .tool-item:hover {
+            transform: scale(1.1);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+            color: var(--primary);
         }
 
-        .icon-circle {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .icon-background {
+        .tool-item .icon-background {
             background: var(--secondary);
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text);
-            font-size: 2rem;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
             transition: background 0.3s ease, transform 0.3s ease;
         }
 
-        .item-course:hover .icon-background {
+        .tool-item:hover .icon-background {
             background: var(--primary);
-            transform: scale(1.1);
+            transform: scale(1.2);
         }
 
-        .name-course a {
-            color: var(--secondary);
-            font-weight: 700;
-            text-decoration: none;
-            font-size: 1.3rem;
-            transition: color 0.3s ease;
-        }
-
-        .name-course a:hover {
-            color: var(--primary);
-        }
-
-        /* Modal Styling */
-        .modal-content {
-            border-radius: 20px;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            border: none;
-        }
-
-        .modal-header {
-            border-bottom: none;
-            justify-content: flex-end;
-            position: relative;
-        }
-
-        .modal-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            width: 100%;
+        .tool-item span {
+            font-size: 1.1rem;
+            font-weight: 600;
             text-align: center;
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
-        .form-group label {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-
-        .form-control {
-            border-radius: 12px;
-            margin-bottom: 20px;
-            padding: 12px;
-            font-size: 1.1rem;
-            border: 1px solid var(--secondary);
-            transition: border-color 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 8px rgba(30, 60, 114, 0.3);
-        }
-
-        .btn-success {
-            background: #28a745;
-            border: none;
-            border-radius: 12px;
-            padding: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            transition: background 0.3s ease;
-        }
-
-        .btn-success:hover {
-            background: #218838;
-        }
-
-        .btn-success.loading::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #fff;
-            border-top: 3px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        .error-message {
-            color: #dc3545;
-            font-size: 0.9rem;
-            display: none;
-            margin-top: 5px;
         }
 
         /* Footer */
@@ -274,37 +182,51 @@
         }
 
         /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .tools-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
             .banner-content h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .banner-content .logo {
                 width: 120px;
             }
 
-            .choose-course-wrapper {
-                grid-template-columns: 1fr;
+            .tools-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
             }
 
-            .icon-background {
-                width: 60px;
-                height: 60px;
-                font-size: 1.8rem;
+            .tool-item {
+                padding: 15px;
+            }
+
+            .tool-item .icon-background {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .tool-item span {
+                font-size: 1rem;
             }
         }
 
         @media (max-width: 576px) {
             .banner-content h1 {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
 
             .banner-content {
-                padding-top: 8vh;
+                padding-top: 10vh;
             }
 
-            .modal-content {
-                padding: 20px;
+            .tools-grid {
+                grid-template-columns: 1fr;
             }
 
             .footer {
@@ -332,11 +254,11 @@
                                 <div class="text-content-wrapper">
                                     <div class="text-content text-center">
                                         <h1 class="title1">
-                                            التعليم الحديث<br>
+                                            منصة كورسات بلس<br>
                                             <span class="cd-words-wrapper">
-                                                <b class="is-visible">منصة التعليم الحديث</b>
-                                                <b>اختار المرحلة</b>
-                                                <b>تعلم بسهولة وسرعة</b>
+                                                <b class="is-visible">تعلم بسهولة وسرعة</b>
+                                                <b>اكتشف الكورسات</b>
+                                                <b>ابدأ رحلتك التعليمية</b>
                                             </span>
                                         </h1>
                                     </div>
@@ -344,92 +266,69 @@
                             </div>
                             <div class="col-12">
                                 <div class="banner-readmore">
-                                    <div class="section section-padding choose-course">
+                                    <div class="section section-padding tools-section">
                                         <div class="container">
-                                            <div class="choose-course-wrapper">
-                                                <!-- Preparatory Stage Login -->
-                                                <div class="item-course item-1">
-                                                    <div class="icon-circle">
-                                                        <div class="icon-background"><i class="fas fa-graduation-cap"></i></div>
-                                                    </div>
-                                                    <div class="name-course">
-                                                        <a class="login-trigger" href="#" data-target="#preparatory-login" data-toggle="modal">تسجيل دخول المرحلة الإعدادية</a>
-                                                        <div id="preparatory-login" class="modal fade" role="dialog">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h4 class="modal-title">تسجيل الدخول للمرحلة الإعدادية</h4>
-                                                                        <button type="button" class="close" data-dismiss="modal">×</button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="form-group">
-                                                                            <label for="ContentPlaceHolder1_PrepCatDropDown">اختر المرحلة</label>
-                                                                            <select name="ctl00$ContentPlaceHolder1$PrepCatDropDown" id="ContentPlaceHolder1_PrepCatDropDown" class="form-control">
-                                                                                <option value="0">--اختر المرحلة--</option>
-                                                                                <option value="1">الصف الأول الإعدادي</option>
-                                                                                <option value="2">الصف الثاني الإعدادي</option>
-                                                                                <option value="3">الصف الثالث الإعدادي</option>
-                                                                            </select>
-                                                                            <div class="error-message" id="prep-stage-error">يرجى اختيار المرحلة</div>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="ContentPlaceHolder1_PrepTxtCode">الكود</label>
-                                                                            <input name="ctl00$ContentPlaceHolder1$PrepTxtCode" type="text" id="ContentPlaceHolder1_PrepTxtCode" class="form-control" placeholder="أدخل الكود" required>
-                                                                            <div class="error-message" id="prep-code-error">يرجى إدخال الكود</div>
-                                                                        </div>
-                                                                        <input type="submit" name="ctl00$ContentPlaceHolder1$PrepBtnSubmit" value="تسجيل" id="ContentPlaceHolder1_PrepBtnSubmit" class="btn btn-success">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Secondary Stage Login -->
-                                                <div class="item-course item-2">
-                                                    <div class="icon-circle">
-                                                        <div class="icon-background"><i class="fas fa-graduation-cap"></i></div>
-                                                    </div>
-                                                    <div class="name-course">
-                                                        <a class="login-trigger" href="#" data-target="#secondary-login" data-toggle="modal">تسجيل دخول المرحلة الثانوية</a>
-                                                        <div id="secondary-login" class="modal fade" role="dialog">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h4 class="modal-title">تسجيل الدخول للمرحلة الثانوية</h4>
-                                                                        <button type="button" class="close" data-dismiss="modal">×</button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="form-group">
-                                                                            <label for="ContentPlaceHolder1_SecCatDropDown">اختر المرحلة</label>
-                                                                            <select name="ctl00$ContentPlaceHolder1$SecCatDropDown" id="ContentPlaceHolder1_SecCatDropDown" class="form-control">
-                                                                                <option value="0">--اختر المرحلة--</option>
-                                                                                <option value="1">الصف الأول الثانوي</option>
-                                                                                <option value="2">الصف الثاني الثانوي</option>
-                                                                                <option value="3">الصف الثالث الثانوي</option>
-                                                                            </select>
-                                                                            <div class="error-message" id="sec-stage-error">يرجى اختيار المرحلة</div>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="ContentPlaceHolder1_SecTxtCode">الكود</label>
-                                                                            <input name="ctl00$ContentPlaceHolder1$SecTxtCode" type="text" id="ContentPlaceHolder1_SecTxtCode" class="form-control" placeholder="أدخل الكود" required>
-                                                                            <div class="error-message" id="sec-code-error">يرجى إدخال الكود</div>
-                                                                        </div>
-                                                                        <input type="submit" name="ctl00$ContentPlaceHolder1$SecBtnSubmit" value="تسجيل" id="ContentPlaceHolder1_SecBtnSubmit" class="btn btn-success">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Instructions -->
-                                                <div class="item-course item-3">
-                                                    <div class="icon-circle">
-                                                        <div class="icon-background"><i class="fas fa-info"></i></div>
-                                                    </div>
-                                                    <div class="name-course">
-                                                        <a href="StudentGuide.pdf" target="_blank">تعليمات الاستخدام</a>
-                                                    </div>
-                                                </div>
+                                            <div class="tools-grid">
+                                                <!-- Tool 1 -->
+                                                <a href="courses.html" class="tool-item">
+                                                    <div class="icon-background"><i class="fas fa-book"></i></div>
+                                                    <span>كورسات</span>
+                                                </a>
+                                                <!-- Tool 2 -->
+                                                <a href="x.html" class="tool-item">
+                                                    <div class="icon-background"><i class="fas fa-laptop-code"></i></div>
+                                                    <span>X</span>
+                                                </a>
+                                                <!-- Tool 3 -->
+                                                <a href="y.html" class="tool-item">
+                                                    <div class="icon-background"><i class="fas fa-chalkboard-teacher"></i></div>
+                                                    <span>Y</span>
+                                                </a>
+                                                <!-- Tool 4 -->
+                                                <a href="z.html" class="tool-item">
+                                                    <div class="icon-background"><i class="fas fa-graduation-cap"></i></div>
+                                                    <span>Z</span>
+                                                </a>
+                                                <!-- Tool 5 -->
+                                                <a href="tool5.html" class="tool-item">
+                                                    <div class="icon-background"><i class="fas fa-video"></i></div>
+                                                    <span>فيديوهات</span>
+                                                </a>
+                                                <!-- Tool 6 -->
+                                                <a href="tool6.html" class="tool-item">
+                                                    <div class="icon-background"><i class="fas fa-book-open"></i></div>
+                                                    <span>ملخصات</span>
+                                                </a>
+                                                <!-- Tool 7 -->
+                                                <a href="tool7.html" class="tool-item">
+                                                    <div class="icon-background"><i class="fas fa-question-circle"></i></div>
+                                                    <span>اختبارات</span>
+                                                </a>
+                                                <!-- Tool 8 -->
+                                                <a href="tool8.html" class="tool-item">
+                                                    <div class="icon-background"><i class="fas fa-users"></i></div>
+                                                    <span>مجتمع التعلم</span>
+                                                </a>
+                                                <!-- Tool 9 -->
+                                                <a href="tool9.html" class="tool-item">
+                                                    <div class="icon-background"><i class="fas fa-calendar-alt"></i></div>
+                                                    <span>جدول الدراسة</span>
+                                                </a>
+                                                <!-- Tool 10 -->
+                                                <a href="tool10.html" class="tool-item">
+                                                    <div class="icon-background"><i class="fas fa-trophy"></i></div>
+                                                    <span>الإنجازات</span>
+                                                </a>
+                                                <!-- Tool 11 -->
+                                                <a href="tool11.html" class="tool-item">
+                                                    <div class="icon-background"><i class="fas fa-cog"></i></div>
+                                                    <span>الإعدادات</span>
+                                                </a>
+                                                <!-- Tool 12 -->
+                                                <a href="tool12.html" class="tool-item">
+                                                    <div class="icon-background"><i class="fas fa-info-circle"></i></div>
+                                                    <span>تعليمات</span>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -443,7 +342,7 @@
             <div class="footer">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6 col-xs-12">جميع الحقوق محفوظة © منصات مهدي حسن 2025</div>
+                        <div class="col-md-6 col-xs-12">جميع الحقوق محفوظة © منصة كورسات بلس 2025</div>
                         <div class="col-md-6 col-xs-12">عدد الزوار: 123456 زائر</div>
                     </div>
                 </div>
@@ -473,60 +372,6 @@
             }
             
             setInterval(rotateWords, 3000); // Rotate every 3 seconds
-
-            // Form validation and loading animation for preparatory modal
-            $('#ContentPlaceHolder1_PrepBtnSubmit').click(function(e) {
-                const stage = $('#ContentPlaceHolder1_PrepCatDropDown').val();
-                const code = $('#ContentPlaceHolder1_PrepTxtCode').val().trim();
-                let valid = true;
-
-                // Reset error messages
-                $('#prep-stage-error').hide();
-                $('#prep-code-error').hide();
-
-                if (stage === '0') {
-                    $('#prep-stage-error').show();
-                    valid = false;
-                }
-                if (!code) {
-                    $('#prep-code-error').show();
-                    valid = false;
-                }
-
-                if (!valid) {
-                    e.preventDefault(); // Prevent form submission if validation fails
-                } else {
-                    $(this).addClass('loading').prop('disabled', true);
-                    setTimeout(() => $(this).removeClass('loading').prop('disabled', false), 2000); // Simulate loading
-                }
-            });
-
-            // Form validation and loading animation for secondary modal
-            $('#ContentPlaceHolder1_SecBtnSubmit').click(function(e) {
-                const stage = $('#ContentPlaceHolder1_SecCatDropDown').val();
-                const code = $('#ContentPlaceHolder1_SecTxtCode').val().trim();
-                let valid = true;
-
-                // Reset error messages
-                $('#sec-stage-error').hide();
-                $('#sec-code-error').hide();
-
-                if (stage === '0') {
-                    $('#sec-stage-error').show();
-                    valid = false;
-                }
-                if (!code) {
-                    $('#sec-code-error').show();
-                    valid = false;
-                }
-
-                if (!valid) {
-                    e.preventDefault(); // Prevent form submission if validation fails
-                } else {
-                    $(this).addClass('loading').prop('disabled', true);
-                    setTimeout(() => $(this).removeClass('loading').prop('disabled', false), 2000); // Simulate loading
-                }
-            });
         });
     </script>
 </body>
