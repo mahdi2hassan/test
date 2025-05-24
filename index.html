@@ -4,14 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>منصة كورسات بلس</title>
-    <meta name="description" content="منصة إلكترونية لتعليم الكورسات بسهولة وسرعة">
+    <meta name="description" content="منصة تعليمية إلكترونية تقدم كورسات متنوعة بسهولة وسرعة">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -23,6 +20,13 @@
             --accent: #ffd700;
             --text: #ffffff;
             --background: #f4f6f9;
+            --card-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
@@ -30,7 +34,6 @@
             background-color: var(--background);
             direction: rtl;
             text-align: right;
-            margin: 0;
             overflow-x: hidden;
         }
 
@@ -38,19 +41,20 @@
         .background-area {
             position: relative;
             width: 100%;
-            height: 100vh;
+            min-height: 100vh;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+            padding: 2rem;
         }
 
         .background-area img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.2;
+            opacity: 0.15;
             position: absolute;
             top: 0;
             left: 0;
@@ -62,22 +66,23 @@
             z-index: 1;
             color: var(--text);
             text-align: center;
-            padding: 20px;
+            max-width: 90%;
+            margin: 0 auto;
         }
 
         .banner-content .logo {
-            width: 150px;
+            width: clamp(100px, 15vw, 140px);
             height: auto;
-            margin-bottom: 30px;
-            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+            margin-bottom: 2rem;
             border-radius: 50%;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
         }
 
         .banner-content h1 {
-            font-size: 3.5rem;
+            font-size: clamp(1.8rem, 5vw, 3rem);
             font-weight: 900;
-            margin-bottom: 2rem;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .banner-content h1 .cd-words-wrapper {
@@ -85,6 +90,7 @@
             color: var(--accent);
             position: relative;
             vertical-align: middle;
+            min-height: 1.5em;
         }
 
         .cd-words-wrapper b {
@@ -94,7 +100,7 @@
             top: 0;
             right: 0;
             opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
         .cd-words-wrapper b.is-visible {
@@ -102,7 +108,7 @@
             position: relative;
             opacity: 1;
             transform: translateY(0);
-            animation: slideIn 0.5s ease-in-out;
+            animation: slideIn 0.6s ease-out;
         }
 
         @keyframes slideIn {
@@ -113,124 +119,138 @@
         /* Tools Grid */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            padding: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .tool-item {
-            background: rgba(255, 255, 255, 0.9);
+            background: var(--card-bg);
             border-radius: 50%;
             aspect-ratio: 1/1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 1.5rem;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
             text-decoration: none;
             color: var(--secondary);
+            cursor: pointer;
         }
 
         .tool-item:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+            transform: scale(1.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             color: var(--primary);
         }
 
         .tool-item .icon-background {
             background: var(--secondary);
-            width: 60px;
-            height: 60px;
+            width: clamp(40px, 10vw, 50px);
+            height: clamp(40px, 10vw, 50px);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text);
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            transition: background 0.3s ease, transform 0.3s ease;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin-bottom: 0.8rem;
+            transition: background 0.4s ease, transform 0.4s ease;
         }
 
         .tool-item:hover .icon-background {
             background: var(--primary);
-            transform: scale(1.2);
+            transform: scale(1.1);
         }
 
         .tool-item span {
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
             font-weight: 600;
             text-align: center;
+            line-height: 1.2;
         }
 
         /* Footer */
         .footer {
             background: var(--primary);
             color: var(--text);
-            padding: 30px 0;
+            padding: 2rem 1rem;
             text-align: center;
-            font-size: 1rem;
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .footer .col-md-6 {
-            margin-bottom: 10px;
+        .footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
         }
 
         /* Responsive Adjustments */
-        @media (max-width: 992px) {
+        @media (max-width: 1200px) {
             .tools-grid {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+                gap: 1.2rem;
             }
         }
 
         @media (max-width: 768px) {
             .banner-content h1 {
-                font-size: 2.2rem;
-            }
-
-            .banner-content .logo {
-                width: 120px;
+                font-size: clamp(1.5rem, 4vw, 2.2rem);
             }
 
             .tools-grid {
                 grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                padding: 1.5rem;
             }
 
             .tool-item {
-                padding: 15px;
+                padding: 1rem;
             }
 
             .tool-item .icon-background {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
             }
 
             .tool-item span {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
         }
 
         @media (max-width: 576px) {
-            .banner-content h1 {
-                font-size: 1.8rem;
+            .banner-content {
+                padding: 1rem;
             }
 
-            .banner-content {
-                padding-top: 10vh;
+            .banner-content .logo {
+                width: 100px;
             }
 
             .tools-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+                gap: 1rem;
             }
 
-            .footer {
-                font-size: 0.9rem;
+            .tool-item {
+                padding: 0.8rem;
+            }
+
+            .tool-item span {
+                font-size: 0.8rem;
+            }
+
+            .footer .container {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
@@ -246,93 +266,79 @@
                 <img src="img/1.jpg" alt="Background Image">
                 <div class="banner-content">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <img class="logo" src="img/logo.png" alt="Logo">
-                            </div>
-                            <div class="col-12">
-                                <div class="text-content-wrapper">
-                                    <div class="text-content text-center">
-                                        <h1 class="title1">
-                                            منصة كورسات بلس<br>
-                                            <span class="cd-words-wrapper">
-                                                <b class="is-visible">تعلم بسهولة وسرعة</b>
-                                                <b>اكتشف الكورسات</b>
-                                                <b>ابدأ رحلتك التعليمية</b>
-                                            </span>
-                                        </h1>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="banner-readmore">
-                                    <div class="section section-padding tools-section">
-                                        <div class="container">
-                                            <div class="tools-grid">
-                                                <!-- Tool 1 -->
-                                                <a href="courses.html" class="tool-item">
-                                                    <div class="icon-background"><i class="fas fa-book"></i></div>
-                                                    <span>كورسات</span>
-                                                </a>
-                                                <!-- Tool 2 -->
-                                                <a href="x.html" class="tool-item">
-                                                    <div class="icon-background"><i class="fas fa-laptop-code"></i></div>
-                                                    <span>X</span>
-                                                </a>
-                                                <!-- Tool 3 -->
-                                                <a href="y.html" class="tool-item">
-                                                    <div class="icon-background"><i class="fas fa-chalkboard-teacher"></i></div>
-                                                    <span>Y</span>
-                                                </a>
-                                                <!-- Tool 4 -->
-                                                <a href="z.html" class="tool-item">
-                                                    <div class="icon-background"><i class="fas fa-graduation-cap"></i></div>
-                                                    <span>Z</span>
-                                                </a>
-                                                <!-- Tool 5 -->
-                                                <a href="tool5.html" class="tool-item">
-                                                    <div class="icon-background"><i class="fas fa-video"></i></div>
-                                                    <span>فيديوهات</span>
-                                                </a>
-                                                <!-- Tool 6 -->
-                                                <a href="tool6.html" class="tool-item">
-                                                    <div class="icon-background"><i class="fas fa-book-open"></i></div>
-                                                    <span>ملخصات</span>
-                                                </a>
-                                                <!-- Tool 7 -->
-                                                <a href="tool7.html" class="tool-item">
-                                                    <div class="icon-background"><i class="fas fa-question-circle"></i></div>
-                                                    <span>اختبارات</span>
-                                                </a>
-                                                <!-- Tool 8 -->
-                                                <a href="tool8.html" class="tool-item">
-                                                    <div class="icon-background"><i class="fas fa-users"></i></div>
-                                                    <span>مجتمع التعلم</span>
-                                                </a>
-                                                <!-- Tool 9 -->
-                                                <a href="tool9.html" class="tool-item">
-                                                    <div class="icon-background"><i class="fas fa-calendar-alt"></i></div>
-                                                    <span>جدول الدراسة</span>
-                                                </a>
-                                                <!-- Tool 10 -->
-                                                <a href="tool10.html" class="tool-item">
-                                                    <div class="icon-background"><i class="fas fa-trophy"></i></div>
-                                                    <span>الإنجازات</span>
-                                                </a>
-                                                <!-- Tool 11 -->
-                                                <a href="tool11.html" class="tool-item">
-                                                    <div class="icon-background"><i class="fas fa-cog"></i></div>
-                                                    <span>الإعدادات</span>
-                                                </a>
-                                                <!-- Tool 12 -->
-                                                <a href="tool12.html" class="tool-item">
-                                                    <div class="icon-background"><i class="fas fa-info-circle"></i></div>
-                                                    <span>تعليمات</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <img class="logo" src="img/logo.png" alt="Logo">
+                        <div class="text-content text-center">
+                            <h1 class="title1">
+                                منصة كورسات بلس<br>
+                                <span class="cd-words-wrapper">
+                                    <b class="is-visible">تعلم بسهولة وسرعة</b>
+                                    <b>استكشف الكورسات المتنوعة</b>
+                                    <b>حقق أهدافك التعليمية</b>
+                                </span>
+                            </h1>
+                        </div>
+                        <div class="tools-section">
+                            <div class="tools-grid">
+                                <!-- Tool 1 -->
+                                <a href="programming.html" class="tool-item">
+                                    <div class="icon-background"><i class="fas fa-laptop-code"></i></div>
+                                    <span>دورات البرمجة</span>
+                                </a>
+                                <!-- Tool 2 -->
+                                <a href="math.html" class="tool-item">
+                                    <div class="icon-background"><i class="fas fa-calculator"></i></div>
+                                    <span>رياضيات</span>
+                                </a>
+                                <!-- Tool 3 -->
+                                <a href="science.html" class="tool-item">
+                                    <div class="icon-background"><i class="fas fa-flask"></i></div>
+                                    <span>علوم</span>
+                                </a>
+                                <!-- Tool 4 -->
+                                <a href="languages.html" class="tool-item">
+                                    <div class="icon-background"><i class="fas fa-language"></i></div>
+                                    <span>لغات</span>
+                                </a>
+                                <!-- Tool 5 -->
+                                <a href="history.html" class="tool-item">
+                                    <div class="icon-background"><i class="fas fa-book"></i></div>
+                                    <span>تاريخ</span>
+                                </a>
+                                <!-- Tool 6 -->
+                                <a href="literature.html" class="tool-item">
+                                    <div class="icon-background"><i class="fas fa-book-open"></i></div>
+                                    <span>أدب</span>
+                                </a>
+                                <!-- Tool 7 -->
+                                <a href="exams.html" class="tool-item">
+                                    <div class="icon-background"><i class="fas fa-question-circle"></i></div>
+                                    <span>اختبارات تدريبية</span>
+                                </a>
+                                <!-- Tool 8 -->
+                                <a href="videos.html" class="tool-item">
+                                    <div class="icon-background"><i class="fas fa-video"></i></div>
+                                    <span>فيديوهات تعليمية</span>
+                                </a>
+                                <!-- Tool 9 -->
+                                <a href="notes.html" class="tool-item">
+                                    <div class="icon-background"><i class="fas fa-sticky-note"></i></div>
+                                    <span>ملخصات دراسية</span>
+                                </a>
+                                <!-- Tool 10 -->
+                                <a href="schedule.html" class="tool-item">
+                                    <div class="icon-background"><i class="fas fa-calendar-alt"></i></div>
+                                    <span>جدول الدراسة</span>
+                                </a>
+                                <!-- Tool 11 -->
+                                <a href="community.html" class="tool-item">
+                                    <div class="icon-background"><i class="fas fa-users"></i></div>
+                                    <span>مجتمع التعلم</span>
+                                </a>
+                                <!-- Tool 12 -->
+                                <a href="guide.html" class="tool-item">
+                                    <div class="icon-background"><i class="fas fa-info-circle"></i></div>
+                                    <span>دليل الاستخدام</span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -341,10 +347,8 @@
             <!-- Footer -->
             <div class="footer">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 col-xs-12">جميع الحقوق محفوظة © منصة كورسات بلس 2025</div>
-                        <div class="col-md-6 col-xs-12">عدد الزوار: 123456 زائر</div>
-                    </div>
+                    <span>جميع الحقوق محفوظة © منصة كورسات بلس 2025</span>
+                    <span>عدد الزوار: 123456 زائر</span>
                 </div>
             </div>
         </div>
@@ -352,7 +356,6 @@
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Prevent back navigation
         window.history.forward();
@@ -371,7 +374,7 @@
                 words.eq(currentWord).addClass('is-visible');
             }
             
-            setInterval(rotateWords, 3000); // Rotate every 3 seconds
+            setInterval(rotateWords, 3500); // Rotate every 3.5 seconds
         });
     </script>
 </body>
