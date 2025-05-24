@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>منصة كورسات بلس</title>
+    <title>كورسات بلس</title>
     <meta name="description" content="منصة تعليمية متقدمة تقدم أدوات تعلم ذكية وتفاعلية">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     
@@ -41,12 +41,11 @@
             overflow-x: hidden;
         }
 
-        /* Transparent Background */
+        /* Background with Uploaded Image */
         .background-area {
             position: relative;
             width: 100%;
             min-height: 100vh;
-            background: transparent; /* خلفية شفافة */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -58,11 +57,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.05; /* تقليل شفافية الصورة لتأثير خافت */
             position: absolute;
             top: 0;
             left: 0;
             z-index: 0;
+            opacity: 1; /* الصورة المرفوعة بوضوح كامل */
         }
 
         .banner-content {
@@ -72,10 +71,11 @@
             text-align: center;
             max-width: 90%;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.1); /* خلفية خفيفة لتحسين الوضوح */
+            background: rgba(255, 255, 255, 0.15); /* خلفية خفيفة لتحسين الوضوح */
             border-radius: 15px;
             padding: 2rem;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .banner-content .logo {
@@ -315,7 +315,7 @@
                         <img class="logo" src="img/logo.png" alt="Logo">
                         <div class="text-content text-center">
                             <h1 class="title1">
-                                منصة كورسات بلس<br>
+                                كورسات بلس<br>
                                 <span class="cd-words-wrapper">
                                     <b class="is-visible">تعلم بذكاء</b>
                                     <b>أدوات تعليمية متقدمة</b>
@@ -418,7 +418,7 @@
     </form>
 
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3. IDictionary<string, object> min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Initialize AOS
