@@ -16,6 +16,12 @@
     <!-- AOS for Scroll Animations -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <style type="text/css">
         :root {
             --primary: #0a1d37; /* أزرق داكن */
@@ -25,6 +31,7 @@
             --background: #f3f4f6;
             --card-bg: rgba(255, 255, 255, 0.95);
             --glow: 0 0 15px rgba(168, 85, 247, 0.5);
+            --border-radius: 12px;
         }
 
         * {
@@ -48,28 +55,15 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-        }
-
-        .main::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('img/1.jpg');
-            background-size: cover;
-            background-position: center;
-            opacity: 1;
-            z-index: -1;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
 
         .header {
             padding: 2rem;
             text-align: center;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 15px;
-            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             margin: 2rem auto;
             max-width: 90%;
@@ -97,14 +91,14 @@
         }
 
         .form-container {
-            max-width: 800px;
+            max-width: 600px;
             width: 100%;
             margin: 2rem auto;
             padding: 2rem;
             background: var(--card-bg);
-            border-radius: 15px;
+            border-radius: var(--border-radius);
             backdrop-filter: blur(12px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             position: relative;
             z-index: 1;
         }
@@ -112,19 +106,20 @@
         .form-container h3 {
             font-size: clamp(1.4rem, 3vw, 1.8rem);
             color: var(--primary);
-            margin: 1rem 0;
+            margin: 1.5rem 0 1rem;
             font-weight: 700;
+            text-align: center;
         }
 
         .form-container .input-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-container .input-group-addon {
             background: var(--primary);
             color: var(--text);
             padding: 0.8rem;
-            border-radius: 8px 0 0 8px;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
             display: flex;
             align-items: center;
         }
@@ -132,11 +127,11 @@
         .form-container .form-control {
             width: 100%;
             padding: 0.8rem;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
             font-family: 'Cairo', sans-serif;
             font-size: clamp(0.9rem, 2vw, 1rem);
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .form-container .form-control:focus {
@@ -151,22 +146,32 @@
             padding-left: 2rem;
         }
 
+        .form-container .form-control[readonly] {
+            background: #f9f9f9;
+            cursor: not-allowed;
+        }
+
         .form-container .btn {
             background: linear-gradient(135deg, var(--secondary), var(--accent));
             color: var(--text);
             padding: 0.8rem 1.5rem;
             border: none;
-            border-radius: 8px;
+            border-radius: var(--border-radius);
             font-family: 'Cairo', sans-serif;
             font-size: clamp(1rem, 2vw, 1.1rem);
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin: 0.5rem;
+            width: 100%;
+            margin: 0.5rem 0;
         }
 
         .form-container .btn:hover {
             transform: translateY(-2px);
             box-shadow: var(--glow);
+        }
+
+        .form-container .btn.whatsapp-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
         }
 
         .form-container .alert-danger {
@@ -175,16 +180,15 @@
             margin-right: 0.5rem;
         }
 
-        .form-container .form-check-label {
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            color: var(--primary);
-        }
-
         .form-container .payment-note {
             font-size: clamp(0.9rem, 2vw, 1rem);
             color: var(--primary);
-            margin: 1rem 0;
+            margin: 1.5rem 0;
             line-height: 1.6;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border-right: 4px solid var(--secondary);
         }
 
         .form-container .payment-note strong {
@@ -212,13 +216,6 @@
         .footer .social-icons a:hover {
             color: var(--accent);
             transform: scale(1.2);
-        }
-
-        .footer .alert-danger {
-            color: #f29f06;
-            font-weight: 600;
-            margin: 0.5rem 0;
-            display: block;
         }
 
         @media (max-width: 768px) {
@@ -269,6 +266,201 @@
 </head>
 <body>
     <form name="aspnetForm" method="post" action="./" id="aspnetForm" autocomplete="off">
-        <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJOTc5NjQ0OTI5D2QWAmYPZBYEAgMPZBYCAgEPZBYIAg8PEA8WAh4LXyFEYXRhQm91bmRnZBAVNhXYp9iu2KrYsSDYp9mE2YPZhNmK2KkX2YPZhNmK2Kkg2KfZhNiq2LHYqNmK2Kkw2YPZhNmK2Kkg2KfZhNiq2YPZhtmI2YTZiNis2YrYpyDZiNin2YTYqti52YTZitmFF9mD2YTZitipINin2YTYqtmF2LHZiti2F9mD2YTZitipINin2YTYtdmK2K/ZhNmHKNmD2YTZitipINin2YTYqtix2KjZitipINin2YTYsdmK2KfYttmK2KkV2YPZhNmK2Kkg2KfZhNit2YLZiNmCEdmD2YTZitipINin2YTYt9ioINmD2YTZitipINin2YTYt9ioINin2YTYqNmK2LfYsdmJFdmD2YTZitipINin2YTYudmE2YjZhRXZg9mE2YrYqSDYp9mE2KLYr9in2KgX2YPZhNmK2Kkg2KfZhNiq2KzYp9ix2Kk12YPZhNmK2Kkg2KfZhNiq2LHYqNmK2Kkg2YTZhNi32YHZiNmE2Kkg2KfZhNmF2KjZg9ix2KkX2YPZhNmK2Kkg2KfZhNmH2YbYr9iz2Kkq2YPZhNmK2Kkg2KfZhNiz2YrYp9iz2Kkg2YjYp9mE2KfZgtiq2LXYp9ivF9mD2YTZitipINin2YTYp9i52YTYp9mFO9mD2YTZitipINin2YTYrdin2LPYqNin2Kog2YjYp9mE2LDZg9in2KEg2KfZhNin2LXYt9mG2KfYudmJHNmD2YTZitipINi32Kgg2KfZhNin2LPZhtin2YYk2YPZhNmK2Kkg2KfZhNi52YTYp9isINin2YTYt9io2YrYudmJRNmD2YTZitipINin2YTYr9ix2KfYs9in2Kog2KfZhNi52YTZitinINmE2YTYudmE2YjZhSDYp9mE2YXYqtmC2K/ZhdipF9mD2YTZitipINin2YTYstix2KfYudipSNmD2YTZitipINiq2YPZhtmI2YTZiNis2YrYpyDYp9mE2LnZhNmI2YUg2KfZhNi12K3ZitipINin2YTYqti32KjZitmC2YrYqSjZg9mE2YrYqSDYp9mE2YHZhtmI2YYg2KfZhNiq2LfYqNmK2YLZitipO9mD2YTZitipINin2YTYrtiv2YXYqSDYp9mE2KfYrNiq2YXYp9i52YrYqSDYp9mE2KrZhtmF2YjZitipFdmD2YTZitipINin2YTYp9mE2LPZhijZg9mE2YrYqSDYp9mE2LPZitin2K3YqSDZiNin2YTZgdmG2KfYr9mCHNmD2YTZitipINi52YTZiNmFINin2YTYp9ix2LY62YPZhNmK2Kkg2LnZhNmI2YUg2LDZiNmJINin2YTYp9it2KrZitin2KzYp9iqINin2YTYrtin2LXYqRrZhdi52YfYryDZgdmG2Ykg2KrZhdix2YrYtjHZhdi52YfYryDYp9io2K3Yp9irINmI2KrYt9io2YrZgtin2Kog2KfZhNmE2YrYstixOdmD2YTZitin2Kog2KfZhNiq2LnZhNmK2YUg2KfZhNmF2YHYqtmI2K0g2KjYp9mE2KzYp9mF2LnYqTPYp9mE2YXYudmH2K8g2KfZhNmC2YjZhdmJINmE2LnZhNmI2YUg2KfZhNmF2LPZhtmK2YYb2YjYrdiv2Kkg2KfZhNmF2LTYsdmI2LnYp9iqG9in2K/Yp9ix2Kkg2KfZhNmI2KfZgdiv2YrZhhXZhdix2YPYsiDYp9mE2KjYrdmI2Ksm2LHYudin2YrYqSDYp9mE2LTYqNin2Kgg2KfZhNmF2LHZg9iy2Yoh2KfZhNi12YbYp9iv2YrZgiDYp9mE2YXYsdmD2LLZitipJtmF2LHZg9iyINin2YTZhNi62KfYqiDZiNin2YTYqtix2KzZhdipQdmF2LHZg9iyINiq2YbZhdmK2Kkg2YLYr9ix2KfYqiDYp9i52LbYp9ihINmH2YrYptipINin2YTYqtiv2LHZitizQtin2YTZhdi52YXZhCDYp9mE2YXYsdmD2LLZiiDZg9mE2YrYqSDYp9mE2K/Ysdin2LPYp9iqINin2YTYudmE2YrYpxvZhdix2YPYsiDYp9mE2YXYpNiq2YXYsdin2Kou2YXYsdmD2LIg2KfZhNin2LPYqti02KfYsdin2Kog2KfZhNiq2LHYqNmI2YrYqSTZhdix2YPYsiDYp9mE2KXYsdi02KfYryDYp9mE2YbZgdiz2Yok2YXYsdmD2LIg2KfZhNiq2K3Zg9mK2YUg2KfZhNiv2YjZhNmKLtmI2K3Yr9ipINin2YTYp9iz2KrYtNin2LHYp9iqINin2YTZh9mG2K/Ys9mK2Kkw2YXYsdmD2LIg2KfZhNiv2LHYp9iz2KfYqiDYp9mE2KrZg9mG2YjZhNmI2KzZitipQ9mD2YTZitipINi52YTZiNmFINin2YTZhdmE2KfYrdipINmIINiq2YPZhtmI2YTZiNis2YrYpyDYp9mE2YHYttin2KEb2KfZhNmF2K/ZhiDYp9mE2KzYp9mF2LnZitipGdil2K/Yp9ix2Kkg2KfZhNis2KfZhdi52KlK2YXYudmH2K8g2K/Ysdin2LPYp9iqINin2YTYrtin2LHYrNmK2KkgLSDYt9ioINin2LPZhtin2YZA2YXYsdmD2LIg2KfZhNin2YbYtNi32Kkg2KfZhNix2YrYp9i22YrYqS3Yqtix2KjZitipINix2YrYp9i22YrYqR/Zhdiv2YHZiNi52KfYqiDYp9mE2YXZg9iq2KjYp9iqHdi52KfZhdmE2YrZhiDYqNin2YTYrNin2YXYudipKdmF2LHZg9iyINiv2LnZhSDZiNiq2LfZiNmK2LEg2KfZhNio2K3ZiNirH9in2LTYqtix2KfZg9in2Kog2YXYpNiq2YXYsdin2Ko12KfZhNiq2KPZh9mK2YQg2KfZhNiq2LHYqNmI2YogLSDYqti52YTZitmFINi12YbYp9i52Yon2YXYr9mB2YjYudin2Kog2YPZhNmK2Kkg2LfYqCDYp9iz2YbYp9mGWdmF2LHZg9iyINin2YTYqtiv2LHZitioINmI2KfZhNin2LPYqti02KfYsdin2Kog2KfZhNiq2LHYqNmI2YrZhyAtINmD2YTZitipINin2YTYqtix2KjZitipGdmI2K3Yr9ipINin2YTYs9mK2KfYsdin2Kob2KrYudmE2YrZhSDYp9mE2YPYqtix2YjZhtmJMNio2LHZhtin2YXYrCDYp9mE2YXYudmE2YjZhdin2KrZitipINin2YTYt9io2YrYqVjZhdi52YXZhCDZhdmK2YPYp9mG2YrZg9inINin2YTYqtix2KjZhyAo2YPZhNmK2Kkg2KfZhNmH2YbYr9iz2Ycg2YjYrdiv2Kkg2KfZhNmF2LnYp9mF2YQpRdmF2LnZhdmEINin2YTYsNmD2KfYoSDYp9mE2KfYtdi32YbYp9i52YogLSDYrNin2YXYudipINio2YbZiiDYs9mI2YrZgT/Yp9mE2YXYsdmD2LIg2KfZhNis2KfZhdi52Yog2YTZhNiq2LfZiNmK2LEg2KfZhNmF2YfZhtmKIFUgQyBDIEQ62YXYsdmD2LIg2KfZhNio2K3ZiNirINmI2KfZhNmF2YbYqtis2KfYGyIV4dnW2nhngYgAY7dW2xvz2QzNDU0MDY4zU2OQEz0QzQzUzUz2QzYzQzYzYzYzQzGINQzYzYzYzQzYzQzQzQzYzYzQzQzYzQzQzQz Y3QzQzYzYzYzQzYzYz YzYzZmQ2YzYzQzQzQzYzYzYzYzQz YzYz Y zZQ0Z2Y0QzQzYzZ2ZmY2ZmZmZmZmMzMzYzZhmZmZmZmZmMzZmZmMzMzZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZwZmZmZmZmZmZwZQZmZmZmZmMzMzQzZmZmZmMzZmZmZmMzMzZmMzMzZmZmZmZmZmZmZmZmMzMzZmZmZmZmZ1ZBAgUPDxYCHgRUZXh0BQYyODU4MDEwZGZmZmQ==" />
-        <input type="hidden" name="_$STATEGENERATOR" id="_vSTATE" value="36D781" />
-        <input type="hidden" name="csrf_token_validation" id="asp_csrf_token" value="/wEdAIsB2F3mL2UHdCX5MRgwewYycJn6oDcWgy9KxcovutDfJ/AO5S6j/7pVdPjGldH91wkHqPHTj1WDoH4IVdlokL/HZM00OMcaXPPrrd30mfPyM6+3NdmS2J2+RomtAvG4Cg+Og/chWA5tm9GhK8fOYzCKuIsoEim6hNJUOWnm1Ik/SL4U++y8qHRYj7VSt8bvF8tV+MZ6+g3LuulPdPMVQ6XmheK9GCwJj6LbZyJr3Wx1sAJ6sXcE019Q4YnP/7jipg0ZRKyZS2l2kdIOA5V03Q0bUvRv9ZQ6UwDMfcX6FuUeIe2QOjdiZzApnfctpSFuY4inLgU6WTIo1jW0Tq1PE/mji6rndpCXf+6mMDjvCmfTIAR5OVvQgUex0Juf58wf1cn2e3eyL0RPLVxgV90tKks7KFe7VWhDGnAsoGI7Qz/duXnXNIFXoD23Mqwc71FXDGUlwmTJPVwiemxmojbAEnjZ7lcMBjgHsgdYEQTswbnZxAhnjyxkX840UcxNrcQjB7lAIO+FkUsM+QJ470WoWOgA9jEN02IKgT83YA3CtTxNmBL4rlVIav1bF325/XjxgNGFybRAzYJ3GSObgr7bdojSf+5Mr8FnungykLRwzRq/+9TuW8VDCREIjhnCL+G8zojgg1A4OcW17Si5lLyFICmHrq2xOD0z/qfAyGzAPws2Z2WuRH4EIKRrtlxVEtlQd87WPiBStzWiIYU7xBgUU0nX6IhU0izkgNOdqrbH9u+4MX9K7ShE8NNYZeyUrtSI9vbxUzp2N7r97XH5/wbaefbt53iSQYICmmOFSmz7rv4uSpuH/dzQjkgZiGbDiexLgrvkEvxqCImq2WDb1Il8SPwA++1cAnoCqZzJukUKAiS9z8QsKDL2gICN5/R3R6oLKbJz/9uzGOqmQs4mTDlt9a6VVOkPWGrJCOcTS5LzcymWcnFfoPVVi5DHE3ox4DiYX+ZDvbyI8Il8yBT5mZfkgbXHcPIPJDP5j1KhsM5Qw9f6aRLEDlrWZjJuW1cHiAagYvBpeJV14pgTEOASYs107LBlYgBESEOpSoPDLMvAUZ4dRNb8qn09jw2xUVIEgGdakBaCT5Xlhu0tkCAb/doTHpsRlnud9HSCGRMnvLW2MO+psqe6c2J2Yy/48hD2fvH/E7wkCnMJPMsqO5QbV2Gy5IU7WniTE6D9ydkou5uqPpG6YPQahVi9uP9Qeo+azGFJH29BMOvl9ozRb50Df4oPmCuZ9J4kHj7KsGQZ9KI/q0cgR79cBf3TY2/dD0OPfBq2I/WnzS2+AxUaREc4cPzv4Ssm+foxJMPPd7FkSVovx1MBR/UOMp2tAmngGuQ37e2TML3OCGF+t1Wrbo+vK0ex+h7FZkT4h9eUgrJoAzgoO03VoPCm315n2Tm9TN8RBG5bYh6r3xQzYqW2xvP9QeI6azK2JFh29nBMO2vlQzRb4oDv4mLmZmZ2Jnh7yQsQzQzQzYsQzYzYzQzQzQzQzYzQzQzQzQz YzQzYzQzQzQzQzQzYzQzQzQz YzYzQzM2YzZmQ2zQzYzM2ZmZmZmZmMzMzYzYzZhmZmZmZmMzZmZmZmMzMzZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZwZmZmZmZmZmZwQzYzZmZmZmMzZmMzMzZmZmZmMzZmZmZmMzMzZmZmZmZmZmZmZmZmZmMzMzQzZmZmZmZmZ1zBAgUPzQzYxQAxODQyMzQzZG5mZmQ2zQzYzZmZmZmZmZmMzMzYzYzQzZhmZmZmZmMzZmZmZmMzMzZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZwPZmQzYzM2ZmZ2ZmZmZmMzQzZmZmMzMzZmMzMzZmM2MzZmZmZmZmZmZmZmZmZmMzMzQzYzZmZmMzZmZmZmMzQzZmZmZmZmZ1zBAzUPzQzY2QAzODkzQzQzZG2mZmZmZmZmMzZmMzMzQzYzYzQzMmZmZmZmMzZmZmZmMzMzQzZmZmZmMzZmZmZmMzMzQzZmZmZmMzZmZmZmMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZwPzQzM2MzZmZmZmMzZmMzMzZmZmZmMzZmZmZmMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmMzMzZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzMzZmMzMzZmMzZmZmZmMzZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmMzZmZmZmZmMzZmZmZmMzMzZmZmMzMzZmMzZmZmMzMzZmZmZmZmZmZmZmZmMzZmZmZmZmMzMzZmMzMzZmZmZmZmZmMzZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmMzZmMzMzZmZmZmZmZmMzZmZmMzMzZmZmMzZmMzMzZmMzZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmMzZmMzMzZmZmZmZmZmMzZmZmMzMzZmZmMzZmMzMzZmMzZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmMzZmZmZmZmZmZmZmZmZmMzMzZmZmZmMzMzZmZmZmZmMzZmZmZmZmZmZmZmZmMzZmZmMzMzZmZmMzZmMzMzZmMzZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmMzZmZmZmMzZmZmZmMzZmZmZmZmMzZmZmZmMzMzZmZmMzMzZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmMzMzZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmMzZmZmZmMzMzZmZmZmZmMzZmZmZmZmZmZmZmZmMzZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzMzZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzMzZmZmZmZmMzZmZmZmMzZmZmZmZmMzZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmMzZmZmZmZmMzZmZmZmZmMzMzZmMzMzZmMzZmZmZmMzZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzMzZmZmZwZmZmZmMzZmZmZmZmMzZmZmZmZmMzMzZmZmZmMzMzZmZmZmZmZmMzZmZmMzMzZmZmZmZmZmMzZmZmMzMzZmZmMzZmMzMzZmMzZmZmZmZmMzMzZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzMzZmMzMzZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzMzZmZmZmMzMzZmZmZmZmZmMzZmZmMzMzZmZmMzZmMzZmZmMzMzZmMzMzZmZmZmZmZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzMzZmMzMzZmMzZmZmMzMzZmZmZmZmZmMzZmZmMzMzZmZmMzZmMzMzZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmMzMzZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmMzMzZmMzZmZmZmZmZmZmZmZmZmMzZmZmMzMzZmZmMzZmMzZmZmMzZmZmZmMzMzZmZmMzZmZmZmZmMzMzZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzMzZmZmZmZmZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzMzZmZmZmZmZmZmZmZmMzMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmMzZmZmZmZmZmMzZmZmZmMzZmZmZmZmZmMzZmZmZmMzZmZmZmZmZmMzZmZmZmMzZmZmZmZmZmMzZmZmZmMzZmZmZmZmZmMzZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzMzZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzMzZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmMzZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmMzZmZmZmZmMzZmZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmMzZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm
+        <div class="main">
+            <div class="header" data-aos="fade-down">
+                <img src="img/logo.png" alt="شعار كورسات بلس" />
+                <h1>تسجيل مدفوعات الكورس</h1>
+            </div>
+
+            <div class="form-container" data-aos="fade-up">
+                <h3 class="text-center alert alert-info">التحصيل الإلكتروني</h3>
+
+                <h3>نوع الطالب</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user-graduate"></i>
+                                <label class="alert-danger">(*)</label>
+                            </span>
+                            <select name="ctl00$ContentPlaceHolder1$StudentType" id="ctl00_ContentPlaceHolder1_StudentType" title="نوع الطالب" class="form-control" required>
+                                <option selected="selected" value="">اختر نوع الطالب</option>
+                                <option value="secondary">طالب ثانوي</option>
+                                <option value="preparatory">إعدادي</option>
+                                <option value="university">كورسات جامعة</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>المادة</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input name="ctl00$ContentPlaceHolder1$TextBox1" type="text" id="ctl00_ContentPlaceHolder1_TextBox1" title="بحث عن المادة" class="form-control" placeholder="بحث عن المادة ثم اضغط إنتر" />
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-cog"></i>
+                                <label class="alert-danger">(*)</label>
+                            </span>
+                            <select name="ctl00$ContentPlaceHolder1$DropDownList1" id="ctl00_ContentPlaceHolder1_DropDownList1" class="form-control" required>
+                                <option selected="selected" value="">اختر المادة</option>
+                                <option value="math">الرياضيات</option>
+                                <option value="physics">الفيزياء</option>
+                                <option value="chemistry">الكيمياء</option>
+                                <option value="biology">الأحياء</option>
+                                <option value="arabic">اللغة العربية</option>
+                                <option value="english">اللغة الإنجليزية</option>
+                                <option value="history">التاريخ</option>
+                                <option value="geography">الجغرافيا</option>
+                                <option value="science">العلوم</option>
+                                <option value="social">الدراسات الاجتماعية</option>
+                                <option value="religion">التربية الدينية</option>
+                                <option value="computer">الحاسب الآلي</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>القيمة</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-money-bill"></i>
+                                <label class="alert-danger">(*)</label>
+                            </span>
+                            <input name="ctl00$ContentPlaceHolder1$Value" type="text" id="ctl00_ContentPlaceHolder1_Value" title="القيمة" class="form-control" placeholder="القيمة بالجنيه المصري" readonly />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-note">
+                    <p>يمكنك الدفع عبر:</p>
+                    <ul>
+                        <li><strong>اتصالات كاش:</strong> 01153652279</li>
+                        <li><strong>أورنج كاش:</strong> 01558870907</li>
+                    </ul>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" id="payButton" class="btn" onclick="initiateVodafonePayment()">
+                            <i class="fas fa-wallet"></i> دفع عبر فودافون كاش
+                        </button>
+                        <button type="button" class="btn whatsapp-btn" onclick="sendToWhatsApp()">
+                            <i class="fab fa-whatsapp"></i> استلم كودك
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>جميع الحقوق محفوظة &copy; 2025 كورسات بلس</p>
+                <div class="social-icons">
+                    <a href="https://t.me/plusinmathbot" target="_blank"><i class="fab fa-telegram"></i></a>
+                    <a href="https://wa.me/+201007586279" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
+            });
+
+            // Service Search
+            $(function () {
+                var $txt = $('input[id$=TextBox1]');
+                var $ddl = $('select[id$=DropDownList1]');
+                var $value = $('input[id$=Value]');
+                var $items = $('select[id$=DropDownList1] option');
+
+                $txt.keyup(function () {
+                    searchDdl($txt.val());
+                });
+
+                function searchDdl(item) {
+                    $ddl.empty();
+                    var exp = new RegExp(item, "i");
+                    var arr = $.grep($items, function (n) {
+                        return exp.test($(n).text());
+                    });
+
+                    if (arr.length > 0) {
+                        countItemsFound(arr.length);
+                        $.each(arr, function () {
+                            $ddl.append(this);
+                            $ddl.get(0).selectedIndex = 0;
+                        });
+                    } else {
+                        countItemsFound(arr.length);
+                        $ddl.append("<option>لم يتم العثور على عناصر</option>");
+                    }
+                }
+
+                function countItemsFound(num) {
+                    $("#para").empty();
+                    if ($txt.val().length) {
+                        $("#para").html(num + " عناصر تم العثور عليها");
+                    }
+                }
+
+                // Update Value field based on selected course
+                $ddl.change(function () {
+                    var course = $(this).val();
+                    var prices = {
+                        "math": "250 جنيه",
+                        "physics": "300 جنيه",
+                        "chemistry": "280 جنيه",
+                        "biology": "270 جنيه",
+                        "arabic": "200 جنيه",
+                        "english": "220 جنيه",
+                        "history": "180 جنيه",
+                        "geography": "180 جنيه",
+                        "science": "200 جنيه",
+                        "social": "190 جنيه",
+                        "religion": "150 جنيه",
+                        "computer": "250 جنيه"
+                    };
+                    $value.val(prices[course] || "");
+                });
+            });
+
+            // Vodafone Cash Payment
+            function initiateVodafonePayment() {
+                var value = $("#ctl00_ContentPlaceHolder1_Value").val();
+                var studentType = $("#ctl00_ContentPlaceHolder1_StudentType").val();
+                var course = $("#ctl00_ContentPlaceHolder1_DropDownList1").val();
+
+                if (!studentType || !course || !value) {
+                    alert("يرجى اختيار نوع الطالب والمادة.");
+                    return;
+                }
+
+                var amount = parseInt(value) || 0;
+                var ussdCode = `*9*7*01007586279*${amount}#`;
+                window.location.href = `tel:${encodeURIComponent(ussdCode)}`;
+            }
+
+            // WhatsApp Submission
+            function sendToWhatsApp() {
+                var studentType = $("#ctl00_ContentPlaceHolder1_StudentType").val();
+                var course = $("#ctl00_ContentPlaceHolder1_DropDownList1").val();
+                var value = $("#ctl00_ContentPlaceHolder1_Value").val();
+
+                if (!studentType || !course || !value) {
+                    alert("يرجى اختيار نوع الطالب والمادة قبل إرسال السكرين.");
+                    return;
+                }
+
+                var message = `مرحبًا، أريد استلام كود الكورس.\nنوع الطالب: ${$("#ctl00_ContentPlaceHolder1_StudentType option:selected").text()}\nالمادة: ${$("#ctl00_ContentPlaceHolder1_DropDownList1 option:selected").text()}\nالقيمة: ${value}\nيرجى إرفاق سكرين شوت الدفع.`;
+                var whatsappUrl = `https://wa.me/+201007586279?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+            }
+        </script>
+    </form>
+</body>
+</html>
