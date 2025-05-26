@@ -189,6 +189,10 @@
             background: linear-gradient(135deg, #dc3545, #c82333);
         }
 
+        .form-container .pay-btn {
+            background: linear-gradient(135deg, #28a745, #218838);
+        }
+
         @media (max-width: 768px) {
             .form-container {
                 padding: 1.5rem;
@@ -268,6 +272,7 @@
                 <button type="submit" class="btn"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</button>
             </form>
             <button class="btn subscribe-btn" onclick="sendWhatsApp()"><i class="fab fa-whatsapp"></i> اشترك الآن</button>
+            <button class="btn pay-btn" onclick="goToPayment()"><i class="fas fa-wallet"></i> دفع</button>
         </div>
     </div>
 
@@ -286,18 +291,20 @@
 
             // Define grade ranges
             const ranges = [
-                { grade: "الصف الأول الإعدادي", min: 101, max: 10001 },
-                { grade: "الصف الثاني الإعدادي", min: 10001, max: 10000001 },
-                { grade: "الصف الثالث الإعدادي", min: 10000001, max: 10000000001 }
+                { grade: "grade1", display: "الصف الأول الإعدادي", min: 101, max: 10001 },
+                { grade: "grade2", display: "الصف الثاني الإعدادي", min: 10001, max: 10000001 },
+                { grade: "grade3", display: "الصف الثالث الإعدادي", min: 10000001, max: 10000000001 }
             ];
 
             // Initialize grade
             let studentGrade = null;
+            let gradeDisplay = null;
 
             // Check code range
             for (const range of ranges) {
                 if (code >= range.min && code <= range.max) {
                     studentGrade = range.grade;
+                    gradeDisplay = range.display;
                     break;
                 }
             }
@@ -310,12 +317,12 @@
             // Check subject-specific conditions
             if (subject === "arabic") {
                 // Arabic: No additional conditions, just range check
-                proceedToClass(studentGrade, subject);
+                proceedToClass(studentGrade, subject, gradeDisplay);
                 return false;
             } else {
                 // Other subjects: Code must be odd
                 if (code % 2 === 1) {
-                    proceedToClass(studentGrade, subject);
+                    proceedToClass(studentGrade, subject, gradeDisplay);
                     return false;
                 } else {
                     errorMessage.style.display = "block";
@@ -324,7 +331,7 @@
             }
         }
 
-        function proceedToClass(grade, subject) {
+        function proceedToClass(grade, subject, gradeDisplay) {
             const subjectName = {
                 "arabic": "اللغة العربية",
                 "math": "الرياضيات",
@@ -341,11 +348,10 @@
             }[subject];
 
             // Send Telegram notification
-            sendTelegramNotification(grade, subjectName);
+            sendTelegramNotification(gradeDisplay, subjectName);
 
-            // Redirect or show alert (replace with actual redirect if URLs are provided)
-            alert(`تم تسجيل الدخول بنجاح!\nالصف: ${grade}\nالمادة: ${subjectName}`);
-            // Example redirect: window.location.href = `/grade1_arabic.html`;
+            // Redirect to specific class page
+            window.location.href = `${grade}_${subject}.html`;
         }
 
         function sendTelegramNotification(grade, subject) {
@@ -374,6 +380,10 @@
             const message = "مرحبًا، أريد الاستفسار عن أسعار الاشتراك في كورسات بلس.";
             const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, "_blank");
+        }
+
+        function goToPayment() {
+            window.location.href = "vr-learning.html";
         }
     </script>
 </body>
