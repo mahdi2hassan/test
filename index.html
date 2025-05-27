@@ -6,13 +6,13 @@
     <title>كورسات بلس</title>
     <meta name="description" content="منصة تعليمية متقدمة تقدم أدوات تعلم ذكية وتفاعلية">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
+
     <!-- AOS for Scroll Animations -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 
@@ -25,6 +25,7 @@
             --background: #f3f4f6;
             --card-bg: rgba(255, 255, 255, 0.95);
             --glow: 0 0 15px rgba(168, 85, 247, 0.5);
+            --border-radius: 12px;
         }
 
         * {
@@ -61,7 +62,7 @@
             top: 0;
             left: 0;
             z-index: 0;
-            opacity: 1; /* الصورة المرفوعة بوضوح كامل */
+            opacity: 0.5; /* خفض الشفافية لتحسين وضوح النصوص */
         }
 
         .banner-content {
@@ -71,19 +72,19 @@
             text-align: center;
             max-width: 90%;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.15); /* خلفية خفيفة لتحسين الوضوح */
-            border-radius: 15px;
-            padding: 2rem;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(10, 29, 55, 0.3); /* خلفية داكنة قليلاً للتباين */
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .banner-content .logo {
-            width: clamp(120px, 18vw, 160px);
+            width: clamp(80px, 12vw, 100px); /* حجم معدل ليتناسب مع اللوجو */
             height: auto;
             margin-bottom: 2rem;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-            transition: transform 0.3s ease;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            transition: filter 0.3s ease, transform 0.3s ease;
         }
 
         .banner-content .logo:hover {
@@ -91,10 +92,11 @@
         }
 
         .banner-content h1 {
-            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-size: clamp(2rem, 5.5vw, 3.2rem);
             font-weight: 900;
             margin-bottom: 1.5rem;
-            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 3px rgba(0, 0, 0);
+            line-height: 1.2;
         }
 
         .banner-content h1 .cd-words-wrapper {
@@ -131,20 +133,20 @@
         /* Tools Grid */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            padding: 3rem 2rem;
-            max-width: 1400px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px;
+            padding: 20px 40px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .tool-item {
+        .item {
             background: var(--card-bg);
-            border-radius: 15px;
-            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            padding: 20px;
             backdrop-filter: blur(12px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
             text-decoration: none;
             color: var(--primary);
             cursor: pointer;
@@ -156,65 +158,67 @@
             overflow: hidden;
         }
 
-        .tool-item:hover {
+        .item:hover {
             transform: translateY(-5px);
             box-shadow: var(--glow);
-            background: rgba(255, 255, 255, 1);
+            background: rgba(255,255,255,1);
         }
 
-        .tool-item .icon-background {
+        .item .icon-background {
             background: linear-gradient(135deg, var(--secondary), var(--accent));
             width: 60px;
             height: 60px;
-            border-radius: 12px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text);
             font-size: 1.8rem;
-            margin-bottom: 1rem;
+            margin-bottom: 20px;
             transition: transform 0.3s ease;
         }
 
-        .tool-item:hover .icon-background {
+        .item:hover .icon-background {
             transform: scale(1.1);
         }
 
-        .tool-item span {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            font-weight: 700;
-            line-height: 1.3;
+        .item span {
+            font-size: 1rem;
+            font-weight: bold;
+            line-height: 1;
         }
 
-        .tool-item .tooltip {
+        .item .tooltip {
             position: absolute;
-            bottom: 100%;
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, -100%) translateY(-10px);
             background: var(--primary);
             color: var(--text);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.875rem;
             opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: all 0.3s ease;
             pointer-events: none;
             max-width: 200px;
             text-align: center;
+            margin: 0;
         }
 
-        .tool-item:hover .tooltip {
+        .item:hover .tooltip {
             opacity: 1;
-            transform: translateY(0);
+            transform: translate(-50%, -100%) translateY(0);
         }
 
         /* Footer */
         .footer {
             background: var(--primary);
             color: var(--text);
-            padding: 2rem 1rem;
+            padding: 20px;
             text-align: center;
-            font-size: clamp(0.8rem, 2vw, 0.9rem);
-            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+            font-size: 0.875rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .footer .container {
@@ -222,16 +226,16 @@
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            gap: 1rem;
+            gap: 8px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .footer .social-icons a {
             color: var(--text);
-            font-size: 1.2rem;
-            margin: 0 0.5rem;
-            transition: color 0.3s ease, transform 0.3s ease;
+            font-size: 1rem;
+            margin: 0 8px;
+            transition: all 0.3s ease;
         }
 
         .footer .social-icons a:hover {
@@ -243,55 +247,55 @@
         @media (max-width: 1200px) {
             .tools-grid {
                 grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-                gap: 1.2rem;
+                gap: 12px;
             }
         }
 
         @media (max-width: 768px) {
             .banner-content h1 {
-                font-size: clamp(1.6rem, 5vw, 2.5rem);
+                font-size: clamp(1.5rem, 5vw, 2rem);
             }
 
             .tools-grid {
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                padding: 2rem 1rem;
+                padding: 16px;
             }
 
-            .tool-item {
-                padding: 1rem;
+            .item {
+                padding: 12px;
             }
 
-            .tool-item .icon-background {
-                width: 50px;
-                height: 50px;
+            .item .icon-background {
+                width: 48px;
+                height: 48px;
                 font-size: 1.5rem;
             }
 
-            .tool-item span {
-                font-size: 1rem;
+            .item span {
+                font-size: 0.875rem;
             }
         }
 
         @media (max-width: 576px) {
             .banner-content {
-                padding: 1.5rem;
+                padding: 16px;
             }
 
             .banner-content .logo {
-                width: 100px;
+                width: clamp(64px, 10vw, 80px);
             }
 
             .tools-grid {
-                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-                gap: 1rem;
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 8px;
             }
 
-            .tool-item {
-                padding: 0.8rem;
+            .item {
+                padding: 8px;
             }
 
-            .tool-item span {
-                font-size: 0.9rem;
+            .item span {
+                font-size: 0.75rem;
             }
 
             .footer .container {
@@ -325,74 +329,74 @@
                         </div>
                         <div class="tools-section">
                             <div class="tools-grid">
-                                <!-- Tool 1 -->
-                                <a href="simulator.html" class="tool-item" data-aos="fade-up">
-                                    <div class="icon-background"><i class="fas fa-vials"></i></div>
-                                    <span>محاكي تفاعلي</span>
-                                    <div class="tooltip">جرّب تجارب علمية ورياضية تفاعلية</div>
+                                <!-- Tool 1: Course Login -->
+                                <a href="course-login.html" class="item" data-aos="fade-up">
+                                    <div class="icon-background"><i class="fas fa-sign-in-alt"></i></div>
+                                    <span>دخول إلى المقرر الدراسي</span>
+                                    <div class="tooltip">سجّل الدخول للوصول إلى مقرراتك الدراسية</div>
                                 </a>
-                                <!-- Tool 2 -->
-                                <a href="smart-quizzes.html" class="tool-item" data-aos="fade-up" data-aos-delay="100">
+                                <!-- Tool 2: Payment Methods -->
+                                <a href="vr-learning.html" class="item" data-aos="fade-up" data-aos-delay="100">
+                                    <div class="icon-background"><i class="fas fa-wallet"></i></div>
+                                    <span>أساليب الدفع</span>
+                                    <div class="tooltip">ادفع بسهولة باستخدام أساليب متعددة</div>
+                                </a>
+                                <!-- Tool 3: Smart Quizzes -->
+                                <a href="smart-quizzes.html" class="item" data-aos="fade-up" data-aos-delay="200">
                                     <div class="icon-background"><i class="fas fa-question-circle"></i></div>
                                     <span>اختبارات ذكية</span>
                                     <div class="tooltip">اختبارات مع تحليل فوري للنتائج</div>
                                 </a>
-                                <!-- Tool 3 -->
-                                <a href="notes-board.html" class="tool-item" data-aos="fade-up" data-aos-delay="200">
+                                <!-- Tool 4: Simulator -->
+                                <a href="simulator.html" class="item" data-aos="fade-up" data-aos-delay="300">
+                                    <div class="icon-background"><i class="fas fa-vials"></i></div>
+                                    <span>محاكي تفاعلي</span>
+                                    <div class="tooltip">جرّب تجارب علمية ورياضية تفاعلية</div>
+                                </a>
+                                <!-- Tool 5: Notes Board -->
+                                <a href="notes-board.html" class="item" data-aos="fade-up" data-aos-delay="400">
                                     <div class="icon-background"><i class="fas fa-edit"></i></div>
                                     <span>لوحة ملاحظات</span>
                                     <div class="tooltip">دوّن ملاحظاتك مع دعم المعادلات</div>
                                 </a>
-                                <!-- Tool 4 -->
-                                <a href="study-planner.html" class="tool-item" data-aos="fade-up" data-aos-delay="300">
+                                <!-- Tool 6: Study Planner -->
+                                <a href="study-planner.html" class="item" data-aos="fade-up" data-aos-delay="500">
                                     <div class="icon-background"><i class="fas fa-calendar-check"></i></div>
                                     <span>جدول دراسة ذكي</span>
                                     <div class="tooltip">خطط لدراستك بذكاء</div>
                                 </a>
-                                <!-- Tool 5 -->
-                                <a href="interactive-videos.html" class="tool-item" data-aos="fade-up" data-aos-delay="400">
+                                <!-- Tool 7: Interactive Videos -->
+                                <a href="interactive-videos.html" class="item" data-aos="fade-up" data-aos-delay="600">
                                     <div class="icon-background"><i class="fas fa-video"></i></div>
                                     <span>فيديوهات تفاعلية</span>
                                     <div class="tooltip">تعلم مع أسئلة مدمجة</div>
                                 </a>
-                                <!-- Tool 6 -->
-                                <a href="forum.html" class="tool-item" data-aos="fade-up" data-aos-delay="500">
+                                <!-- Tool 8: Forum -->
+                                <a href="forum.html" class="item" data-aos="fade-up" data-aos-delay="700">
                                     <div class="icon-background"><i class="fas fa-comments"></i></div>
                                     <span>منتدى تعليمي</span>
                                     <div class="tooltip">ناقش مع زملائك ومعلميك</div>
                                 </a>
-                                <!-- Tool 7 -->
-                                <a href="code-editor.html" class="tool-item" data-aos="fade-up" data-aos-delay="600">
+                                <!-- Tool 9: Code Editor -->
+                                <a href="code-editor.html" class="item" data-aos="fade-up" data-aos-delay="800">
                                     <div class="icon-background"><i class="fas fa-code"></i></div>
                                     <span>محرر أكواد</span>
                                     <div class="tooltip">برمج مباشرة في المنصة</div>
                                 </a>
-                                <!-- Tool 8 -->
-                                <a href="language-trainer.html" class="tool-item" data-aos="fade-up" data-aos-delay="700">
+                                <!-- Tool 10: Language Trainer -->
+                                <a href="language-trainer.html" class="item" data-aos="fade-up" data-aos-delay="900">
                                     <div class="icon-background"><i class="fas fa-language"></i></div>
                                     <span>مترجم لغات</span>
                                     <div class="tooltip">تعلم اللغات بتمارين تفاعلية</div>
                                 </a>
-                                <!-- Tool 9 -->
-                                <a href="progress-tracker.html" class="tool-item" data-aos="fade-up" data-aos-delay="800">
+                                <!-- Tool 11: Progress Tracker -->
+                                <a href="progress-tracker.html" class="item" data-aos="fade-up" data-aos-delay="1000">
                                     <div class="icon-background"><i class="fas fa-chart-line"></i></div>
                                     <span>محلل التقدم</span>
                                     <div class="tooltip">تتبع أدائك بسهولة</div>
                                 </a>
-                                <!-- Tool 10 -->
-                                <a href="question-generator.html" class="tool-item" data-aos="fade-up" data-aos-delay="900">
-                                    <div class="icon-background"><i class="fas fa-random"></i></div>
-                                    <span>مولد أسئلة</span>
-                                    <div class="tooltip">أسئلة عشوائية للتدريب</div>
-                                </a>
-                                <!-- Tool 11 -->
-                                <a href="vr-learning.html" class="tool-item" data-aos="fade-up" data-aos-delay="1000">
-                                    <div class="icon-background"><i class="fas fa-vr-cardboard"></i></div>
-                                    <span>واقع افتراضي</span>
-                                    <div class="tooltip">دروس بتقنية الواقع الافتراضي</div>
-                                </a>
-                                <!-- Tool 12 -->
-                                <a href="study-bot.html" class="tool-item" data-aos="fade-up" data-aos-delay="1100">
+                                <!-- Tool 12: Study Bot -->
+                                <a href="study-bot.html" class="item" data-aos="fade-up" data-aos-delay="1100">
                                     <div class="icon-background"><i class="fas fa-robot"></i></div>
                                     <span>روبوت دراسي</span>
                                     <div class="tooltip">اسأل وتعلم مع الذكاء الاصطناعي</div>
@@ -438,13 +442,13 @@
         $(document).ready(function() {
             const words = $('.cd-words-wrapper b');
             let currentWord = 0;
-            
+
             function rotateWords() {
                 words.eq(currentWord).removeClass('is-visible');
                 currentWord = (currentWord + 1) % words.length;
                 words.eq(currentWord).addClass('is-visible');
             }
-            
+
             setInterval(rotateWords, 3000); // Rotate every 3 seconds
         });
     </script>
