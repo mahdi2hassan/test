@@ -9,143 +9,224 @@
 
   body {
     min-height: 100vh;
-    background: linear-gradient(135deg, #0a1628 0%, #1a3a6b 50%, #0a1628 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: linear-gradient(160deg, #0a1628 0%, #1a3a6b 60%, #0a1628 100%);
     font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    padding: 24px 16px 40px;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .logo {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, #c8a028, #f0c040);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 28px;
+    box-shadow: 0 8px 24px rgba(200,160,40,0.4);
+  }
+
+  h1 { color: #fff; font-size: 20px; font-weight: 700; }
+  .sub { color: rgba(255,255,255,0.45); font-size: 13px; margin-top: 4px; }
+
+  /* LOGIN SECTION */
+  .login-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(16px);
+  }
+
+  .login-title {
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    margin-bottom: 12px;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
+  .inputs { display: flex; flex-direction: column; gap: 10px; }
+
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 11px 14px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.13);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+    text-align: right;
+  }
+  input:focus { border-color: #c8a028; }
+  input::placeholder { color: rgba(255,255,255,0.28); }
+
+  .remember {
+    display: flex; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.5); font-size: 12px;
+    cursor: pointer; margin-top: 4px;
+  }
+  .remember input { width: auto; }
+
+  .btn-login {
+    width: 100%; padding: 12px;
+    background: linear-gradient(135deg, #c8a028, #f0c040);
+    border: none; border-radius: 10px;
+    color: #0a1628; font-size: 15px; font-weight: 700;
+    cursor: pointer; margin-top: 10px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 5px 18px rgba(200,160,40,0.35);
+  }
+  .btn-login:hover { transform: translateY(-1px); }
+  .btn-login:active { transform: translateY(0); }
+
+  /* STATUS */
+  .status {
+    text-align: center; font-size: 12px; margin-top: 8px; min-height: 18px;
+    color: rgba(255,255,255,0.4);
+  }
+  .status.ok { color: #4ade80; }
+  .status.err { color: #f87171; }
+
+  /* SHORTCUTS */
+  .section-title {
+    color: rgba(255,255,255,0.4);
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
 
   .card {
     background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 20px;
-    padding: 40px 36px;
-    width: 360px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.4);
-    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 18px 14px;
+    text-decoration: none;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    transition: background 0.2s, transform 0.15s, border-color 0.2s;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
   }
+  .card:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); border-color: rgba(200,160,40,0.4); }
+  .card:active { transform: translateY(0); }
 
-  .logo {
-    width: 80px; height: 80px;
-    background: linear-gradient(135deg, #c8a028, #f0c040);
-    border-radius: 50%;
+  .icon {
+    width: 48px; height: 48px; border-radius: 14px;
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 16px;
-    font-size: 32px;
-    box-shadow: 0 8px 24px rgba(200,160,40,0.4);
+    font-size: 22px;
   }
 
-  h1 { color: #fff; font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-  .sub { color: rgba(255,255,255,0.5); font-size: 13px; margin-bottom: 32px; }
-
-  .field { margin-bottom: 16px; text-align: right; }
-
-  label { display: block; color: rgba(255,255,255,0.7); font-size: 13px; margin-bottom: 6px; }
-
-  input[type="text"], input[type="password"] {
-    width: 100%;
-    padding: 12px 16px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 10px;
-    color: #fff;
-    font-size: 15px;
-    outline: none;
-    transition: border 0.2s, background 0.2s;
-    text-align: right;
+  .card-label {
+    color: #fff; font-size: 13px; font-weight: 600;
+    text-align: center; line-height: 1.4;
   }
 
-  input:focus { border-color: #c8a028; background: rgba(255,255,255,0.12); }
-  input::placeholder { color: rgba(255,255,255,0.3); }
+  /* icon colors */
+  .ic-blue   { background: rgba(59,130,246,0.2); }
+  .ic-green  { background: rgba(34,197,94,0.2); }
+  .ic-yellow { background: rgba(234,179,8,0.2); }
+  .ic-purple { background: rgba(168,85,247,0.2); }
+  .ic-red    { background: rgba(239,68,68,0.2); }
 
-  .remember {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 20px;
-    color: rgba(255,255,255,0.6);
-    font-size: 13px;
-    cursor: pointer;
+  /* FOOTER */
+  .footer {
+    text-align: center; color: rgba(255,255,255,0.2);
+    font-size: 11px; margin-top: 28px;
   }
-  .remember input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
 
-  .btn {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, #c8a028, #f0c040);
-    border: none;
-    border-radius: 12px;
-    color: #0a1628;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s;
-    box-shadow: 0 6px 20px rgba(200,160,40,0.35);
-  }
-  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(200,160,40,0.5); }
-  .btn:active { transform: translateY(0); }
-
-  .hint {
-    margin-top: 16px;
-    padding: 12px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 10px;
-    color: rgba(255,255,255,0.45);
-    font-size: 12px;
-    line-height: 1.7;
-    display: none;
-  }
-  .hint.show { display: block; }
-
-  .step {
-    margin-top: 8px;
-    color: #f0c040;
-    font-size: 13px;
-    font-weight: 600;
-    display: none;
-  }
-  .step.show { display: block; }
-
-  .footer { margin-top: 24px; color: rgba(255,255,255,0.3); font-size: 11px; }
+  /* hidden real form */
+  #realForm { display: none; }
 </style>
 </head>
 <body>
 
-<div class="card">
+<div class="header">
   <div class="logo">🎓</div>
   <h1>التسجيل الإلكتروني</h1>
   <p class="sub">جامعة بني سويف</p>
-
-  <div class="field">
-    <label>اسم المستخدم (الرقم القومي / كود الطالب)</label>
-    <input type="text" id="username" placeholder="أدخل الكود هنا" autocomplete="username" />
-  </div>
-
-  <div class="field">
-    <label>كلمة السر</label>
-    <input type="password" id="password" placeholder="أدخل كلمة السر" autocomplete="current-password" />
-  </div>
-
-  <label class="remember">
-    <input type="checkbox" id="rememberMe" /> حفظ البيانات للمرة الجاية
-  </label>
-
-  <button class="btn" onclick="doLogin()">دخول ←</button>
-
-  <p class="step" id="step">⏳ جاري فتح النظام... أدخل بياناتك في الصفحة اللي هتفتح</p>
-  <div class="hint" id="hint">
-    ⚠️ بسبب قيود أمان سيرفر الجامعة، مش ممكن نعمل تسجيل دخول مباشر.<br>
-    هتفتح صفحة الجامعة — بياناتك اتنسخت في الـ clipboard.<br>
-    بس الصقها في الحقول وادخل.
-  </div>
-
-  <div class="footer">بوابة سريعة لنظام جامعة بني سويف</div>
 </div>
 
+<!-- LOGIN -->
+<div class="login-card">
+  <p class="login-title">تسجيل الدخول أولاً للوصول للخدمات</p>
+  <div class="inputs">
+    <input type="text"     id="username" placeholder="اسم المستخدم / الرقم القومي" autocomplete="username" />
+    <input type="password" id="password" placeholder="كلمة السر" autocomplete="current-password" />
+  </div>
+  <label class="remember">
+    <input type="checkbox" id="rememberMe" /> تذكر بياناتي
+  </label>
+  <button class="btn-login" onclick="doLogin()">دخول ←</button>
+  <div class="status" id="status"></div>
+</div>
+
+<!-- SHORTCUTS -->
+<p class="section-title">الخدمات المتاحة — اضغط للدخول المباشر</p>
+
+<div class="grid">
+
+  <div class="card" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/STUDENTSUBJECTS.ASPX')">
+    <div class="icon ic-blue">📋</div>
+    <span class="card-label">بيان المقررات</span>
+  </div>
+
+  <div class="card" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_Stud_EXPENSES.aspx')">
+    <div class="icon ic-green">💰</div>
+    <span class="card-label">المصروفات</span>
+  </div>
+
+  <div class="card" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_RS_ST_223.aspx')">
+    <div class="icon ic-yellow">🪪</div>
+    <span class="card-label">بطاقة التسجيل</span>
+  </div>
+
+  <div class="card" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_REG_COURSE_GROUP.aspx')">
+    <div class="icon ic-purple">📚</div>
+    <span class="card-label">السجل الدراسي</span>
+  </div>
+
+  <div class="card" style="grid-column: span 2;" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_RecordStudentPrimarySubjectsCredit.aspx')">
+    <div class="icon ic-red">✏️</div>
+    <span class="card-label">تسجيل المواد</span>
+  </div>
+
+  <div class="card" style="grid-column: span 2;" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ed_login.aspx')">
+    <div class="icon" style="background:rgba(255,255,255,0.08)">🔐</div>
+    <span class="card-label" style="color:rgba(255,255,255,0.5)">صفحة الدخول الرسمية</span>
+  </div>
+
+</div>
+
+<div class="footer">جامعة بني سويف — نظام MIS</div>
+
+<!-- Real Form -->
+<form id="realForm" method="POST"
+  action="https://www.mis.bsu.edu.eg/umisswf/Registration/ed_login.aspx"
+  target="_self">
+  <input type="hidden" name="__VIEWSTATE"          id="vs"  value="wEPDwUKLTM0NDAzNDI3Ng9k" />
+  <input type="hidden" name="__VIEWSTATEGENERATOR" id="vsg" value="3639424D" />
+  <input type="hidden" name="__EVENTVALIDATION"    id="ev"  value="wEWBwL07YmMCg" />
+  <input type="text"   name="ctl00$cntphmaster$txt_StudCode"    id="f_user" />
+  <input type="text"   name="ctl00$cntphmaster$txt_Nationalnum" id="f_pass" />
+  <input type="submit" name="ctl00$cntphmaster$btn_Login"       value="تسجيل دخول" />
+</form>
+
 <script>
-const TARGET = 'https://www.mis.bsu.edu.eg/umisswf/Registration/ed_login.aspx';
+const LOGIN_URL = 'https://www.mis.bsu.edu.eg/umisswf/Registration/ed_login.aspx';
 
 // تحميل البيانات المحفوظة
 window.onload = () => {
@@ -160,41 +241,54 @@ window.onload = () => {
   }
 };
 
-function doLogin() {
+function setStatus(msg, type='') {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = 'status ' + type;
+}
+
+async function doLogin() {
   const user = document.getElementById('username').value.trim();
   const pass = document.getElementById('password').value.trim();
   const remember = document.getElementById('rememberMe').checked;
 
-  if (!user || !pass) {
-    alert('من فضلك أدخل اسم المستخدم وكلمة السر');
-    return;
-  }
+  if (!user || !pass) { setStatus('أدخل اسم المستخدم وكلمة السر', 'err'); return; }
 
-  // حفظ أو مسح البيانات
   if (remember) {
     localStorage.setItem('bsu_creds', JSON.stringify({ u: user, p: pass }));
   } else {
     localStorage.removeItem('bsu_creds');
   }
 
-  // نسخ الكود ثم كلمة السر للـ clipboard
-  const combined = `الكود: ${user}\nكلمة السر: ${pass}`;
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(combined).catch(() => {});
-  }
+  setStatus('⏳ جاري تسجيل الدخول...');
 
-  document.getElementById('step').classList.add('show');
-
-  // فتح صفحة الجامعة بعد ثانية
-  setTimeout(() => {
-    window.location.href = TARGET;
-  }, 1000);
+  document.getElementById('f_user').value = user;
+  document.getElementById('f_pass').value = pass;
+  document.getElementById('realForm').submit();
 }
 
-// دخول بـ Enter
+// الضغط على Enter
 document.addEventListener('keydown', e => {
   if (e.key === 'Enter') doLogin();
 });
+
+// الدخول المباشر للصفحات (بعد تسجيل الدخول)
+function go(url) {
+  const user = document.getElementById('username').value.trim();
+  const pass = document.getElementById('password').value.trim();
+
+  if (!user || !pass) {
+    setStatus('⚠️ سجّل دخولك الأول', 'err');
+    document.getElementById('username').focus();
+    return;
+  }
+  // حفظ الـ URL المطلوب ثم تسجيل الدخول
+  sessionStorage.setItem('bsu_redirect', url);
+  document.getElementById('f_user').value = user;
+  document.getElementById('f_pass').value = pass;
+  document.getElementById('realForm').action = url; // نحاول مباشرة
+  document.getElementById('realForm').submit();
+}
 </script>
 
 </body>
