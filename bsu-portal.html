@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بوابة جامعة بني سويف</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  min-height:100vh;
+  background: linear-gradient(160deg,#0a1628 0%,#1a3a6b 60%,#0a1628 100%);
+  font-family:'Segoe UI',Tahoma,Arial,sans-serif;
+  padding:20px 14px 50px;
+  color:#fff;
+}
+
+/* HEADER */
+.header { text-align:center; margin-bottom:22px; }
+.logo {
+  width:66px;height:66px;
+  background:linear-gradient(135deg,#c8a028,#f0c040);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 10px;font-size:26px;
+  box-shadow:0 8px 24px rgba(200,160,40,.4);
+}
+h1 { font-size:19px;font-weight:700; }
+.sub { color:rgba(255,255,255,.4);font-size:12px;margin-top:3px; }
+
+/* LOGIN */
+.login-card {
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;padding:16px;margin-bottom:18px;
+}
+.login-title { color:rgba(255,255,255,.45);font-size:11px;text-align:center;margin-bottom:10px; }
+.inputs { display:flex;flex-direction:column;gap:8px; }
+input[type=text],input[type=password] {
+  width:100%;padding:10px 13px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:9px;color:#fff;font-size:14px;
+  outline:none;transition:border .2s;text-align:right;
+}
+input:focus { border-color:#c8a028; }
+input::placeholder { color:rgba(255,255,255,.27); }
+.remember {
+  display:flex;align-items:center;gap:7px;
+  color:rgba(255,255,255,.45);font-size:12px;cursor:pointer;margin-top:6px;
+}
+.remember input[type=checkbox]{width:15px;height:15px;}
+.btn-login {
+  width:100%;padding:11px;margin-top:9px;
+  background:linear-gradient(135deg,#c8a028,#f0c040);
+  border:none;border-radius:9px;
+  color:#0a1628;font-size:15px;font-weight:700;cursor:pointer;
+  box-shadow:0 5px 18px rgba(200,160,40,.3);
+  transition:transform .15s;
+}
+.btn-login:active{transform:scale(.98);}
+.status{text-align:center;font-size:12px;margin-top:6px;min-height:15px;color:rgba(255,255,255,.4);}
+.status.err{color:#f87171;}
+
+/* SECTION */
+.section-label {
+  color:rgba(255,255,255,.35);font-size:10px;
+  letter-spacing:1.2px;margin:16px 0 9px;text-align:center;
+  text-transform:uppercase;
+}
+
+/* GRID */
+.grid { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+.grid.col1 { grid-template-columns:1fr; }
+
+.card {
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:14px;padding:14px 11px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  cursor:pointer;transition:background .2s,transform .15s,border-color .2s;
+  text-decoration:none;user-select:none;
+}
+.card:hover{background:rgba(255,255,255,.09);border-color:rgba(200,160,40,.35);}
+.card:active{transform:scale(.97);}
+.card.full{grid-column:span 2;}
+.card.row {
+  flex-direction:row;justify-content:flex-start;gap:12px;
+  padding:11px 14px;
+}
+
+.icon {
+  width:42px;height:42px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:19px;
+  flex-shrink:0;
+}
+.ic-blue{background:rgba(59,130,246,.18);}
+.ic-green{background:rgba(34,197,94,.18);}
+.ic-yellow{background:rgba(234,179,8,.18);}
+.ic-purple{background:rgba(168,85,247,.18);}
+.ic-red{background:rgba(239,68,68,.18);}
+.ic-cyan{background:rgba(6,182,212,.18);}
+.ic-orange{background:rgba(249,115,22,.18);}
+.ic-pink{background:rgba(236,72,153,.18);}
+.ic-gray{background:rgba(255,255,255,.08);}
+.ic-teal{background:rgba(20,184,166,.18);}
+.ic-indigo{background:rgba(99,102,241,.18);}
+
+.card-label{color:#fff;font-size:12px;font-weight:600;text-align:center;line-height:1.4;}
+.card-label.dim{color:rgba(255,255,255,.4);}
+.card-label.left{text-align:right;}
+
+/* DIVIDER */
+.divider{height:1px;background:rgba(255,255,255,.07);margin:6px 0;}
+
+/* hidden form */
+#loginForm{display:none;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">🎓</div>
+  <h1>بوابة جامعة بني سويف</h1>
+  <p class="sub">جميع الخدمات في مكان واحد</p>
+</div>
+
+<!-- LOGIN -->
+<div class="login-card">
+  <p class="login-title">سجّل دخولك لنظام التسجيل</p>
+  <div class="inputs">
+    <input type="text"     id="username" placeholder="اسم المستخدم / الرقم القومي" autocomplete="username"/>
+    <input type="password" id="password" placeholder="كلمة السر" autocomplete="current-password"/>
+  </div>
+  <label class="remember"><input type="checkbox" id="rememberMe"/> تذكر بياناتي</label>
+  <button class="btn-login" onclick="doLogin()">دخول نظام التسجيل ←</button>
+  <div class="status" id="status"></div>
+</div>
+
+<!-- ===== خدمات الطالب (تحتاج login) ===== -->
+<p class="section-label">🔐 خدمات الطالب — بعد تسجيل الدخول</p>
+<div class="grid">
+  <div class="card" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/STUDENTSUBJECTS.ASPX')">
+    <div class="icon ic-blue">📋</div>
+    <span class="card-label">بيان المقررات</span>
+  </div>
+  <div class="card" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_Stud_EXPENSES.aspx')">
+    <div class="icon ic-green">💰</div>
+    <span class="card-label">المصروفات</span>
+  </div>
+  <div class="card" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_RS_ST_223.aspx')">
+    <div class="icon ic-yellow">🪪</div>
+    <span class="card-label">بطاقة التسجيل</span>
+  </div>
+  <div class="card" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_REG_COURSE_GROUP.aspx')">
+    <div class="icon ic-purple">📚</div>
+    <span class="card-label">السجل الدراسي</span>
+  </div>
+  <div class="card full" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_RecordStudentPrimarySubjectsCredit.aspx')">
+    <div class="icon ic-red">✏️</div>
+    <span class="card-label">تسجيل المواد</span>
+  </div>
+</div>
+
+<!-- ===== نتائج (عامة) ===== -->
+<p class="section-label">📊 النتائج والاستعلامات</p>
+<div class="grid">
+  <div class="card" onclick="go('http://www.results.bsu.edu.eg')">
+    <div class="icon ic-cyan">🏆</div>
+    <span class="card-label">نتائج الطلاب</span>
+  </div>
+  <div class="card" onclick="go('https://misapp.bsu.edu.eg/MisBsuResults2026/')">
+    <div class="icon ic-orange">📈</div>
+    <span class="card-label">نتائج 2026</span>
+  </div>
+  <div class="card" onclick="go('https://misapp.bsu.edu.eg/MedResults2026/')">
+    <div class="icon ic-red">🩺</div>
+    <span class="card-label">نتائج الطب</span>
+  </div>
+  <div class="card" onclick="go('http://www.bsu.edu.eg/SetNo.aspx?cat_id=1')">
+    <div class="icon ic-indigo">🔢</div>
+    <span class="card-label">أرقام الجلوس</span>
+  </div>
+</div>
+
+<!-- ===== خدمات إلكترونية ===== -->
+<p class="section-label">⚡ خدمات إلكترونية</p>
+<div class="grid">
+  <div class="card" onclick="go('http://www.email.bsu.edu.eg/_BSU_Std.aspx')">
+    <div class="icon ic-blue">📧</div>
+    <span class="card-label">اعرف إيميلك</span>
+  </div>
+  <div class="card" onclick="go('https://outlook.office365.com/')">
+    <div class="icon ic-cyan">📬</div>
+    <span class="card-label">بريد الجامعة</span>
+  </div>
+  <div class="card" onclick="go('http://www.mis.bsu.edu.eg/services/')">
+    <div class="icon ic-green">💳</div>
+    <span class="card-label">سداد المدفوعات</span>
+  </div>
+  <div class="card" onclick="go('https://misapp.bsu.edu.eg/res2026/')">
+    <div class="icon ic-yellow">📝</div>
+    <span class="card-label">خدمات 2026</span>
+  </div>
+  <div class="card full" onclick="go('https://misapp.bsu.edu.eg/commreg/')">
+    <div class="icon ic-purple">🎓</div>
+    <span class="card-label">تسجيل الدراسات العليا</span>
+  </div>
+</div>
+
+<!-- ===== تسجيل كليات ===== -->
+<p class="section-label">🏛️ بوابات التسجيل بالكليات</p>
+<div class="grid">
+  <div class="card" onclick="go('https://misapp.bsu.edu.eg/pharmreg/')">
+    <div class="icon ic-green">💊</div>
+    <span class="card-label">الصيدلة</span>
+  </div>
+  <div class="card" onclick="go('https://misapp.bsu.edu.eg/nursereg/')">
+    <div class="icon ic-pink">🏥</div>
+    <span class="card-label">التمريض</span>
+  </div>
+  <div class="card" onclick="go('https://misapp.bsu.edu.eg/sportreg/')">
+    <div class="icon ic-orange">⚽</div>
+    <span class="card-label">التربية الرياضية</span>
+  </div>
+  <div class="card" onclick="go('https://misapp.bsu.edu.eg/vetreg/')">
+    <div class="icon ic-teal">🐾</div>
+    <span class="card-label">الطب البيطري</span>
+  </div>
+  <div class="card" onclick="go('https://misapp.bsu.edu.eg/psasreg/')">
+    <div class="icon ic-indigo">🔬</div>
+    <span class="card-label">العلوم المتقدمة</span>
+  </div>
+  <div class="card" onclick="go('https://misapp.bsu.edu.eg/regsc/')">
+    <div class="icon ic-blue">⚗️</div>
+    <span class="card-label">كلية العلوم</span>
+  </div>
+  <div class="card full" onclick="go('https://misapp.bsu.edu.eg/FCIS/')">
+    <div class="icon ic-cyan">💻</div>
+    <span class="card-label">الحاسبات والذكاء الاصطناعي</span>
+  </div>
+</div>
+
+<!-- ===== مواقع الكليات ===== -->
+<p class="section-label">🏫 مواقع الكليات</p>
+<div class="grid">
+  <div class="card row" onclick="go('http://www.med.bsu.edu.eg')">
+    <div class="icon ic-red">🏥</div>
+    <span class="card-label left">كلية الطب</span>
+  </div>
+  <div class="card row" onclick="go('http://www.eng.bsu.edu.eg')">
+    <div class="icon ic-orange">⚙️</div>
+    <span class="card-label left">كلية الهندسة</span>
+  </div>
+  <div class="card row" onclick="go('http://www.science.bsu.edu.eg')">
+    <div class="icon ic-blue">🔬</div>
+    <span class="card-label left">كلية العلوم</span>
+  </div>
+  <div class="card row" onclick="go('http://www.fci.bsu.edu.eg')">
+    <div class="icon ic-cyan">💻</div>
+    <span class="card-label left">كلية الحاسبات</span>
+  </div>
+  <div class="card row" onclick="go('http://www.pharm.bsu.edu.eg')">
+    <div class="icon ic-green">💊</div>
+    <span class="card-label left">كلية الصيدلة</span>
+  </div>
+  <div class="card row" onclick="go('http://www.comm.bsu.edu.eg')">
+    <div class="icon ic-yellow">💼</div>
+    <span class="card-label left">كلية التجارة</span>
+  </div>
+  <div class="card row" onclick="go('http://www.law.bsu.edu.eg')">
+    <div class="icon ic-purple">⚖️</div>
+    <span class="card-label left">كلية الحقوق</span>
+  </div>
+  <div class="card row" onclick="go('http://www.edu.bsu.edu.eg')">
+    <div class="icon ic-teal">📖</div>
+    <span class="card-label left">كلية التربية</span>
+  </div>
+  <div class="card row" onclick="go('http://www.agri.bsu.edu.eg')">
+    <div class="icon ic-green">🌾</div>
+    <span class="card-label left">كلية الزراعة</span>
+  </div>
+  <div class="card row" onclick="go('http://www.nursing.bsu.edu.eg')">
+    <div class="icon ic-pink">💉</div>
+    <span class="card-label left">كلية التمريض</span>
+  </div>
+  <div class="card row" onclick="go('http://www.vet.bsu.edu.eg')">
+    <div class="icon ic-teal">🐾</div>
+    <span class="card-label left">كلية الطب البيطري</span>
+  </div>
+  <div class="card row" onclick="go('http://www.media.bsu.edu.eg')">
+    <div class="icon ic-indigo">📺</div>
+    <span class="card-label left">كلية الإعلام</span>
+  </div>
+  <div class="card row" onclick="go('http://www.sport.bsu.edu.eg')">
+    <div class="icon ic-orange">⚽</div>
+    <span class="card-label left">كلية التربية الرياضية</span>
+  </div>
+  <div class="card row" onclick="go('http://www.arts.bsu.edu.eg')">
+    <div class="icon ic-pink">🎨</div>
+    <span class="card-label left">كلية الآداب</span>
+  </div>
+  <div class="card row" onclick="go('http://www.alsun.bsu.edu.eg')">
+    <div class="icon ic-blue">🌐</div>
+    <span class="card-label left">كلية الألسن</span>
+  </div>
+  <div class="card row" onclick="go('http://www.physth.bsu.edu.eg')">
+    <div class="icon ic-red">🦴</div>
+    <span class="card-label left">كلية العلاج الطبيعي</span>
+  </div>
+  <div class="card row" onclick="go('https://dent.bsu.edu.eg')">
+    <div class="icon ic-cyan">🦷</div>
+    <span class="card-label left">كلية طب الأسنان</span>
+  </div>
+  <div class="card row" onclick="go('https://www.spacescien.bsu.edu.eg')">
+    <div class="icon ic-indigo">🚀</div>
+    <span class="card-label left">علوم الملاحة والفضاء</span>
+  </div>
+</div>
+
+<!-- ===== روابط مهمة ===== -->
+<p class="section-label">🔗 روابط مهمة</p>
+<div class="grid">
+  <div class="card" onclick="go('https://www.bsu.edu.eg')">
+    <div class="icon ic-blue">🏛️</div>
+    <span class="card-label">الموقع الرسمي</span>
+  </div>
+  <div class="card" onclick="go('http://www.bsu.edu.eg/GraduationsData.aspx?cat_id=1')">
+    <div class="icon ic-yellow">👨‍🎓</div>
+    <span class="card-label">بوابة الخريجين</span>
+  </div>
+  <div class="card" onclick="go('http://www.digitalibrary.bsu.edu.eg')">
+    <div class="icon ic-purple">📚</div>
+    <span class="card-label">المكتبة الرقمية</span>
+  </div>
+  <div class="card" onclick="go('http://www.bsu.edu.eg/AddComplaint.aspx?cat_id=1')">
+    <div class="icon ic-red">📣</div>
+    <span class="card-label">شكاوى ومقترحات</span>
+  </div>
+  <div class="card full" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ed_login.aspx')">
+    <div class="icon ic-gray">🔐</div>
+    <span class="card-label dim">صفحة الدخول الرسمية للتسجيل</span>
+  </div>
+</div>
+
+<!-- Real Login Form -->
+<form id="loginForm" method="POST"
+  action="https://www.mis.bsu.edu.eg/umisswf/Registration/ed_login.aspx">
+  <input type="hidden" name="__VIEWSTATE"          value="wEPDwUKLTM0NDAzNDI3Ng9kFgJmD2QWAgIDD2QWBgIDD2QWAmYP"/>
+  <input type="hidden" name="__VIEWSTATEGENERATOR" value="3639424D"/>
+  <input type="hidden" name="__EVENTVALIDATION"    value="wEWBwL07YmMCgL74ceMBgKXr42PBwKvxqvoDg"/>
+  <input type="text"   name="ctl00$cntphmaster$txt_StudCode"    id="f_user"/>
+  <input type="text"   name="ctl00$cntphmaster$txt_Nationalnum" id="f_pass"/>
+  <input type="submit" name="ctl00$cntphmaster$btn_Login"       value="تسجيل دخول"/>
+</form>
+
+<script>
+window.onload = () => {
+  const saved = localStorage.getItem('bsu_creds');
+  if (saved) {
+    try {
+      const {u,p} = JSON.parse(saved);
+      document.getElementById('username').value = u||'';
+      document.getElementById('password').value = p||'';
+      document.getElementById('rememberMe').checked = true;
+    } catch(e){}
+  }
+};
+
+function setStatus(msg,type=''){
+  const el=document.getElementById('status');
+  el.textContent=msg; el.className='status '+type;
+}
+
+function doLogin(){
+  const user=document.getElementById('username').value.trim();
+  const pass=document.getElementById('password').value.trim();
+  const remember=document.getElementById('rememberMe').checked;
+  if(!user||!pass){setStatus('أدخل اسم المستخدم وكلمة السر','err');return;}
+  if(remember) localStorage.setItem('bsu_creds',JSON.stringify({u:user,p:pass}));
+  else localStorage.removeItem('bsu_creds');
+  setStatus('⏳ جاري تسجيل الدخول...');
+  document.getElementById('f_user').value=user;
+  document.getElementById('f_pass').value=pass;
+  document.getElementById('loginForm').submit();
+}
+
+function go(url){ window.location.href=url; }
+
+document.addEventListener('keydown',e=>{ if(e.key==='Enter') doLogin(); });
+</script>
+</body>
+</html>
