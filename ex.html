@@ -28,44 +28,23 @@
   }
 
   .logo {
-    width: 80px;
-    height: 80px;
+    width: 80px; height: 80px;
     background: linear-gradient(135deg, #c8a028, #f0c040);
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     margin: 0 auto 16px;
     font-size: 32px;
     box-shadow: 0 8px 24px rgba(200,160,40,0.4);
   }
 
-  h1 {
-    color: #fff;
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
+  h1 { color: #fff; font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .sub { color: rgba(255,255,255,0.5); font-size: 13px; margin-bottom: 32px; }
 
-  .sub {
-    color: rgba(255,255,255,0.5);
-    font-size: 13px;
-    margin-bottom: 32px;
-  }
+  .field { margin-bottom: 16px; text-align: right; }
 
-  .field {
-    margin-bottom: 16px;
-    text-align: right;
-  }
+  label { display: block; color: rgba(255,255,255,0.7); font-size: 13px; margin-bottom: 6px; }
 
-  label {
-    display: block;
-    color: rgba(255,255,255,0.7);
-    font-size: 13px;
-    margin-bottom: 6px;
-  }
-
-  input {
+  input[type="text"], input[type="password"] {
     width: 100%;
     padding: 12px 16px;
     background: rgba(255,255,255,0.08);
@@ -76,20 +55,25 @@
     outline: none;
     transition: border 0.2s, background 0.2s;
     text-align: right;
-    direction: ltr;
   }
 
-  input:focus {
-    border-color: #c8a028;
-    background: rgba(255,255,255,0.12);
-  }
+  input:focus { border-color: #c8a028; background: rgba(255,255,255,0.12); }
+  input::placeholder { color: rgba(255,255,255,0.3); }
 
-  input::placeholder { color: rgba(255,255,255,0.3); direction: rtl; }
+  .remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .remember input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
 
   .btn {
     width: 100%;
     padding: 14px;
-    margin-top: 8px;
     background: linear-gradient(135deg, #c8a028, #f0c040);
     border: none;
     border-radius: 12px;
@@ -100,37 +84,31 @@
     transition: transform 0.15s, box-shadow 0.15s;
     box-shadow: 0 6px 20px rgba(200,160,40,0.35);
   }
-
   .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(200,160,40,0.5); }
   .btn:active { transform: translateY(0); }
 
-  .footer {
-    margin-top: 24px;
-    color: rgba(255,255,255,0.3);
-    font-size: 11px;
-  }
-
-  /* hidden real form */
-  #realForm { display: none; }
-
-  .loading {
+  .hint {
+    margin-top: 16px;
+    padding: 12px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    color: rgba(255,255,255,0.45);
+    font-size: 12px;
+    line-height: 1.7;
     display: none;
-    margin-top: 12px;
-    color: rgba(255,255,255,0.6);
+  }
+  .hint.show { display: block; }
+
+  .step {
+    margin-top: 8px;
+    color: #f0c040;
     font-size: 13px;
+    font-weight: 600;
+    display: none;
   }
-  .loading.show { display: block; }
-  .spinner {
-    display: inline-block;
-    width: 14px; height: 14px;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-top-color: #f0c040;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    vertical-align: middle;
-    margin-left: 6px;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
+  .step.show { display: block; }
+
+  .footer { margin-top: 24px; color: rgba(255,255,255,0.3); font-size: 11px; }
 </style>
 </head>
 <body>
@@ -150,66 +128,67 @@
     <input type="password" id="password" placeholder="أدخل كلمة السر" autocomplete="current-password" />
   </div>
 
+  <label class="remember">
+    <input type="checkbox" id="rememberMe" /> حفظ البيانات للمرة الجاية
+  </label>
+
   <button class="btn" onclick="doLogin()">دخول ←</button>
 
-  <div class="loading" id="loading">
-    <span class="spinner"></span> جاري تسجيل الدخول...
+  <p class="step" id="step">⏳ جاري فتح النظام... أدخل بياناتك في الصفحة اللي هتفتح</p>
+  <div class="hint" id="hint">
+    ⚠️ بسبب قيود أمان سيرفر الجامعة، مش ممكن نعمل تسجيل دخول مباشر.<br>
+    هتفتح صفحة الجامعة — بياناتك اتنسخت في الـ clipboard.<br>
+    بس الصقها في الحقول وادخل.
   </div>
 
   <div class="footer">بوابة سريعة لنظام جامعة بني سويف</div>
 </div>
 
-<!-- النموذج الحقيقي المخفي -->
-<form id="realForm"
-  method="POST"
-  action="https://www.mis.bsu.edu.eg/umisswf/Registration/ed_login.aspx"
-  target="_self">
-  <input type="hidden" name="__VIEWSTATE" id="vs" value="" />
-  <input type="hidden" name="__VIEWSTATEGENERATOR" id="vsg" value="3639424D" />
-  <input type="hidden" name="__EVENTVALIDATION" id="ev" value="" />
-  <input type="text"   name="ctl00$cntphmaster$txt_StudCode"     id="f_user" />
-  <input type="text"   name="ctl00$cntphmaster$txt_Nationalnum"  id="f_pass" />
-  <input type="submit" name="ctl00$cntphmaster$btn_Login"        value="تسجيل دخول" />
-</form>
-
 <script>
-// جلب الـ VIEWSTATE من صفحة اللوجين الأصلية وقت الضغط
-async function doLogin() {
+const TARGET = 'https://www.mis.bsu.edu.eg/umisswf/Registration/ed_login.aspx';
+
+// تحميل البيانات المحفوظة
+window.onload = () => {
+  const saved = localStorage.getItem('bsu_creds');
+  if (saved) {
+    try {
+      const { u, p } = JSON.parse(saved);
+      document.getElementById('username').value = u || '';
+      document.getElementById('password').value = p || '';
+      document.getElementById('rememberMe').checked = true;
+    } catch(e) {}
+  }
+};
+
+function doLogin() {
   const user = document.getElementById('username').value.trim();
   const pass = document.getElementById('password').value.trim();
+  const remember = document.getElementById('rememberMe').checked;
 
   if (!user || !pass) {
     alert('من فضلك أدخل اسم المستخدم وكلمة السر');
     return;
   }
 
-  document.getElementById('loading').classList.add('show');
-
-  try {
-    // جلب الصفحة الأصلية عشان ناخد الـ VIEWSTATE الصح
-    const res = await fetch('https://www.mis.bsu.edu.eg/umisswf/Registration/ed_login.aspx', {
-      credentials: 'include'
-    });
-    const html = await res.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-
-    const vs  = doc.getElementById('__VIEWSTATE')?.value || '';
-    const ev  = doc.getElementById('__EVENTVALIDATION')?.value || '';
-
-    document.getElementById('vs').value  = vs;
-    document.getElementById('ev').value  = ev;
-    document.getElementById('f_user').value = user;
-    document.getElementById('f_pass').value = pass;
-
-    document.getElementById('realForm').submit();
-
-  } catch(e) {
-    // لو فشل الجلب (CORS) نبعت من غير VIEWSTATE محدث
-    document.getElementById('f_user').value = user;
-    document.getElementById('f_pass').value = pass;
-    document.getElementById('realForm').submit();
+  // حفظ أو مسح البيانات
+  if (remember) {
+    localStorage.setItem('bsu_creds', JSON.stringify({ u: user, p: pass }));
+  } else {
+    localStorage.removeItem('bsu_creds');
   }
+
+  // نسخ الكود ثم كلمة السر للـ clipboard
+  const combined = `الكود: ${user}\nكلمة السر: ${pass}`;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(combined).catch(() => {});
+  }
+
+  document.getElementById('step').classList.add('show');
+
+  // فتح صفحة الجامعة بعد ثانية
+  setTimeout(() => {
+    window.location.href = TARGET;
+  }, 1000);
 }
 
 // دخول بـ Enter
