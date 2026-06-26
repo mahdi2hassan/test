@@ -3,35 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#04081a">
+<meta name="theme-color" content="#f0f4ff">
 <title>أوائل — بوابة التعليم الجامعي</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════
-   ROOT
-═══════════════════════════════════ */
 :root{
-  --bg:#04081a;
-  --s1:#080f24;
-  --s2:#0c1530;
-  --s3:#111e40;
-  --border:rgba(255,255,255,.06);
-  --b2:rgba(255,255,255,.1);
-  --text:#dde6f8;
-  --muted:rgba(221,230,248,.42);
-  --r:16px;
-  --font:'Tajawal',sans-serif;
-  --serif:'Amiri',serif;
-  --v1:#7c3aed;
-  --v2:#2563eb;
-  --v3:#0891b2;
-  --v4:#059669;
-  --v5:#d97706;
-  --v6:#dc2626;
-  --v7:#db2777;
-  --safe-top:env(safe-area-inset-top,0px);
-  --safe-bot:env(safe-area-inset-bottom,0px);
+  --bg:       #f0f4ff;
+  --bg2:      #e8eeff;
+  --card:     #ffffff;
+  --card2:    #f7f9ff;
+  --border:   rgba(100,116,200,.13);
+  --b2:       rgba(100,116,200,.22);
+  --text:     #1a1f3c;
+  --muted:    rgba(26,31,60,.5);
+  --muted2:   rgba(26,31,60,.35);
+  --font:     'Tajawal',sans-serif;
+  --serif:    'Amiri',serif;
+  --r:        18px;
+  /* accent palette */
+  --p1:#5046e5; /* indigo */
+  --p2:#7c3aed; /* violet */
+  --p3:#0891b2; /* cyan */
+  --p4:#059669; /* emerald */
+  --p5:#d97706; /* amber */
+  --p6:#dc2626; /* red */
+  --p7:#db2777; /* pink */
+  --p8:#0284c7; /* sky */
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html{scroll-behavior:smooth;}
@@ -44,345 +42,416 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-/* ═══════════════════════════════════
-   ANIMATED BG
-═══════════════════════════════════ */
+/* ── ANIMATED BG ── */
 .bg-wrap{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
-.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.15;animation:orb-float 14s ease-in-out infinite;}
-.o1{width:min(500px,90vw);height:min(500px,90vw);background:var(--v1);top:-15%;right:-15%;animation-delay:0s;}
-.o2{width:min(350px,70vw);height:min(350px,70vw);background:var(--v2);bottom:10%;left:-10%;animation-delay:-5s;}
-.o3{width:min(280px,60vw);height:min(280px,60vw);background:var(--v7);bottom:-10%;right:10%;animation-delay:-9s;}
-@keyframes orb-float{
-  0%,100%{transform:translate(0,0) scale(1);}
-  33%{transform:translate(20px,-30px) scale(1.07);}
-  66%{transform:translate(-15px,15px) scale(.95);}
+.blob{
+  position:absolute;border-radius:60% 40% 50% 50%/50% 60% 40% 50%;
+  filter:blur(60px);opacity:.12;
+  animation:blob-float 18s ease-in-out infinite;
 }
-.grid-bg{
+.b1{width:min(500px,100vw);height:min(500px,100vw);background:var(--p1);top:-20%;right:-10%;animation-delay:0s;}
+.b2{width:min(400px,80vw);height:min(400px,80vw);background:var(--p3);bottom:5%;left:-10%;animation-delay:-6s;}
+.b3{width:min(300px,70vw);height:min(300px,70vw);background:var(--p7);bottom:-10%;right:15%;animation-delay:-12s;}
+@keyframes blob-float{
+  0%,100%{transform:translate(0,0) scale(1) rotate(0deg);}
+  33%{transform:translate(20px,-25px) scale(1.06) rotate(5deg);}
+  66%{transform:translate(-15px,15px) scale(.96) rotate(-3deg);}
+}
+.dots-bg{
   position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(rgba(99,102,241,.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(99,102,241,.03) 1px,transparent 1px);
-  background-size:50px 50px;
+  background-image:radial-gradient(rgba(80,70,229,.07) 1px,transparent 1px);
+  background-size:28px 28px;
 }
-.stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
-.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d) ease-in-out infinite;}
-@keyframes twinkle{0%,100%{opacity:0;}50%{opacity:var(--op);}}
 
-/* ═══════════════════════════════════
-   LAYOUT WRAP
-═══════════════════════════════════ */
+/* ── WRAP ── */
 .wrap{position:relative;z-index:10;max-width:600px;margin:0 auto;}
 
-/* ═══════════════════════════════════
-   HEADER
-═══════════════════════════════════ */
+/* ══════════════════════════════
+   GATE SCREEN
+══════════════════════════════ */
+#gate-screen{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px 20px;
+}
+.gate-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:36px 28px;
+  width:100%;max-width:380px;
+  box-shadow:0 20px 60px rgba(80,70,229,.1),0 4px 20px rgba(0,0,0,.06);
+  text-align:center;
+}
+.gate-logo{
+  width:72px;height:72px;border-radius:20px;
+  background:linear-gradient(135deg,var(--p1),var(--p2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;margin:0 auto 16px;
+  box-shadow:0 8px 24px rgba(80,70,229,.3);
+}
+.gate-title{
+  font-family:var(--serif);
+  font-size:28px;font-weight:700;
+  background:linear-gradient(135deg,var(--p1),var(--p2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:4px;
+}
+.gate-sub{font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.6;}
+
+.gate-field{margin-bottom:14px;text-align:right;}
+.gate-field label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px;}
+.gate-field input{
+  width:100%;padding:13px 16px;
+  background:var(--bg);border:2px solid var(--border);border-radius:12px;
+  color:var(--text);font-family:var(--font);font-size:16px;
+  outline:none;transition:border .2s,box-shadow .2s;text-align:center;
+  letter-spacing:3px;font-weight:800;
+}
+.gate-field input:focus{
+  border-color:var(--p1);
+  box-shadow:0 0 0 4px rgba(80,70,229,.1);
+}
+.gate-field input::placeholder{letter-spacing:1px;font-weight:400;color:rgba(26,31,60,.3);}
+
+.btn-gate{
+  width:100%;padding:14px;margin-top:4px;
+  background:linear-gradient(135deg,var(--p1),var(--p2));
+  border:none;border-radius:12px;
+  color:#fff;font-family:var(--font);font-size:15px;font-weight:800;
+  cursor:pointer;transition:transform .15s,box-shadow .2s;
+  box-shadow:0 6px 24px rgba(80,70,229,.35);
+}
+.btn-gate:hover{box-shadow:0 8px 32px rgba(80,70,229,.45);}
+.btn-gate:active{transform:scale(.98);}
+.gate-err{
+  font-size:12px;color:#dc2626;margin-top:10px;min-height:16px;
+  font-weight:600;
+}
+.gate-hint{
+  margin-top:18px;padding:12px 16px;
+  background:linear-gradient(135deg,rgba(80,70,229,.06),rgba(124,58,237,.04));
+  border:1px solid rgba(80,70,229,.15);border-radius:12px;
+  font-size:11px;color:var(--muted);line-height:1.7;
+}
+.gate-footer{margin-top:20px;font-size:11px;color:var(--muted2);}
+
+/* shake animation */
+@keyframes shake{
+  0%,100%{transform:translateX(0);}
+  20%{transform:translateX(-8px);}
+  40%{transform:translateX(8px);}
+  60%{transform:translateX(-5px);}
+  80%{transform:translateX(5px);}
+}
+.shake{animation:shake .4s ease;}
+
+/* ══════════════════════════════
+   MAIN APP
+══════════════════════════════ */
+#app{display:none;}
+
+/* ── HEADER ── */
 .hdr{
-  background:rgba(8,15,36,.88);
+  background:rgba(255,255,255,.82);
   border-bottom:1px solid var(--border);
-  backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
-  padding:clamp(10px,2vw,14px) clamp(14px,4vw,20px);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  padding:12px 18px;
   position:sticky;top:0;z-index:200;
-  display:flex;align-items:center;gap:12px;
-  padding-top:calc(clamp(10px,2vw,14px) + var(--safe-top));
+  display:flex;align-items:center;gap:11px;
 }
 .hdr-logo{
-  width:clamp(38px,8vw,46px);height:clamp(38px,8vw,46px);
-  border-radius:12px;flex-shrink:0;
-  background:linear-gradient(135deg,var(--v1),var(--v2));
-  display:flex;align-items:center;justify-content:center;
-  font-size:clamp(18px,4vw,22px);
-  box-shadow:0 4px 20px rgba(124,58,237,.4);
+  width:40px;height:40px;border-radius:11px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--p1),var(--p2));
+  display:flex;align-items:center;justify-content:center;font-size:19px;
+  box-shadow:0 4px 14px rgba(80,70,229,.3);
 }
 .hdr-name{
-  font-family:var(--serif);
-  font-size:clamp(18px,5vw,24px);font-weight:700;
-  background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);
+  font-family:var(--serif);font-size:21px;font-weight:700;
+  background:linear-gradient(135deg,var(--p1),var(--p2));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
-.hdr-sub{font-size:clamp(9px,2vw,11px);color:var(--muted);margin-top:1px;}
+.hdr-sub{font-size:10px;color:var(--muted);margin-top:1px;}
 .hdr-pill{
   margin-right:auto;
-  background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(37,99,235,.2));
-  border:1px solid rgba(124,58,237,.3);color:#a78bfa;
-  font-size:clamp(9px,2.2vw,11px);font-weight:700;
+  background:linear-gradient(135deg,rgba(80,70,229,.12),rgba(124,58,237,.08));
+  border:1px solid rgba(80,70,229,.2);
+  color:var(--p1);font-size:10px;font-weight:800;
   padding:3px 10px;border-radius:20px;white-space:nowrap;
 }
+.hdr-exit{
+  width:32px;height:32px;border-radius:9px;flex-shrink:0;
+  background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;cursor:pointer;color:var(--p6);
+  transition:background .2s;
+}
+.hdr-exit:hover{background:rgba(220,38,38,.15);}
 
-/* ═══════════════════════════════════
-   PAGES
-═══════════════════════════════════ */
-.page{display:none;padding:clamp(12px,3vw,18px) clamp(12px,3vw,16px) 80px;animation:pgIn .28s ease;}
+/* ── PAGES ── */
+.page{display:none;padding:16px 14px 80px;animation:pgIn .25s ease;}
 .page.active{display:block;}
 @keyframes pgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* ═══════════════════════════════════
-   HERO
-═══════════════════════════════════ */
-.hero{text-align:center;padding:clamp(18px,5vw,28px) 12px clamp(12px,3vw,18px);}
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(135deg,var(--p1),var(--p2));
+  border-radius:20px;padding:22px 20px;margin-bottom:18px;
+  color:#fff;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-30px;left:-30px;
+  width:150px;height:150px;border-radius:50%;
+  background:rgba(255,255,255,.07);
+}
+.hero::after{
+  content:'';position:absolute;bottom:-40px;right:-20px;
+  width:120px;height:120px;border-radius:50%;
+  background:rgba(255,255,255,.05);
+}
 .hero-badge{
   display:inline-block;
-  background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);
-  color:#a78bfa;font-size:clamp(10px,2.5vw,12px);font-weight:700;
-  padding:4px 14px;border-radius:20px;margin-bottom:12px;letter-spacing:.8px;
+  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);
+  font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;
+  margin-bottom:10px;letter-spacing:.8px;
 }
-.hero h2{
-  font-family:var(--serif);
-  font-size:clamp(22px,6vw,30px);font-weight:700;line-height:1.3;
-  background:linear-gradient(135deg,#e2e8f0 20%,#a78bfa 55%,#60a5fa);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:8px;
-}
-.hero p{font-size:clamp(12px,3vw,14px);color:var(--muted);line-height:1.7;}
+.hero h2{font-family:var(--serif);font-size:24px;font-weight:700;margin-bottom:6px;position:relative;z-index:1;}
+.hero p{font-size:12px;opacity:.85;line-height:1.7;position:relative;z-index:1;}
 
-/* ═══════════════════════════════════
-   LOGIN BOX
-═══════════════════════════════════ */
+/* ── LOGIN BOX ── */
 .login-box{
-  background:rgba(8,15,36,.7);border:1px solid var(--border);
+  background:var(--card);border:1px solid var(--border);
   border-radius:var(--r);margin-bottom:18px;overflow:hidden;
-  backdrop-filter:blur(20px);box-shadow:0 8px 40px rgba(0,0,0,.4);
+  box-shadow:0 4px 20px rgba(80,70,229,.07);
 }
 .login-toggle{
   display:flex;align-items:center;gap:10px;
-  padding:clamp(12px,3vw,15px) clamp(14px,4vw,18px);cursor:pointer;
-  background:linear-gradient(135deg,rgba(124,58,237,.07),rgba(37,99,235,.04));
-  border-bottom:1px solid transparent;transition:border-color .2s;
-  user-select:none;
+  padding:14px 16px;cursor:pointer;user-select:none;
+  border-bottom:1px solid transparent;transition:border-color .2s,background .2s;
 }
+.login-toggle:hover{background:var(--bg);}
 .login-toggle.open{border-bottom-color:var(--border);}
 .lt-i{
-  width:clamp(34px,7vw,40px);height:clamp(34px,7vw,40px);border-radius:10px;flex-shrink:0;
-  background:linear-gradient(135deg,rgba(124,58,237,.3),rgba(37,99,235,.3));
-  display:flex;align-items:center;justify-content:center;font-size:clamp(16px,4vw,19px);
+  width:38px;height:38px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,rgba(80,70,229,.15),rgba(124,58,237,.1));
+  display:flex;align-items:center;justify-content:center;font-size:17px;
 }
 .lt-txt{flex:1;}
-.lt-txt h3{font-size:clamp(13px,3.5vw,15px);font-weight:800;}
-.lt-txt p{font-size:clamp(10px,2.5vw,11px);color:var(--muted);}
-.lt-arr{color:var(--muted);font-size:12px;transition:transform .25s;flex-shrink:0;}
+.lt-txt h3{font-size:14px;font-weight:800;color:var(--text);}
+.lt-txt p{font-size:10px;color:var(--muted);}
+.lt-arr{color:var(--muted);font-size:11px;transition:transform .25s;}
 .lt-arr.open{transform:rotate(180deg);}
-.login-body{display:none;padding:clamp(12px,3vw,16px);}
+.login-body{display:none;padding:16px;}
 .login-body.open{display:block;}
 .field{margin-bottom:10px;}
-.field label{font-size:clamp(10px,2.5vw,11px);color:var(--muted);display:block;margin-bottom:5px;font-weight:600;}
+.field label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px;font-weight:700;}
 .field input{
-  width:100%;padding:clamp(10px,2.5vw,12px) clamp(12px,3vw,15px);
-  background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;
-  color:var(--text);font-family:var(--font);font-size:clamp(13px,3.5vw,15px);
-  outline:none;transition:border .2s,background .2s;text-align:right;
+  width:100%;padding:11px 14px;
+  background:var(--bg);border:1.5px solid var(--border);border-radius:10px;
+  color:var(--text);font-family:var(--font);font-size:14px;
+  outline:none;transition:border .2s,box-shadow .2s;text-align:right;
 }
-.field input:focus{border-color:var(--v1);background:rgba(124,58,237,.06);}
-.field input::placeholder{color:rgba(255,255,255,.2);}
-.row-chk{display:flex;align-items:center;gap:7px;font-size:clamp(11px,3vw,13px);color:var(--muted);cursor:pointer;margin-bottom:12px;}
+.field input:focus{border-color:var(--p1);box-shadow:0 0 0 3px rgba(80,70,229,.1);}
+.field input::placeholder{color:rgba(26,31,60,.25);}
+.row-chk{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);cursor:pointer;margin-bottom:12px;}
 .btn-login{
-  width:100%;padding:clamp(11px,3vw,13px);
-  background:linear-gradient(135deg,var(--v1),var(--v2));
+  width:100%;padding:12px;
+  background:linear-gradient(135deg,var(--p1),var(--p2));
   border:none;border-radius:10px;color:#fff;font-family:var(--font);
-  font-size:clamp(13px,3.5vw,15px);font-weight:800;cursor:pointer;
+  font-size:14px;font-weight:800;cursor:pointer;
   transition:opacity .2s,transform .15s;
-  box-shadow:0 4px 24px rgba(124,58,237,.35);
+  box-shadow:0 4px 20px rgba(80,70,229,.3);
 }
-.btn-login:active{transform:scale(.98);opacity:.9;}
+.btn-login:active{transform:scale(.98);}
 .status{font-size:11px;text-align:center;margin-top:7px;min-height:14px;color:var(--muted);}
-.status.err{color:#f87171;}
-.status.ok{color:#34d399;}
+.status.err{color:#dc2626;}
+.status.ok{color:#059669;}
 
-/* ═══════════════════════════════════
-   SECTION LABEL
-═══════════════════════════════════ */
+/* ── SECTION LABEL ── */
 .sec-lbl{
-  font-size:clamp(9px,2.2vw,10px);letter-spacing:1.5px;color:var(--muted);
-  text-align:center;margin:clamp(14px,4vw,20px) 0 clamp(10px,3vw,13px);
-  text-transform:uppercase;font-weight:700;
+  font-size:10px;letter-spacing:1.4px;color:var(--muted2);
+  text-align:center;margin:18px 0 12px;text-transform:uppercase;font-weight:700;
 }
 
-/* ═══════════════════════════════════
-   CATEGORY GRID
-═══════════════════════════════════ */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,2.5vw,12px);}
-
+/* ── CAT GRID ── */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
 .cat-card{
-  background:rgba(8,15,36,.6);border:1px solid var(--border);border-radius:var(--r);
-  padding:clamp(14px,4vw,18px) clamp(10px,3vw,14px);
-  display:flex;flex-direction:column;align-items:center;gap:clamp(7px,2vw,10px);
+  background:var(--card);border:1.5px solid var(--border);border-radius:var(--r);
+  padding:18px 12px;
+  display:flex;flex-direction:column;align-items:center;gap:9px;
   cursor:pointer;transition:all .2s;user-select:none;
-  position:relative;overflow:hidden;backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
+  box-shadow:0 2px 12px rgba(80,70,229,.05);
 }
-.cat-card::before{
-  content:'';position:absolute;inset:0;
-  background:var(--glow,rgba(255,255,255,.02));opacity:0;transition:opacity .2s;
+.cat-card:hover{
+  border-color:var(--hover-c,rgba(80,70,229,.35));
+  box-shadow:0 6px 24px rgba(80,70,229,.1);
+  transform:translateY(-2px);
 }
-.cat-card:hover::before{opacity:1;}
-.cat-card:hover{border-color:var(--accent,rgba(124,58,237,.3));transform:translateY(-2px);}
 .cat-card:active{transform:scale(.97);}
-.cat-card.full{grid-column:span 2;flex-direction:row;gap:clamp(10px,3vw,14px);padding:clamp(12px,3vw,15px) clamp(14px,4vw,18px);}
+.cat-card.full{grid-column:span 2;flex-direction:row;gap:13px;padding:14px 16px;}
+.cat-card.full .ci{width:40px;height:40px;border-radius:11px;font-size:18px;}
+.cat-card.full .ct h3,.cat-card.full .ct p{text-align:right;}
+.cat-card.full .ct{flex:1;}
+.ct-arr{font-size:13px;color:var(--muted);flex-shrink:0;}
 
 .ci{
-  width:clamp(44px,11vw,52px);height:clamp(44px,11vw,52px);border-radius:14px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:clamp(20px,5vw,24px);flex-shrink:0;position:relative;
+  width:50px;height:50px;border-radius:15px;
+  display:flex;align-items:center;justify-content:center;font-size:23px;flex-shrink:0;
 }
-.ci::after{
-  content:'';position:absolute;inset:0;border-radius:inherit;
-  background:linear-gradient(135deg,rgba(255,255,255,.12),transparent);pointer-events:none;
-}
-.cat-card.full .ci{
-  width:clamp(38px,9vw,44px);height:clamp(38px,9vw,44px);
-  border-radius:12px;font-size:clamp(18px,4.5vw,21px);
-}
-.ct h3{font-size:clamp(12px,3.2vw,14px);font-weight:800;text-align:center;line-height:1.3;}
-.ct p{font-size:clamp(9px,2.5vw,11px);color:var(--muted);margin-top:2px;text-align:center;}
-.cat-card.full .ct{flex:1;}
-.cat-card.full .ct h3,.cat-card.full .ct p{text-align:right;}
-.ct-arr{font-size:14px;color:var(--muted);flex-shrink:0;}
+.ct h3{font-size:13px;font-weight:800;text-align:center;line-height:1.3;color:var(--text);}
+.ct p{font-size:10px;color:var(--muted);margin-top:2px;text-align:center;}
 
-/* icon bg */
-.ib-vl{background:linear-gradient(135deg,rgba(124,58,237,.35),rgba(124,58,237,.15));}
-.ib-bl{background:linear-gradient(135deg,rgba(37,99,235,.35),rgba(37,99,235,.15));}
-.ib-cy{background:linear-gradient(135deg,rgba(8,145,178,.35),rgba(8,145,178,.15));}
-.ib-em{background:linear-gradient(135deg,rgba(5,150,105,.35),rgba(5,150,105,.15));}
-.ib-am{background:linear-gradient(135deg,rgba(217,119,6,.35),rgba(217,119,6,.15));}
-.ib-rd{background:linear-gradient(135deg,rgba(220,38,38,.35),rgba(220,38,38,.15));}
-.ib-pk{background:linear-gradient(135deg,rgba(219,39,119,.35),rgba(219,39,119,.15));}
-.ib-tl{background:linear-gradient(135deg,rgba(20,184,166,.35),rgba(20,184,166,.15));}
-.ib-in{background:linear-gradient(135deg,rgba(99,102,241,.35),rgba(99,102,241,.15));}
-.ib-gd{background:linear-gradient(135deg,rgba(245,158,11,.35),rgba(245,158,11,.15));}
-.ib-gy{background:rgba(255,255,255,.07);}
+/* icon backgrounds — light version */
+.ib-vl{background:rgba(124,58,237,.1);}
+.ib-bl{background:rgba(37,99,235,.1);}
+.ib-cy{background:rgba(8,145,178,.1);}
+.ib-em{background:rgba(5,150,105,.1);}
+.ib-am{background:rgba(217,119,6,.1);}
+.ib-rd{background:rgba(220,38,38,.1);}
+.ib-pk{background:rgba(219,39,119,.1);}
+.ib-tl{background:rgba(20,184,166,.1);}
+.ib-in{background:rgba(99,102,241,.1);}
+.ib-gd{background:rgba(245,158,11,.1);}
+.ib-sk{background:rgba(2,132,199,.1);}
+.ib-gy{background:rgba(100,116,139,.08);}
 
-/* ═══════════════════════════════════
-   SUB PAGE
-═══════════════════════════════════ */
+/* ── SUB PAGE ── */
 .sub-hdr{
-  display:flex;align-items:center;gap:clamp(9px,2.5vw,12px);
-  margin-bottom:clamp(14px,4vw,18px);
-  padding-bottom:clamp(12px,3vw,16px);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:11px;
+  margin-bottom:16px;padding-bottom:14px;border-bottom:1.5px solid var(--border);
 }
 .back-btn{
-  width:clamp(34px,8vw,40px);height:clamp(34px,8vw,40px);border-radius:10px;flex-shrink:0;
-  background:rgba(255,255,255,.06);border:1px solid var(--border);
+  width:38px;height:38px;border-radius:11px;flex-shrink:0;
+  background:var(--card);border:1.5px solid var(--border);
   display:flex;align-items:center;justify-content:center;
-  font-size:clamp(16px,4vw,19px);cursor:pointer;transition:background .2s;
+  font-size:17px;cursor:pointer;transition:background .2s,border-color .2s;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
 }
-.back-btn:hover{background:rgba(255,255,255,.1);}
-.sub-icon{
-  width:clamp(36px,8vw,42px);height:clamp(36px,8vw,42px);border-radius:11px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:clamp(17px,4vw,20px);flex-shrink:0;
-}
-.sub-hdr-txt h2{font-family:var(--serif);font-size:clamp(16px,4.5vw,19px);font-weight:700;}
-.sub-hdr-txt p{font-size:clamp(9px,2.5vw,11px);color:var(--muted);margin-top:2px;}
+.back-btn:hover{background:var(--bg);border-color:var(--p1);}
+.sub-icon{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
+.sub-hdr-txt h2{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--text);}
+.sub-hdr-txt p{font-size:10px;color:var(--muted);margin-top:2px;}
 
 /* LINK LIST */
 .link-list{
-  background:rgba(8,15,36,.6);border:1px solid var(--border);border-radius:var(--r);
-  overflow:hidden;margin-bottom:clamp(10px,3vw,14px);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  background:var(--card);border:1.5px solid var(--border);border-radius:var(--r);
+  overflow:hidden;margin-bottom:12px;
+  box-shadow:0 2px 12px rgba(80,70,229,.05);
 }
-.sub-label{
-  padding:clamp(6px,1.5vw,8px) clamp(14px,4vw,16px) clamp(4px,1vw,5px);
-  font-size:clamp(8px,2vw,9px);letter-spacing:1.2px;
-  color:rgba(255,255,255,.2);background:rgba(0,0,0,.3);
-  text-transform:uppercase;font-weight:700;
+.sub-lbl{
+  padding:7px 16px 5px;font-size:9px;letter-spacing:1.3px;
+  color:var(--muted2);background:var(--bg2);text-transform:uppercase;font-weight:700;
 }
 .link-item{
-  display:flex;align-items:center;gap:clamp(10px,3vw,12px);
-  padding:clamp(11px,3vw,13px) clamp(13px,3.5vw,16px);
+  display:flex;align-items:center;gap:11px;padding:12px 15px;
   cursor:pointer;transition:background .15s;
-  border-bottom:1px solid rgba(255,255,255,.04);color:var(--text);
-  text-decoration:none;min-height:56px;
+  border-bottom:1px solid rgba(100,116,200,.08);color:var(--text);
+  text-decoration:none;min-height:54px;
 }
 .link-item:last-child{border-bottom:none;}
-.link-item:hover{background:rgba(255,255,255,.04);}
-.link-item:active{background:rgba(124,58,237,.08);}
-.li-i{
-  width:clamp(32px,7vw,37px);height:clamp(32px,7vw,37px);border-radius:9px;
-  display:flex;align-items:center;justify-content:center;font-size:clamp(15px,3.5vw,17px);flex-shrink:0;
-}
+.link-item:hover{background:var(--bg);}
+.link-item:active{background:rgba(80,70,229,.05);}
+.li-i{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
 .li-t{flex:1;min-width:0;}
-.li-t h4{font-size:clamp(12px,3.2vw,14px);font-weight:700;line-height:1.3;}
-.li-t p{font-size:clamp(9px,2.3vw,11px);color:var(--muted);margin-top:1px;}
-.li-arr{color:rgba(255,255,255,.2);font-size:14px;flex-shrink:0;}
+.li-t h4{font-size:13px;font-weight:700;line-height:1.3;color:var(--text);}
+.li-t p{font-size:10px;color:var(--muted);margin-top:1px;}
+.li-arr{color:rgba(26,31,60,.2);font-size:13px;flex-shrink:0;}
 
 /* INFO BOX */
 .info-box{
-  background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);
-  border-radius:12px;padding:clamp(10px,3vw,13px) clamp(12px,3vw,15px);
-  margin-bottom:12px;font-size:clamp(11px,3vw,12px);
-  color:rgba(167,139,250,.9);line-height:1.7;
+  background:rgba(80,70,229,.06);border:1.5px solid rgba(80,70,229,.15);
+  border-radius:12px;padding:12px 15px;margin-bottom:12px;
+  font-size:12px;color:var(--p1);line-height:1.7;font-weight:500;
 }
 
-/* PAYMENT BADGES */
-.payment-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+/* PAYMENT GRID */
+.pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
 .pay-badge{
-  background:rgba(255,255,255,.04);border:1px solid var(--border);
-  border-radius:10px;padding:10px 12px;text-align:center;
-  font-size:clamp(10px,2.5vw,12px);color:var(--muted);cursor:pointer;
-  transition:background .15s,border-color .15s;
+  background:var(--card);border:1.5px solid var(--border);
+  border-radius:12px;padding:12px 10px;text-align:center;
+  font-size:11px;color:var(--text);cursor:pointer;font-weight:600;
+  transition:all .15s;box-shadow:0 2px 8px rgba(0,0,0,.04);
 }
-.pay-badge:hover{background:rgba(255,255,255,.07);border-color:rgba(5,150,105,.3);}
-.pay-badge .pi{font-size:18px;display:block;margin-bottom:4px;}
+.pay-badge:hover{border-color:rgba(5,150,105,.4);background:rgba(5,150,105,.05);}
+.pay-badge .pi{font-size:20px;display:block;margin-bottom:5px;}
 
-/* GRADUATION CARD */
+/* GRAD CARD */
 .grad-card{
-  background:linear-gradient(135deg,rgba(124,58,237,.12),rgba(37,99,235,.07));
-  border:1px solid rgba(124,58,237,.22);border-radius:var(--r);
-  padding:clamp(16px,4vw,22px);margin-bottom:14px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,rgba(80,70,229,.06),rgba(124,58,237,.04));
+  border:1.5px solid rgba(80,70,229,.18);border-radius:var(--r);
+  padding:20px;margin-bottom:14px;position:relative;overflow:hidden;
 }
-.grad-card::before{content:'🎓';position:absolute;top:-10px;left:-10px;font-size:80px;opacity:.05;}
+.grad-card::before{content:'🎓';position:absolute;top:-8px;left:-8px;font-size:70px;opacity:.06;}
 .grad-tag{
-  display:inline-block;background:rgba(124,58,237,.2);
-  border:1px solid rgba(124,58,237,.3);color:#a78bfa;
-  font-size:clamp(9px,2.2vw,10px);font-weight:800;
-  padding:3px 10px;border-radius:20px;margin-bottom:10px;letter-spacing:.8px;
+  display:inline-block;background:rgba(80,70,229,.1);border:1px solid rgba(80,70,229,.25);
+  color:var(--p1);font-size:9px;font-weight:800;padding:3px 10px;
+  border-radius:20px;margin-bottom:10px;letter-spacing:.8px;
 }
-.grad-title{font-family:var(--serif);font-size:clamp(16px,4.5vw,20px);font-weight:700;margin-bottom:8px;line-height:1.4;}
-.grad-desc{font-size:clamp(11px,3vw,13px);color:var(--muted);line-height:1.8;margin-bottom:12px;}
+.grad-title{font-family:var(--serif);font-size:19px;font-weight:700;margin-bottom:8px;line-height:1.4;color:var(--text);}
+.grad-desc{font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:12px;}
 .grad-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
-.grad-stat{background:rgba(255,255,255,.04);border-radius:10px;padding:clamp(8px,2vw,10px) 12px;}
-.grad-stat .val{font-size:clamp(14px,3.5vw,16px);font-weight:800;color:#a78bfa;}
-.grad-stat .key{font-size:clamp(9px,2.5vw,10px);color:var(--muted);margin-top:2px;}
+.grad-stat{background:var(--card);border-radius:10px;padding:10px 12px;border:1px solid var(--border);}
+.grad-stat .val{font-size:15px;font-weight:800;color:var(--p1);}
+.grad-stat .key{font-size:9px;color:var(--muted);margin-top:2px;}
 .btn-grad{
-  display:block;width:100%;padding:clamp(10px,3vw,12px);
-  background:linear-gradient(135deg,var(--v1),var(--v2));
+  display:block;width:100%;padding:12px;
+  background:linear-gradient(135deg,var(--p1),var(--p2));
   border:none;border-radius:10px;color:#fff;font-family:var(--font);
-  font-size:clamp(12px,3.2vw,14px);font-weight:800;cursor:pointer;
-  text-align:center;text-decoration:none;
-  box-shadow:0 4px 20px rgba(124,58,237,.3);
+  font-size:13px;font-weight:800;cursor:pointer;text-align:center;
+  text-decoration:none;box-shadow:0 4px 16px rgba(80,70,229,.3);
 }
 
 /* FOOTER */
 .footer{
-  text-align:center;padding:clamp(20px,5vw,30px) 14px calc(clamp(20px,5vw,30px) + var(--safe-bot));
-  color:rgba(255,255,255,.15);font-size:clamp(10px,2.5vw,12px);line-height:2;
+  text-align:center;padding:24px 14px 50px;
+  color:var(--muted2);font-size:11px;line-height:2.2;
 }
-.footer strong{color:rgba(167,139,250,.5);}
+.footer strong{color:var(--p1);}
 
 #loginForm{display:none;}
-
-/* ═══════════════════════════════════
-   RESPONSIVE TWEAKS
-═══════════════════════════════════ */
-@media(min-width:480px){
-  .grid{gap:14px;}
-  .cat-card{padding:20px 16px;}
-}
-@media(max-width:320px){
-  .grid{grid-template-columns:1fr;}
-  .cat-card.full{grid-column:span 1;}
-}
 </style>
 </head>
 <body>
 
 <!-- ANIMATED BG -->
 <div class="bg-wrap">
-  <div class="orb o1"></div>
-  <div class="orb o2"></div>
-  <div class="orb o3"></div>
-  <div class="grid-bg"></div>
-  <div class="stars" id="stars"></div>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="dots-bg"></div>
 </div>
 
+<!-- ══════════════════════════════
+     GATE SCREEN
+══════════════════════════════ -->
+<div id="gate-screen">
+  <div class="gate-card">
+    <div class="gate-logo">✦</div>
+    <div class="gate-title">أوائل</div>
+    <div class="gate-sub">بوابة التعليم الجامعي المصري<br>أدخل كود الوصول للمتابعة</div>
+
+    <div class="gate-field">
+      <label>كود الوصول</label>
+      <input type="text" id="gateInput" placeholder="AWL-XXX"
+        maxlength="7" autocomplete="off" spellcheck="false"
+        oninput="formatCode(this)"
+        onkeydown="if(event.key==='Enter')checkGate()"/>
+    </div>
+    <button class="btn-gate" onclick="checkGate()">دخول ←</button>
+    <div class="gate-err" id="gateErr"></div>
+
+    <div class="gate-hint">
+      💡 الكود يُمنح من قِبل مسؤول المنصة<br>
+      للتواصل: راسل مشرف المنصة
+    </div>
+    <div class="gate-footer">© 2026 أوائل — جميع الحقوق محفوظة</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     MAIN APP
+══════════════════════════════ -->
+<div id="app">
 <div class="wrap">
 
 <!-- HEADER -->
@@ -393,14 +462,16 @@ body{
     <div class="hdr-sub">بوابة التعليم الجامعي</div>
   </div>
   <span class="hdr-pill">MIS · 2026</span>
+  <div class="hdr-exit" onclick="logout()" title="خروج">🚪</div>
 </div>
 
-<!-- ═══════════════ HOME ═══════════════ -->
+<!-- ═══════ HOME ═══════ -->
 <div class="page active" id="home">
+
   <div class="hero">
     <div class="hero-badge">✦ بوابتك الجامعية الذكية</div>
     <h2>كل خدماتك في مكان واحد</h2>
-    <p>وصول سريع لنظام MIS ومنصات جامعة بني سويف</p>
+    <p>وصول سريع لنظام MIS ومنصات جامعة بني سويف والجامعات المصرية</p>
   </div>
 
   <!-- LOGIN -->
@@ -416,7 +487,7 @@ body{
     <div class="login-body" id="loginBody">
       <div class="field">
         <label>اسم المستخدم / الرقم القومي</label>
-        <input type="text" id="username" placeholder="أدخل الكود" autocomplete="username" inputmode="text"/>
+        <input type="text" id="username" placeholder="أدخل الكود" autocomplete="username"/>
       </div>
       <div class="field">
         <label>كلمة السر</label>
@@ -430,68 +501,82 @@ body{
 
   <p class="sec-lbl">✦ اختر الخدمة</p>
   <div class="grid">
-    <div class="cat-card" style="--glow:rgba(37,99,235,.08);--accent:rgba(37,99,235,.35);" onclick="showPage('pg-student')">
+
+    <div class="cat-card" style="--hover-c:rgba(37,99,235,.35);" onclick="showPage('pg-student')">
       <div class="ci ib-bl">📋</div>
       <div class="ct"><h3>خدمات الطالب</h3><p>التسجيل والمقررات</p></div>
     </div>
-    <div class="cat-card" style="--glow:rgba(8,145,178,.08);--accent:rgba(8,145,178,.35);" onclick="showPage('pg-results')">
+
+    <div class="cat-card" style="--hover-c:rgba(8,145,178,.35);" onclick="showPage('pg-results')">
       <div class="ci ib-cy">🏆</div>
-      <div class="ct"><h3>النتائج</h3><p>الدرجات وأرقام الجلوس</p></div>
+      <div class="ct"><h3>النتائج</h3><p>درجات وأرقام جلوس</p></div>
     </div>
-    <div class="cat-card" style="--glow:rgba(5,150,105,.08);--accent:rgba(5,150,105,.35);" onclick="showPage('pg-financial')">
+
+    <div class="cat-card" style="--hover-c:rgba(5,150,105,.35);" onclick="showPage('pg-financial')">
       <div class="ci ib-em">💳</div>
-      <div class="ct"><h3>المالية والسداد</h3><p>الرسوم والمصروفات</p></div>
+      <div class="ct"><h3>المالية والسداد</h3><p>الرسوم الإلكترونية</p></div>
     </div>
-    <div class="cat-card" style="--glow:rgba(124,58,237,.08);--accent:rgba(124,58,237,.35);" onclick="showPage('pg-digital')">
+
+    <div class="cat-card" style="--hover-c:rgba(124,58,237,.35);" onclick="showPage('pg-digital')">
       <div class="ci ib-vl">⚡</div>
       <div class="ct"><h3>الخدمات الرقمية</h3><p>بريد، منصات، مكتبة</p></div>
     </div>
-    <div class="cat-card" style="--glow:rgba(217,119,6,.08);--accent:rgba(217,119,6,.35);" onclick="showPage('pg-affairs')">
+
+    <div class="cat-card" style="--hover-c:rgba(217,119,6,.35);" onclick="showPage('pg-affairs')">
       <div class="ci ib-am">📄</div>
       <div class="ct"><h3>شئون الطلاب</h3><p>نماذج وطلبات</p></div>
     </div>
-    <div class="cat-card" style="--glow:rgba(220,38,38,.08);--accent:rgba(220,38,38,.35);" onclick="showPage('pg-military')">
+
+    <div class="cat-card" style="--hover-c:rgba(220,38,38,.35);" onclick="showPage('pg-military')">
       <div class="ci ib-rd">🪖</div>
       <div class="ct"><h3>التربية العسكرية</h3><p>التسجيل والرسوم</p></div>
     </div>
-    <div class="cat-card" style="--glow:rgba(219,39,119,.08);--accent:rgba(219,39,119,.35);" onclick="showPage('pg-research')">
+
+    <div class="cat-card" style="--hover-c:rgba(219,39,119,.35);" onclick="showPage('pg-research')">
       <div class="ci ib-pk">🔬</div>
-      <div class="ct"><h3>البحث العلمي</h3><p>أبحاث ومجلات</p></div>
+      <div class="ct"><h3>البحث العلمي</h3><p>مجلات وأبحاث</p></div>
     </div>
-    <div class="cat-card" style="--glow:rgba(219,39,119,.08);--accent:rgba(219,39,119,.35);" onclick="showPage('pg-grad')">
+
+    <div class="cat-card" style="--hover-c:rgba(219,39,119,.35);" onclick="showPage('pg-grad')">
       <div class="ci ib-pk">🎓</div>
       <div class="ct"><h3>مشروع التخرج</h3><p>محو الأمية</p></div>
     </div>
-    <div class="cat-card full" style="--glow:rgba(99,102,241,.08);--accent:rgba(99,102,241,.35);" onclick="showPage('pg-mis-egypt')">
-      <div class="ci ib-in">🗺️</div>
+
+    <div class="cat-card full" style="--hover-c:rgba(99,102,241,.35);" onclick="showPage('pg-mis-egypt')">
+      <div class="ci ib-in" style="width:40px;height:40px;border-radius:11px;font-size:18px;">🗺️</div>
       <div class="ct"><h3>MIS مصر</h3><p>بوابات جامعات المحافظات</p></div>
       <span class="ct-arr">‹</span>
     </div>
-    <div class="cat-card full" style="--glow:rgba(124,58,237,.08);--accent:rgba(124,58,237,.35);" onclick="showPage('pg-reg')">
-      <div class="ci ib-vl">🏛️</div>
+
+    <div class="cat-card full" style="--hover-c:rgba(124,58,237,.35);" onclick="showPage('pg-reg')">
+      <div class="ci ib-vl" style="width:40px;height:40px;border-radius:11px;font-size:18px;">🏛️</div>
       <div class="ct"><h3>تسجيل الكليات</h3><p>البوابات الخاصة بكل كلية</p></div>
       <span class="ct-arr">‹</span>
     </div>
-    <div class="cat-card full" style="--glow:rgba(20,184,166,.08);--accent:rgba(20,184,166,.35);" onclick="showPage('pg-faculties')">
-      <div class="ci ib-tl">🏫</div>
-      <div class="ct"><h3>مواقع الكليات</h3><p>33+ كلية ومعهد</p></div>
+
+    <div class="cat-card full" style="--hover-c:rgba(20,184,166,.35);" onclick="showPage('pg-faculties')">
+      <div class="ci ib-tl" style="width:40px;height:40px;border-radius:11px;font-size:18px;">🏫</div>
+      <div class="ct"><h3>مواقع الكليات والمعاهد</h3><p>33+ كلية ومعهد</p></div>
       <span class="ct-arr">‹</span>
     </div>
-    <div class="cat-card full" style="--glow:rgba(245,158,11,.08);--accent:rgba(245,158,11,.35);" onclick="showPage('pg-centers')">
-      <div class="ci ib-gd">🏢</div>
+
+    <div class="cat-card full" style="--hover-c:rgba(245,158,11,.35);" onclick="showPage('pg-centers')">
+      <div class="ci ib-gd" style="width:40px;height:40px;border-radius:11px;font-size:18px;">🏢</div>
       <div class="ct"><h3>المراكز والوحدات</h3><p>الخدمات الإدارية والأكاديمية</p></div>
       <span class="ct-arr">‹</span>
     </div>
-    <div class="cat-card full" style="--glow:rgba(37,99,235,.08);--accent:rgba(37,99,235,.35);" onclick="showPage('pg-links')">
-      <div class="ci ib-bl">🔗</div>
-      <div class="ct"><h3>روابط رسمية مهمة</h3><p>الجامعة والوزارة</p></div>
+
+    <div class="cat-card full" style="--hover-c:rgba(37,99,235,.35);" onclick="showPage('pg-links')">
+      <div class="ci ib-bl" style="width:40px;height:40px;border-radius:11px;font-size:18px;">🔗</div>
+      <div class="ct"><h3>روابط رسمية مهمة</h3><p>الجامعة والوزارة والمراكز</p></div>
       <span class="ct-arr">‹</span>
     </div>
+
   </div>
   <div class="footer">© 2026 <strong>أوائل</strong> — جميع الحقوق محفوظة<br>بوابة التعليم الجامعي المصري</div>
 </div>
 
-<!-- ═══════════════ خدمات الطالب ═══════════════ -->
+<!-- ═══════ خدمات الطالب ═══════ -->
 <div class="page" id="pg-student">
   <div class="sub-hdr">
     <div class="back-btn" onclick="goHome()">→</div>
@@ -500,178 +585,94 @@ body{
   </div>
   <div class="info-box">⚠️ سجّل دخولك من الشاشة الرئيسية أولاً ثم ارجع هنا واضغط أي خدمة</div>
   <div class="link-list">
-    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/')">
-      <div class="li-i ib-bl">🚪</div><div class="li-t"><h4>البوابة الرئيسية MIS</h4><p>mis.bsu.edu.eg/umisswf</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/STUDENTSUBJECTS.ASPX')">
-      <div class="li-i ib-bl">📋</div><div class="li-t"><h4>بيان المقررات</h4><p>قائمة المواد المسجلة</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_RecordStudentPrimarySubjectsCredit.aspx')">
-      <div class="li-i ib-rd">✏️</div><div class="li-t"><h4>تسجيل المواد</h4><p>اختيار مواد الفصل الدراسي</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_REG_COURSE_GROUP.aspx')">
-      <div class="li-i ib-vl">📚</div><div class="li-t"><h4>السجل الدراسي</h4><p>تاريخ المواد والدرجات</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_RS_ST_223.aspx')">
-      <div class="li-i ib-am">🪪</div><div class="li-t"><h4>بطاقة التسجيل</h4><p>بيانات الطالب الرسمية</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_Stud_EXPENSES.aspx')">
-      <div class="li-i ib-em">💰</div><div class="li-t"><h4>المصروفات الدراسية</h4><p>كشف الرسوم المستحقة</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://www.bsu.edu.eg/ShowGraduationProjects.aspx')">
-      <div class="li-i ib-pk">🎓</div><div class="li-t"><h4>نماذج مشروعات التخرج</h4><p>أمثلة ومشاريع سابقة</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://nps.bsu.edu.eg/portal/')">
-      <div class="li-i ib-cy">🌐</div><div class="li-t"><h4>بوابة الخدمات الطلابية NPS</h4><p>nps.bsu.edu.eg/portal</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://www.bsu.edu.eg/Subjects.aspx?cat_id=1')">
-      <div class="li-i ib-in">📖</div><div class="li-t"><h4>المقررات الدراسية للجامعة</h4><p>دليل المواد والمناهج</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=440')">
-      <div class="li-i ib-tl">♿</div><div class="li-t"><h4>خدمة ذوي الاحتياجات الخاصة</h4><p>دعم الطلاب من ذوي الإعاقة</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=53')">
-      <div class="li-i ib-gd">🌍</div><div class="li-t"><h4>إدارة الطلاب الوافدين</h4><p>خدمات الطلاب الأجانب</p></div><span class="li-arr">‹</span>
-    </div>
+    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/')"><div class="li-i ib-bl">🚪</div><div class="li-t"><h4>البوابة الرئيسية MIS</h4><p>mis.bsu.edu.eg/umisswf</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/STUDENTSUBJECTS.ASPX')"><div class="li-i ib-bl">📋</div><div class="li-t"><h4>بيان المقررات</h4><p>قائمة المواد المسجلة</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_RecordStudentPrimarySubjectsCredit.aspx')"><div class="li-i ib-rd">✏️</div><div class="li-t"><h4>تسجيل المواد</h4><p>اختيار مواد الفصل</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_REG_COURSE_GROUP.aspx')"><div class="li-i ib-vl">📚</div><div class="li-t"><h4>السجل الدراسي</h4><p>تاريخ المواد والدرجات</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_RS_ST_223.aspx')"><div class="li-i ib-am">🪪</div><div class="li-t"><h4>بطاقة التسجيل</h4><p>بيانات الطالب الرسمية</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_Stud_EXPENSES.aspx')"><div class="li-i ib-em">💰</div><div class="li-t"><h4>المصروفات الدراسية</h4><p>كشف الرسوم المستحقة</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://nps.bsu.edu.eg/portal/')"><div class="li-i ib-cy">🌐</div><div class="li-t"><h4>بوابة الخدمات الطلابية NPS</h4><p>nps.bsu.edu.eg/portal</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://www.bsu.edu.eg/ShowGraduationProjects.aspx')"><div class="li-i ib-pk">🎓</div><div class="li-t"><h4>نماذج مشروعات التخرج</h4><p>أمثلة ومشاريع سابقة</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://www.bsu.edu.eg/Subjects.aspx?cat_id=1')"><div class="li-i ib-in">📖</div><div class="li-t"><h4>المقررات الدراسية</h4><p>دليل المواد والمناهج</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=440')"><div class="li-i ib-tl">♿</div><div class="li-t"><h4>خدمة ذوي الاحتياجات الخاصة</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=53')"><div class="li-i ib-gd">🌍</div><div class="li-t"><h4>إدارة الطلاب الوافدين</h4></div><span class="li-arr">‹</span></div>
   </div>
 </div>
 
-<!-- ═══════════════ النتائج ═══════════════ -->
+<!-- ═══════ النتائج ═══════ -->
 <div class="page" id="pg-results">
   <div class="sub-hdr">
     <div class="back-btn" onclick="goHome()">→</div>
     <div class="sub-icon ib-cy">🏆</div>
-    <div class="sub-hdr-txt"><h2>النتائج والاستعلامات</h2><p>درجات وأرقام جلوس</p></div>
+    <div class="sub-hdr-txt"><h2>النتائج والاستعلامات</h2></div>
   </div>
   <div class="link-list">
-    <div class="link-item" onclick="go('https://www.misapp.bsu.edu.eg/results/')">
-      <div class="li-i ib-cy">🏆</div><div class="li-t"><h4>نتائج الطلاب — الجديد</h4><p>misapp.bsu.edu.eg/results</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://www.results.bsu.edu.eg')">
-      <div class="li-i ib-bl">📊</div><div class="li-t"><h4>بوابة النتائج الرسمية</h4><p>results.bsu.edu.eg</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://misapp.bsu.edu.eg/MisBsuResults2026/')">
-      <div class="li-i ib-am">📈</div><div class="li-t"><h4>نتائج 2026</h4><p>النتائج الرسمية للعام الدراسي</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://misapp.bsu.edu.eg/MedResults2026/')">
-      <div class="li-i ib-rd">🩺</div><div class="li-t"><h4>نتائج كلية الطب</h4><p>طب بشري 2026</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://www.bsu.edu.eg/SetNo.aspx?cat_id=1')">
-      <div class="li-i ib-in">🔢</div><div class="li-t"><h4>أرقام الجلوس</h4><p>معرفة رقم الجلوس</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://www.bsu.edu.eg/GraduationsData.aspx?cat_id=1')">
-      <div class="li-i ib-gd">👨‍🎓</div><div class="li-t"><h4>بوابة الخريجين — بالكلية</h4><p>البحث بالكلية</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://www.bsu.edu.eg/Graduations_Search.aspx?cat_id=1')">
-      <div class="li-i ib-tl">🔍</div><div class="li-t"><h4>بحث عن خريج بالاسم</h4><p>استعلام بالاسم</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=6')">
-      <div class="li-i ib-vl">🎓</div><div class="li-t"><h4>نتائج الدراسات العليا</h4><p>ماجستير ودكتوراه</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Content.aspx?section_id=6252&cat_id=1')">
-      <div class="li-i ib-em">✅</div><div class="li-t"><h4>المقبولون في اختبار القدرات</h4><p>نتائج اختبار القدرات</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Graduate_Services.aspx')">
-      <div class="li-i ib-pk">🏅</div><div class="li-t"><h4>خدمات الخريجين</h4><p>بوابة خدمات ما بعد التخرج</p></div><span class="li-arr">‹</span>
-    </div>
+    <div class="link-item" onclick="go('https://www.misapp.bsu.edu.eg/results/')"><div class="li-i ib-cy">🏆</div><div class="li-t"><h4>نتائج الطلاب — الجديد</h4><p>misapp.bsu.edu.eg/results</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://www.results.bsu.edu.eg')"><div class="li-i ib-bl">📊</div><div class="li-t"><h4>بوابة النتائج الرسمية</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://misapp.bsu.edu.eg/MisBsuResults2026/')"><div class="li-i ib-am">📈</div><div class="li-t"><h4>نتائج 2026</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://misapp.bsu.edu.eg/MedResults2026/')"><div class="li-i ib-rd">🩺</div><div class="li-t"><h4>نتائج كلية الطب</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://www.bsu.edu.eg/SetNo.aspx?cat_id=1')"><div class="li-i ib-in">🔢</div><div class="li-t"><h4>أرقام الجلوس</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://www.bsu.edu.eg/GraduationsData.aspx?cat_id=1')"><div class="li-i ib-gd">👨‍🎓</div><div class="li-t"><h4>بوابة الخريجين — بالكلية</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://www.bsu.edu.eg/Graduations_Search.aspx?cat_id=1')"><div class="li-i ib-tl">🔍</div><div class="li-t"><h4>بحث عن خريج بالاسم</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=6')"><div class="li-i ib-vl">🎓</div><div class="li-t"><h4>نتائج الدراسات العليا</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Content.aspx?section_id=6252&cat_id=1')"><div class="li-i ib-em">✅</div><div class="li-t"><h4>المقبولون في اختبار القدرات</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Graduate_Services.aspx')"><div class="li-i ib-pk">🏅</div><div class="li-t"><h4>خدمات الخريجين</h4></div><span class="li-arr">‹</span></div>
   </div>
 </div>
 
-<!-- ═══════════════ المالية ═══════════════ -->
+<!-- ═══════ المالية ═══════ -->
 <div class="page" id="pg-financial">
   <div class="sub-hdr">
     <div class="back-btn" onclick="goHome()">→</div>
     <div class="sub-icon ib-em">💳</div>
-    <div class="sub-hdr-txt"><h2>المدفوعات والرسوم</h2><p>سداد إلكتروني فيزا / فوري</p></div>
+    <div class="sub-hdr-txt"><h2>المدفوعات والرسوم</h2><p>سداد إلكتروني فيزا/فوري</p></div>
   </div>
-  <div class="payment-grid">
-    <div class="pay-badge" onclick="go('http://www.payment.bsu.edu.eg/services/universityOut.aspx')">
-      <span class="pi">🏦</span>رسوم الجامعة
-    </div>
-    <div class="pay-badge" onclick="go('http://www.payment.bsu.edu.eg/services/')">
-      <span class="pi">💳</span>كل الخدمات
-    </div>
-    <div class="pay-badge" onclick="go('https://www.payment.bsu.edu.eg/services/')">
-      <span class="pi">🧾</span>المدفوعات الأخرى
-    </div>
-    <div class="pay-badge" onclick="go('https://military.bsu.edu.eg/')">
-      <span class="pi">🪖</span>التربية العسكرية
-    </div>
+  <div class="pay-grid">
+    <div class="pay-badge" onclick="go('http://www.payment.bsu.edu.eg/services/universityOut.aspx')"><span class="pi">🏦</span>رسوم الجامعة</div>
+    <div class="pay-badge" onclick="go('https://www.payment.bsu.edu.eg/services/')"><span class="pi">💳</span>كل الخدمات</div>
+    <div class="pay-badge" onclick="go('https://military.bsu.edu.eg/')"><span class="pi">🪖</span>التربية العسكرية</div>
+    <div class="pay-badge" onclick="go('https://www.payment.bsu.edu.eg/services/')"><span class="pi">🔬</span>معمل الذكاء الاصطناعي</div>
   </div>
   <div class="link-list">
-    <div class="sub-label">خدمات السداد المتاحة</div>
-    <div class="link-item" onclick="go('http://www.payment.bsu.edu.eg/services/universityOut.aspx')">
-      <div class="li-i ib-em">💳</div><div class="li-t"><h4>سداد مصروفات الجامعة</h4><p>الرسوم الدراسية أونلاين</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.payment.bsu.edu.eg/services/')">
-      <div class="li-i ib-gd">🏦</div><div class="li-t"><h4>بوابة التحصيل الإلكتروني</h4><p>مدفوعات المكتبات، طوابع، مؤتمرات</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.payment.bsu.edu.eg/services/')">
-      <div class="li-i ib-tl">🔬</div><div class="li-t"><h4>معمل الذكاء الاصطناعي</h4><p>رسوم معمل AI — جامعة بني سويف</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.payment.bsu.edu.eg/services/')">
-      <div class="li-i ib-bl">📚</div><div class="li-t"><h4>مدفوعات المكتبات</h4><p>رسوم الاشتراك والخدمات</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.payment.bsu.edu.eg/services/')">
-      <div class="li-i ib-vl">🎓</div><div class="li-t"><h4>طلاب وافدون</h4><p>رسوم الطلاب الأجانب</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_Stud_EXPENSES.aspx')">
-      <div class="li-i ib-am">💰</div><div class="li-t"><h4>كشف المصروفات — MIS</h4><p>من نظام MIS بعد الدخول</p></div><span class="li-arr">‹</span>
-    </div>
+    <div class="link-item" onclick="go('http://www.payment.bsu.edu.eg/services/universityOut.aspx')"><div class="li-i ib-em">💳</div><div class="li-t"><h4>سداد مصروفات الجامعة</h4><p>الرسوم الدراسية أونلاين</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.payment.bsu.edu.eg/services/')"><div class="li-i ib-gd">🏦</div><div class="li-t"><h4>بوابة التحصيل الإلكتروني</h4><p>مدفوعات المكتبات، طوابع، مؤتمرات</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.payment.bsu.edu.eg/services/')"><div class="li-i ib-tl">🦷</div><div class="li-t"><h4>مدفوعات كلية طب الأسنان</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.payment.bsu.edu.eg/services/')"><div class="li-i ib-bl">📚</div><div class="li-t"><h4>مدفوعات المكتبات</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.payment.bsu.edu.eg/services/')"><div class="li-i ib-vl">🌍</div><div class="li-t"><h4>طلاب وافدون</h4><p>رسوم الطلاب الأجانب</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.payment.bsu.edu.eg/services/')"><div class="li-i ib-am">🎓</div><div class="li-t"><h4>اشتراكات مؤتمرات وأخلاقيات البحث</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.payment.bsu.edu.eg/services/')"><div class="li-i ib-cy">🔬</div><div class="li-t"><h4>معمل ميكانيكا التربة — كلية الهندسة</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.payment.bsu.edu.eg/services/')"><div class="li-i ib-pk">🏥</div><div class="li-t"><h4>مركز التدريب والاستشارات — كلية التربية</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ED/OR_Stud_EXPENSES.aspx')"><div class="li-i ib-em">💰</div><div class="li-t"><h4>كشف المصروفات — MIS</h4><p>بعد تسجيل الدخول</p></div><span class="li-arr">‹</span></div>
   </div>
 </div>
 
-<!-- ═══════════════ الخدمات الرقمية ═══════════════ -->
+<!-- ═══════ الخدمات الرقمية ═══════ -->
 <div class="page" id="pg-digital">
   <div class="sub-hdr">
     <div class="back-btn" onclick="goHome()">→</div>
     <div class="sub-icon ib-vl">⚡</div>
-    <div class="sub-hdr-txt"><h2>الخدمات الرقمية</h2><p>بريد، منصات، مكتبة</p></div>
+    <div class="sub-hdr-txt"><h2>الخدمات الرقمية</h2></div>
   </div>
   <div class="link-list">
-    <div class="sub-label">البريد الإلكتروني</div>
-    <div class="link-item" onclick="go('http://www.email.bsu.edu.eg/_BSU_Std.aspx')">
-      <div class="li-i ib-bl">📧</div><div class="li-t"><h4>اعرف إيميلك الجامعي</h4><p>استعلام عن البريد الرسمي</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://outlook.office365.com/')">
-      <div class="li-i ib-cy">📬</div><div class="li-t"><h4>بريد Outlook — Office 365</h4><p>دخول البريد الجامعي</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="sub-label">المنصات التعليمية</div>
-    <div class="link-item" onclick="go('https://www.beinbsu.bsu.edu.eg/')">
-      <div class="li-i ib-vl">📗</div><div class="li-t"><h4>منصة الكتاب الإلكتروني الجديدة</h4><p>beinbsu — المنصة الرسمية 2026</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.ebook.bsu.edu.eg/')">
-      <div class="li-i ib-in">📘</div><div class="li-t"><h4>منصة الكتاب الإلكتروني</h4><p>الكتب والمناهج الدراسية</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://ejada.edu.eg')">
-      <div class="li-i ib-tl">🎯</div><div class="li-t"><h4>منصة إجادة</h4><p>التعليم الإلكتروني المدمج</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://misapp.bsu.edu.eg/res2026/')">
-      <div class="li-i ib-em">🖥️</div><div class="li-t"><h4>خدمات MIS 2026</h4><p>منظومة الخدمات الجديدة</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=295')">
-      <div class="li-i ib-pk">💻</div><div class="li-t"><h4>التعليم الإلكتروني</h4><p>المركز الرسمي للتعليم الإلكتروني</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="sub-label">المكتبة والبحث العلمي</div>
-    <div class="link-item" onclick="go('http://www.digitalibrary.bsu.edu.eg')">
-      <div class="li-i ib-gd">📚</div><div class="li-t"><h4>المكتبة الرقمية</h4><p>الأبحاث والمراجع العلمية</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.ekb.eg/ar/home')">
-      <div class="li-i ib-am">🔬</div><div class="li-t"><h4>بنك المعرفة المصري</h4><p>مجلات وأبحاث دولية</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://db5.eulc.edu.eg/eulc_v5/libraries/start.aspx?fn=portal')">
-      <div class="li-i ib-tl">🗂️</div><div class="li-t"><h4>البحث في قواعد البيانات العالمية</h4><p>EULC — الاتحاد المصري للمكتبات</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://scholar.google.com.eg/citations?hl=en&view_op=search_authors&mauthors=beni+suef')">
-      <div class="li-i ib-bl">🎓</div><div class="li-t"><h4>أبحاث الجامعة على Google Scholar</h4><p>استعراض النشر الدولي</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://fekra.bsu.edu.eg')">
-      <div class="li-i ib-vl">💡</div><div class="li-t"><h4>منصة فكرة</h4><p>ريادة الأعمال والابتكار</p></div><span class="li-arr">‹</span>
-    </div>
+    <div class="sub-lbl">البريد الإلكتروني</div>
+    <div class="link-item" onclick="go('http://www.email.bsu.edu.eg/_BSU_Std.aspx')"><div class="li-i ib-bl">📧</div><div class="li-t"><h4>اعرف إيميلك الجامعي</h4><p>استعلام عن البريد الرسمي</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://outlook.office365.com/')"><div class="li-i ib-cy">📬</div><div class="li-t"><h4>بريد Outlook — Office 365</h4></div><span class="li-arr">‹</span></div>
+    <div class="sub-lbl">المنصات التعليمية</div>
+    <div class="link-item" onclick="go('https://www.beinbsu.bsu.edu.eg/')"><div class="li-i ib-vl">📗</div><div class="li-t"><h4>منصة الكتاب الإلكتروني الجديدة</h4><p>beinbsu — 2026</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.ebook.bsu.edu.eg/')"><div class="li-i ib-in">📘</div><div class="li-t"><h4>منصة الكتاب الإلكتروني</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://ejada.edu.eg')"><div class="li-i ib-tl">🎯</div><div class="li-t"><h4>منصة إجادة</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://fekra.bsu.edu.eg')"><div class="li-i ib-vl">💡</div><div class="li-t"><h4>منصة فكرة — ريادة الأعمال</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://misapp.bsu.edu.eg/res2026/')"><div class="li-i ib-em">🖥️</div><div class="li-t"><h4>خدمات MIS 2026</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=295')"><div class="li-i ib-pk">💻</div><div class="li-t"><h4>مركز التعليم الإلكتروني</h4></div><span class="li-arr">‹</span></div>
+    <div class="sub-lbl">المكتبة والبحث</div>
+    <div class="link-item" onclick="go('http://www.digitalibrary.bsu.edu.eg')"><div class="li-i ib-gd">📚</div><div class="li-t"><h4>المكتبة الرقمية</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.ekb.eg/ar/home')"><div class="li-i ib-am">🔬</div><div class="li-t"><h4>بنك المعرفة المصري</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://db5.eulc.edu.eg/eulc_v5/libraries/start.aspx?fn=portal')"><div class="li-i ib-tl">🗂️</div><div class="li-t"><h4>قواعد البيانات العالمية — EULC</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://scholar.google.com.eg/citations?hl=en&view_op=search_authors&mauthors=beni+suef')"><div class="li-i ib-bl">🎓</div><div class="li-t"><h4>أبحاث الجامعة على Google Scholar</h4></div><span class="li-arr">‹</span></div>
   </div>
 </div>
 
-<!-- ═══════════════ شئون الطلاب ═══════════════ -->
+<!-- ═══════ شئون الطلاب ═══════ -->
 <div class="page" id="pg-affairs">
   <div class="sub-hdr">
     <div class="back-btn" onclick="goHome()">→</div>
@@ -679,207 +680,131 @@ body{
     <div class="sub-hdr-txt"><h2>شئون الطلاب</h2><p>نماذج وطلبات رسمية</p></div>
   </div>
   <div class="link-list">
-    <div class="sub-label">نماذج PDF — اضغط للتحميل</div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/توقيع الكشف الطب.pdf')">
-      <div class="li-i ib-rd">🩺</div><div class="li-t"><h4>طلب كشف طبي</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/طلب تحويل.pdf')">
-      <div class="li-i ib-bl">🔄</div><div class="li-t"><h4>طلب تحويل</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/بيان حاله الطالب.pdf')">
-      <div class="li-i ib-vl">📋</div><div class="li-t"><h4>بيان حالة الطالب</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/اثبات قيد للطالب.pdf')">
-      <div class="li-i ib-em">✅</div><div class="li-t"><h4>إثبات قيد للطالب</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/اخلاء طرف للطالب.pdf')">
-      <div class="li-i ib-am">📝</div><div class="li-t"><h4>إخلاء طرف</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/اعتذار عن امتحان.pdf')">
-      <div class="li-i ib-pk">🙋</div><div class="li-t"><h4>اعتذار عن امتحان</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/التماس اعاده رصد درجات.pdf')">
-      <div class="li-i ib-cy">📊</div><div class="li-t"><h4>التماس إعادة رصد درجات</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/تأجيل تجنيد.pdf')">
-      <div class="li-i ib-in">🪖</div><div class="li-t"><h4>تأجيل تجنيد</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/استمارة التقديم للمدينه الجامعيه.pdf')">
-      <div class="li-i ib-tl">🏠</div><div class="li-t"><h4>التقديم للمدينة الجامعية</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="sub-label">روابط شئون الطلاب</div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=7')">
-      <div class="li-i ib-bl">🏛️</div><div class="li-t"><h4>موقع شئون التعليم والطلاب</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=286')">
-      <div class="li-i ib-bl">🏘️</div><div class="li-t"><h4>المدن الجامعية</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=277')">
-      <div class="li-i ib-am">🏅</div><div class="li-t"><h4>رعاية الشباب — الأنشطة الطلابية</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=284')">
-      <div class="li-i ib-vl">💬</div><div class="li-t"><h4>منتدى الطلاب</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://www.bsu.edu.eg/AddComplaint.aspx?cat_id=1')">
-      <div class="li-i ib-rd">📣</div><div class="li-t"><h4>شكاوى ومقترحات</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://forms.gle/C67Wj8yAJTkE5agx7/')">
-      <div class="li-i ib-gy">🛠️</div><div class="li-t"><h4>إبلاغ عن مشكلة تقنية</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/AddDoctorStatement.aspx?cat_id=1')">
-      <div class="li-i ib-cy">📃</div><div class="li-t"><h4>إفادة من الجامعة</h4><p>طلب شهادة رسمية</p></div><span class="li-arr">‹</span>
-    </div>
+    <div class="sub-lbl">نماذج PDF — اضغط للتحميل</div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/توقيع الكشف الطب.pdf')"><div class="li-i ib-rd">🩺</div><div class="li-t"><h4>طلب كشف طبي</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/طلب تحويل.pdf')"><div class="li-i ib-bl">🔄</div><div class="li-t"><h4>طلب تحويل</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/بيان حاله الطالب.pdf')"><div class="li-i ib-vl">📋</div><div class="li-t"><h4>بيان حالة الطالب</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/اثبات قيد للطالب.pdf')"><div class="li-i ib-em">✅</div><div class="li-t"><h4>إثبات قيد</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/اخلاء طرف للطالب.pdf')"><div class="li-i ib-am">📝</div><div class="li-t"><h4>إخلاء طرف</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/اعتذار عن امتحان.pdf')"><div class="li-i ib-pk">🙋</div><div class="li-t"><h4>اعتذار عن امتحان</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/التماس اعاده رصد درجات.pdf')"><div class="li-i ib-cy">📊</div><div class="li-t"><h4>التماس إعادة رصد درجات</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/تأجيل تجنيد.pdf')"><div class="li-i ib-in">🪖</div><div class="li-t"><h4>تأجيل تجنيد</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/استمارة التقديم للمدينه الجامعيه.pdf')"><div class="li-i ib-tl">🏠</div><div class="li-t"><h4>التقديم للمدينة الجامعية</h4></div><span class="li-arr">‹</span></div>
+    <div class="sub-lbl">روابط شئون الطلاب</div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=7')"><div class="li-i ib-bl">🏛️</div><div class="li-t"><h4>موقع شئون التعليم والطلاب</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=286')"><div class="li-i ib-cy">🏘️</div><div class="li-t"><h4>المدن الجامعية</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=277')"><div class="li-i ib-am">🏅</div><div class="li-t"><h4>رعاية الشباب — الأنشطة الطلابية</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=284')"><div class="li-i ib-vl">💬</div><div class="li-t"><h4>منتدى الطلاب</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://www.bsu.edu.eg/AddComplaint.aspx?cat_id=1')"><div class="li-i ib-rd">📣</div><div class="li-t"><h4>شكاوى ومقترحات</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/AddDoctorStatement.aspx?cat_id=1')"><div class="li-i ib-cy">📃</div><div class="li-t"><h4>إفادة من الجامعة</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://forms.gle/C67Wj8yAJTkE5agx7/')"><div class="li-i ib-gy">🛠️</div><div class="li-t"><h4>إبلاغ عن مشكلة تقنية</h4></div><span class="li-arr">‹</span></div>
   </div>
 </div>
 
-<!-- ═══════════════ التربية العسكرية ═══════════════ -->
+<!-- ═══════ التربية العسكرية ═══════ -->
 <div class="page" id="pg-military">
   <div class="sub-hdr">
     <div class="back-btn" onclick="goHome()">→</div>
     <div class="sub-icon ib-rd">🪖</div>
-    <div class="sub-hdr-txt"><h2>التربية العسكرية</h2><p>التسجيل والرسوم</p></div>
+    <div class="sub-hdr-txt"><h2>التربية العسكرية</h2></div>
   </div>
   <div class="link-list">
-    <div class="link-item" onclick="go('https://military.bsu.edu.eg/')">
-      <div class="li-i ib-rd">🪖</div><div class="li-t"><h4>بوابة التربية العسكرية</h4><p>military.bsu.edu.eg</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=283')">
-      <div class="li-i ib-in">🏛️</div><div class="li-t"><h4>قسم التربية العسكرية بالجامعة</h4><p>الصفحة الرسمية</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://www.payment.bsu.edu.eg/services/universityOut.aspx')">
-      <div class="li-i ib-em">💳</div><div class="li-t"><h4>سداد رسوم التربية العسكرية</h4><p>اختر التربية العسكرية من القائمة</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/تأجيل تجنيد.pdf')">
-      <div class="li-i ib-am">📝</div><div class="li-t"><h4>استمارة تأجيل التجنيد</h4><p>PDF — تحميل مباشر</p></div><span class="li-arr">‹</span>
-    </div>
+    <div class="link-item" onclick="go('https://military.bsu.edu.eg/')"><div class="li-i ib-rd">🪖</div><div class="li-t"><h4>بوابة التربية العسكرية</h4><p>military.bsu.edu.eg</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=283')"><div class="li-i ib-in">🏛️</div><div class="li-t"><h4>قسم التربية العسكرية</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://www.payment.bsu.edu.eg/services/universityOut.aspx')"><div class="li-i ib-em">💳</div><div class="li-t"><h4>سداد رسوم التربية العسكرية</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Backend/Uploads/PDF/خدمات الكترونيه/تأجيل تجنيد.pdf')"><div class="li-i ib-am">📝</div><div class="li-t"><h4>استمارة تأجيل التجنيد</h4></div><span class="li-arr">‹</span></div>
   </div>
 </div>
 
-<!-- ═══════════════ البحث العلمي ═══════════════ -->
+<!-- ═══════ البحث العلمي ═══════ -->
 <div class="page" id="pg-research">
   <div class="sub-hdr">
     <div class="back-btn" onclick="goHome()">→</div>
     <div class="sub-icon ib-pk">🔬</div>
-    <div class="sub-hdr-txt"><h2>البحث العلمي</h2><p>مجلات وأبحاث ونشر دولي</p></div>
+    <div class="sub-hdr-txt"><h2>البحث العلمي</h2></div>
   </div>
   <div class="link-list">
-    <div class="sub-label">المجلات العلمية</div>
-    <div class="link-item" onclick="go('http://ees.elsevier.com/bjbas')">
-      <div class="li-i ib-bl">📰</div><div class="li-t"><h4>مجلة جامعة بني سويف — Elsevier</h4><p>BJBAS — دولية محكمة</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://www.bsu.edu.eg/bsujournals/BIJHSS.aspx')">
-      <div class="li-i ib-vl">📖</div><div class="li-t"><h4>المجلة الدولية للعلوم الإنسانية</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://jvmr.journals.ekb.eg')">
-      <div class="li-i ib-tl">🐾</div><div class="li-t"><h4>مجلة كلية الطب البيطري</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://jdlol.journals.ekb.eg')">
-      <div class="li-i ib-cy">💻</div><div class="li-t"><h4>مجلة التعليم عن بُعد</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://sjas.journals.ekb.eg')">
-      <div class="li-i ib-em">🌾</div><div class="li-t"><h4>مجلة كلية الزراعة</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://jfabsu.journals.ekb.eg')">
-      <div class="li-i ib-pk">🎨</div><div class="li-t"><h4>مجلة كلية الآداب</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="sub-label">النشر والأبحاث الدولية</div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/ResearchesPortal.aspx?cat_id=1')">
-      <div class="li-i ib-gd">🔭</div><div class="li-t"><h4>بوابة الأبحاث العلمية</h4><p>قاعدة بيانات أبحاث الجامعة</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/frmScientificRegistration.aspx?cat_id=346')">
-      <div class="li-i ib-am">🏆</div><div class="li-t"><h4>مكافأة النشر الدولي</h4><p>التسجيل للحصول على المكافأة</p></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://scholar.google.com.eg/citations?hl=en&view_op=search_authors&mauthors=beni+suef')">
-      <div class="li-i ib-bl">🎓</div><div class="li-t"><h4>Google Scholar — بني سويف</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=52')">
-      <div class="li-i ib-rd">⚖️</div><div class="li-t"><h4>لجنة أخلاقيات البحث العلمي IRB</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('http://www.bsu.edu.eg/IACUC.aspx')">
-      <div class="li-i ib-tl">🧪</div><div class="li-t"><h4>لجنة رعاية حيوانات التجارب</h4></div><span class="li-arr">‹</span>
-    </div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/FrmStudentRegister.aspx')">
-      <div class="li-i ib-vl">📝</div><div class="li-t"><h4>تسجيل الحاصلين على ماجستير/دكتوراه</h4></div><span class="li-arr">‹</span>
-    </div>
+    <div class="sub-lbl">المجلات العلمية</div>
+    <div class="link-item" onclick="go('http://ees.elsevier.com/bjbas')"><div class="li-i ib-bl">📰</div><div class="li-t"><h4>مجلة جامعة بني سويف — Elsevier</h4><p>BJBAS — دولية محكمة</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://www.bsu.edu.eg/bsujournals/BIJHSS.aspx')"><div class="li-i ib-vl">📖</div><div class="li-t"><h4>المجلة الدولية للعلوم الإنسانية</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://jvmr.journals.ekb.eg')"><div class="li-i ib-tl">🐾</div><div class="li-t"><h4>مجلة كلية الطب البيطري</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://jdlol.journals.ekb.eg')"><div class="li-i ib-cy">💻</div><div class="li-t"><h4>مجلة التعليم عن بُعد</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://sjas.journals.ekb.eg')"><div class="li-i ib-em">🌾</div><div class="li-t"><h4>مجلة كلية الزراعة</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://jfabsu.journals.ekb.eg')"><div class="li-i ib-pk">🎨</div><div class="li-t"><h4>مجلة كلية الآداب</h4></div><span class="li-arr">‹</span></div>
+    <div class="sub-lbl">النشر والأبحاث</div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/ResearchesPortal.aspx?cat_id=1')"><div class="li-i ib-gd">🔭</div><div class="li-t"><h4>بوابة الأبحاث العلمية</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/frmScientificRegistration.aspx?cat_id=346')"><div class="li-i ib-am">🏆</div><div class="li-t"><h4>مكافأة النشر الدولي</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=52')"><div class="li-i ib-rd">⚖️</div><div class="li-t"><h4>لجنة أخلاقيات البحث IRB</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/FrmStudentRegister.aspx')"><div class="li-i ib-vl">📝</div><div class="li-t"><h4>تسجيل الحاصلين على ماجستير/دكتوراه</h4></div><span class="li-arr">‹</span></div>
   </div>
 </div>
 
-<!-- ═══════════════ مشروع التخرج ═══════════════ -->
+<!-- ═══════ مشروع التخرج ═══════ -->
 <div class="page" id="pg-grad">
   <div class="sub-hdr">
     <div class="back-btn" onclick="goHome()">→</div>
     <div class="sub-icon ib-pk">🎓</div>
-    <div class="sub-hdr-txt"><h2>مشروع التخرج</h2><p>مبادرة محو الأمية — بني سويف</p></div>
+    <div class="sub-hdr-txt"><h2>مشروع التخرج</h2><p>محو الأمية — بني سويف</p></div>
   </div>
   <div class="grad-card">
     <div class="grad-tag">✦ مشروع تخرج مقترح</div>
-    <div class="grad-title">منصة "نور بني سويف"<br>لمحو الأمية الرقمية والتعليمية</div>
-    <div class="grad-desc">منصة إلكترونية متكاملة تستهدف محو الأمية في بني سويف، تدمج التعلم عن بُعد بالمتابعة الميدانية، وتوفر مناهج مبسطة للكبار عبر تطبيق موبايل وواجهة ويب، مع لوحة تحكم للمتطوعين لمتابعة التقدم وقياس الأثر.</div>
+    <div class="grad-title">منصة "نور بني سويف"<br>لمحو الأمية الرقمية</div>
+    <div class="grad-desc">منصة إلكترونية متكاملة تستهدف محو الأمية في بني سويف، تدمج التعلم عن بُعد بالمتابعة الميدانية مع لوحة تحكم للمتطوعين لمتابعة التقدم وقياس الأثر.</div>
     <div class="grad-stats">
-      <div class="grad-stat"><div class="val">~18%</div><div class="key">نسبة الأمية في بني سويف</div></div>
+      <div class="grad-stat"><div class="val">~18%</div><div class="key">نسبة الأمية</div></div>
       <div class="grad-stat"><div class="val">+200K</div><div class="key">مستفيد مستهدف</div></div>
       <div class="grad-stat"><div class="val">3 محاور</div><div class="key">قراءة · كتابة · رقمي</div></div>
       <div class="grad-stat"><div class="val">Firebase</div><div class="key">تقنيات التطوير</div></div>
     </div>
-    <div class="grad-desc"><strong style="color:#a78bfa;">أهداف المشروع:</strong><br>① محتوى تعليمي باللهجة المحلية<br>② تتبع تقدم المتعلم بنظام شهادات<br>③ تقارير إحصائية للجهات الحكومية<br>④ ربط المتطوعين الجامعيين بالمستفيدين</div>
-    <a class="btn-grad" href="http://www.bsu.edu.eg/ShowGraduationProjects.aspx" onclick="go('http://www.bsu.edu.eg/ShowGraduationProjects.aspx');return false;">🔗 نماذج مشروعات التخرج السابقة</a>
-  </div>
-  <div class="link-list">
-    <div class="sub-label">روابط داعمة للمشروع</div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=277')"><div class="li-i ib-am">🤲</div><div class="li-t"><h4>رعاية الشباب والتطوع</h4></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.ekb.eg/ar/home')"><div class="li-i ib-tl">📖</div><div class="li-t"><h4>بنك المعرفة المصري</h4></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://fekra.bsu.edu.eg')"><div class="li-i ib-vl">💡</div><div class="li-t"><h4>منصة فكرة — ريادة الأعمال</h4></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('http://www.digitalibrary.bsu.edu.eg')"><div class="li-i ib-gd">📚</div><div class="li-t"><h4>المكتبة الرقمية للجامعة</h4></div><span class="li-arr">‹</span></div>
+    <div class="grad-desc"><strong style="color:var(--p1);">أهداف:</strong><br>① محتوى باللهجة المحلية ② شهادات إلكترونية ③ تقارير للجهات الحكومية ④ ربط المتطوعين بالمستفيدين</div>
+    <a class="btn-grad" onclick="go('http://www.bsu.edu.eg/ShowGraduationProjects.aspx');return false;">🔗 نماذج مشروعات التخرج السابقة</a>
   </div>
 </div>
 
-<!-- ═══════════════ MIS مصر ═══════════════ -->
+<!-- ═══════ MIS مصر ═══════ -->
 <div class="page" id="pg-mis-egypt">
   <div class="sub-hdr">
     <div class="back-btn" onclick="goHome()">→</div>
     <div class="sub-icon ib-in">🗺️</div>
-    <div class="sub-hdr-txt"><h2>MIS — الجامعات المصرية</h2><p>بوابات المحافظات</p></div>
+    <div class="sub-hdr-txt"><h2>MIS — الجامعات المصرية</h2></div>
   </div>
-  <div class="info-box">📌 بوابات نظام MIS وأنظمة الطلاب في الجامعات المصرية الحكومية</div>
   <div class="link-list">
-    <div class="sub-label">الصعيد الأوسط</div>
+    <div class="sub-lbl">الصعيد الأوسط</div>
     <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ed_login.aspx')"><div class="li-i ib-vl">🏛️</div><div class="li-t"><h4>جامعة بني سويف</h4><p>mis.bsu.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('http://mispg.svu.edu.eg/svu/UI/LoginPage.aspx')"><div class="li-i ib-bl">🏫</div><div class="li-t"><h4>جامعة جنوب الوادي</h4><p>mispg.svu.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.minia.edu.eg/minia/results2.aspx')"><div class="li-i ib-em">🏫</div><div class="li-t"><h4>جامعة المنيا</h4><p>minia.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('http://www.aun.edu.eg/main/')"><div class="li-i ib-am">🏫</div><div class="li-t"><h4>جامعة أسيوط</h4><p>aun.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.sohag-univ.edu.eg/ar/')"><div class="li-i ib-rd">🏫</div><div class="li-t"><h4>جامعة سوهاج</h4><p>sohag-univ.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.fayoum.edu.eg/')"><div class="li-i ib-tl">🏫</div><div class="li-t"><h4>جامعة الفيوم</h4><p>fayoum.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="sub-label">القاهرة الكبرى</div>
-    <div class="link-item" onclick="go('https://cu.edu.eg/Home')"><div class="li-i ib-gd">🏛️</div><div class="li-t"><h4>جامعة القاهرة</h4><p>cu.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://ums.asu.edu.eg/App/Login_Form')"><div class="li-i ib-cy">🏫</div><div class="li-t"><h4>جامعة عين شمس — UMS</h4><p>ums.asu.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.helwan.edu.eg/')"><div class="li-i ib-tl">🏫</div><div class="li-t"><h4>جامعة حلوان</h4><p>helwan.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="sub-label">الدلتا والشمال</div>
-    <div class="link-item" onclick="go('https://www.mans.edu.eg/ar')"><div class="li-i ib-bl">🏫</div><div class="li-t"><h4>جامعة المنصورة</h4><p>mans.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('http://mis.alexu.edu.eg/umisapp/ui/loginpage.aspx')"><div class="li-i ib-vl">🏫</div><div class="li-t"><h4>جامعة الإسكندرية — MIS</h4><p>mis.alexu.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://mis.kfs.edu.eg/last_year/account/login')"><div class="li-i ib-em">🏫</div><div class="li-t"><h4>جامعة كفر الشيخ — MIS</h4><p>mis.kfs.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.zu.edu.eg/ar-EG/Pages/default.aspx')"><div class="li-i ib-cy">🏫</div><div class="li-t"><h4>جامعة الزقازيق</h4><p>zu.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.tanta.edu.eg/ar/')"><div class="li-i ib-am">🏫</div><div class="li-t"><h4>جامعة طنطا</h4><p>tanta.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.dmu.edu.eg/')"><div class="li-i ib-tl">🏫</div><div class="li-t"><h4>جامعة دمنهور</h4><p>dmu.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.menofia.edu.eg/')"><div class="li-i ib-pk">🏫</div><div class="li-t"><h4>جامعة المنوفية</h4><p>menofia.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="sub-label">قناة السويس والشرق والجنوب</div>
-    <div class="link-item" onclick="go('https://www.suezcanal.edu.eg/ar/')"><div class="li-i ib-bl">🏫</div><div class="li-t"><h4>جامعة قناة السويس</h4><p>suezcanal.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://mis.bie.edu.eg/student')"><div class="li-i ib-gd">🏫</div><div class="li-t"><h4>جامعة بورسعيد — MIS</h4><p>mis.bie.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.aru.edu.eg/')"><div class="li-i ib-rd">🏫</div><div class="li-t"><h4>جامعة العريش</h4><p>aru.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.luxor-univ.edu.eg/')"><div class="li-i ib-am">🏫</div><div class="li-t"><h4>جامعة الأقصر</h4><p>luxor-univ.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.asu.edu.eg/')"><div class="li-i ib-in">🏫</div><div class="li-t"><h4>جامعة أسوان</h4><p>asu.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.qsufs.edu.eg/')"><div class="li-i ib-vl">🏫</div><div class="li-t"><h4>جامعة قنا / جنوب الوادي</h4><p>qsufs.edu.eg</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://mispg.svu.edu.eg/svu/UI/LoginPage.aspx')"><div class="li-i ib-bl">🏫</div><div class="li-t"><h4>جامعة جنوب الوادي</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.minia.edu.eg/minia/results2.aspx')"><div class="li-i ib-em">🏫</div><div class="li-t"><h4>جامعة المنيا</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://www.aun.edu.eg/main/')"><div class="li-i ib-am">🏫</div><div class="li-t"><h4>جامعة أسيوط</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.sohag-univ.edu.eg/ar/')"><div class="li-i ib-rd">🏫</div><div class="li-t"><h4>جامعة سوهاج</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.fayoum.edu.eg/')"><div class="li-i ib-tl">🏫</div><div class="li-t"><h4>جامعة الفيوم</h4></div><span class="li-arr">‹</span></div>
+    <div class="sub-lbl">القاهرة الكبرى</div>
+    <div class="link-item" onclick="go('https://cu.edu.eg/Home')"><div class="li-i ib-gd">🏛️</div><div class="li-t"><h4>جامعة القاهرة</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://ums.asu.edu.eg/App/Login_Form')"><div class="li-i ib-cy">🏫</div><div class="li-t"><h4>جامعة عين شمس — UMS</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.helwan.edu.eg/')"><div class="li-i ib-tl">🏫</div><div class="li-t"><h4>جامعة حلوان</h4></div><span class="li-arr">‹</span></div>
+    <div class="sub-lbl">الدلتا والشمال</div>
+    <div class="link-item" onclick="go('https://www.mans.edu.eg/ar')"><div class="li-i ib-bl">🏫</div><div class="li-t"><h4>جامعة المنصورة</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://mis.alexu.edu.eg/umisapp/ui/loginpage.aspx')"><div class="li-i ib-vl">🏫</div><div class="li-t"><h4>جامعة الإسكندرية — MIS</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://mis.kfs.edu.eg/last_year/account/login')"><div class="li-i ib-em">🏫</div><div class="li-t"><h4>جامعة كفر الشيخ — MIS</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.zu.edu.eg/ar-EG/Pages/default.aspx')"><div class="li-i ib-cy">🏫</div><div class="li-t"><h4>جامعة الزقازيق</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.tanta.edu.eg/ar/')"><div class="li-i ib-am">🏫</div><div class="li-t"><h4>جامعة طنطا</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.dmu.edu.eg/')"><div class="li-i ib-tl">🏫</div><div class="li-t"><h4>جامعة دمنهور</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.menofia.edu.eg/')"><div class="li-i ib-pk">🏫</div><div class="li-t"><h4>جامعة المنوفية</h4></div><span class="li-arr">‹</span></div>
+    <div class="sub-lbl">قناة السويس والجنوب</div>
+    <div class="link-item" onclick="go('https://www.suezcanal.edu.eg/ar/')"><div class="li-i ib-bl">🏫</div><div class="li-t"><h4>جامعة قناة السويس</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://mis.bie.edu.eg/student')"><div class="li-i ib-gd">🏫</div><div class="li-t"><h4>جامعة بورسعيد — MIS</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.luxor-univ.edu.eg/')"><div class="li-i ib-am">🏫</div><div class="li-t"><h4>جامعة الأقصر</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.asu.edu.eg/')"><div class="li-i ib-in">🏫</div><div class="li-t"><h4>جامعة أسوان</h4></div><span class="li-arr">‹</span></div>
   </div>
 </div>
 
-<!-- ═══════════════ تسجيل الكليات ═══════════════ -->
+<!-- ═══════ تسجيل الكليات ═══════ -->
 <div class="page" id="pg-reg">
   <div class="sub-hdr">
     <div class="back-btn" onclick="goHome()">→</div>
     <div class="sub-icon ib-vl">🏛️</div>
-    <div class="sub-hdr-txt"><h2>بوابات تسجيل الكليات</h2><p>بني سويف</p></div>
+    <div class="sub-hdr-txt"><h2>بوابات تسجيل الكليات</h2></div>
   </div>
   <div class="link-list">
-    <div class="link-item" onclick="go('https://misapp.bsu.edu.eg/commreg/')"><div class="li-i ib-gd">🎓</div><div class="li-t"><h4>الدراسات العليا</h4><p>ماجستير ودكتوراه</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://misapp.bsu.edu.eg/commreg/')"><div class="li-i ib-gd">🎓</div><div class="li-t"><h4>الدراسات العليا</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://misapp.bsu.edu.eg/pharmreg/')"><div class="li-i ib-em">💊</div><div class="li-t"><h4>كلية الصيدلة</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://misapp.bsu.edu.eg/nursereg/')"><div class="li-i ib-pk">🏥</div><div class="li-t"><h4>كلية التمريض</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://misapp.bsu.edu.eg/sportreg/')"><div class="li-i ib-am">⚽</div><div class="li-t"><h4>كلية التربية الرياضية</h4></div><span class="li-arr">‹</span></div>
@@ -887,19 +812,19 @@ body{
     <div class="link-item" onclick="go('https://misapp.bsu.edu.eg/psasreg/')"><div class="li-i ib-in">🔬</div><div class="li-t"><h4>كلية العلوم المتقدمة PSAS</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://misapp.bsu.edu.eg/regsc/')"><div class="li-i ib-bl">⚗️</div><div class="li-t"><h4>كلية العلوم</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://misapp.bsu.edu.eg/FCIS/')"><div class="li-i ib-cy">💻</div><div class="li-t"><h4>كلية الحاسبات والذكاء الاصطناعي</h4></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://sis-bsnu.bsu.edu.eg/DefaultApplicantNew.aspx')"><div class="li-i ib-vl">🏫</div><div class="li-t"><h4>جامعة بني سويف الأهلية</h4><p>بوابة القبول والتسجيل</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://sis-bsnu.bsu.edu.eg/DefaultApplicantNew.aspx')"><div class="li-i ib-vl">🏫</div><div class="li-t"><h4>جامعة بني سويف الأهلية</h4></div><span class="li-arr">‹</span></div>
   </div>
 </div>
 
-<!-- ═══════════════ مواقع الكليات ═══════════════ -->
+<!-- ═══════ مواقع الكليات ═══════ -->
 <div class="page" id="pg-faculties">
   <div class="sub-hdr">
     <div class="back-btn" onclick="goHome()">→</div>
     <div class="sub-icon ib-tl">🏫</div>
-    <div class="sub-hdr-txt"><h2>مواقع الكليات والمعاهد</h2><p>33+ كلية ومعهد</p></div>
+    <div class="sub-hdr-txt"><h2>مواقع الكليات والمعاهد</h2></div>
   </div>
   <div class="link-list">
-    <div class="sub-label">الكليات العملية والتطبيقية</div>
+    <div class="sub-lbl">الكليات العملية</div>
     <div class="link-item" onclick="go('http://www.med.bsu.edu.eg')"><div class="li-i ib-rd">🏥</div><div class="li-t"><h4>كلية الطب البشري</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.eng.bsu.edu.eg')"><div class="li-i ib-am">⚙️</div><div class="li-t"><h4>كلية الهندسة</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.science.bsu.edu.eg')"><div class="li-i ib-bl">🔬</div><div class="li-t"><h4>كلية العلوم</h4></div><span class="li-arr">‹</span></div>
@@ -917,7 +842,7 @@ body{
     <div class="link-item" onclick="go('http://www.earthsc.bsu.edu.eg')"><div class="li-i ib-tl">🌍</div><div class="li-t"><h4>كلية علوم الأرض</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.specialneed.bsu.edu.eg')"><div class="li-i ib-bl">♿</div><div class="li-t"><h4>كلية علوم ذوي الاحتياجات الخاصة</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.psas.bsu.edu.eg')"><div class="li-i ib-vl">🏛️</div><div class="li-t"><h4>كلية الدراسات العليا للعلوم المتقدمة</h4></div><span class="li-arr">‹</span></div>
-    <div class="sub-label">الكليات النظرية والإنسانية</div>
+    <div class="sub-lbl">الكليات النظرية</div>
     <div class="link-item" onclick="go('http://www.comm.bsu.edu.eg')"><div class="li-i ib-gd">💼</div><div class="li-t"><h4>كلية التجارة</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.law.bsu.edu.eg')"><div class="li-i ib-vl">⚖️</div><div class="li-t"><h4>كلية الحقوق</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.edu.bsu.edu.eg')"><div class="li-i ib-tl">📖</div><div class="li-t"><h4>كلية التربية</h4></div><span class="li-arr">‹</span></div>
@@ -929,7 +854,7 @@ body{
     <div class="link-item" onclick="go('http://www.kinder.bsu.edu.eg')"><div class="li-i ib-pk">🧒</div><div class="li-t"><h4>كلية التربية للطفولة المبكرة</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.socialwork.bsu.edu.eg')"><div class="li-i ib-em">🤝</div><div class="li-t"><h4>كلية الخدمة الاجتماعية</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.tourism.bsu.edu.eg')"><div class="li-i ib-gd">🏨</div><div class="li-t"><h4>كلية السياحة والفنادق</h4></div><span class="li-arr">‹</span></div>
-    <div class="sub-label">المعاهد والمراكز البحثية</div>
+    <div class="sub-lbl">المعاهد البحثية</div>
     <div class="link-item" onclick="go('https://www.olderinst.bsu.edu.eg')"><div class="li-i ib-gy">🧓</div><div class="li-t"><h4>معهد دراسات علوم المسنين</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.laserinst.bsu.edu.eg')"><div class="li-i ib-rd">💡</div><div class="li-t"><h4>معهد أبحاث الليزر LIRA</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://www.medplants.bsu.edu.eg')"><div class="li-i ib-em">🌿</div><div class="li-t"><h4>معهد النباتات الطبية والعطرية</h4></div><span class="li-arr">‹</span></div>
@@ -937,15 +862,15 @@ body{
   </div>
 </div>
 
-<!-- ═══════════════ المراكز والوحدات ═══════════════ -->
+<!-- ═══════ المراكز والوحدات ═══════ -->
 <div class="page" id="pg-centers">
   <div class="sub-hdr">
     <div class="back-btn" onclick="goHome()">→</div>
     <div class="sub-icon ib-gd">🏢</div>
-    <div class="sub-hdr-txt"><h2>المراكز والوحدات</h2><p>الخدمات الإدارية والأكاديمية</p></div>
+    <div class="sub-hdr-txt"><h2>المراكز والوحدات</h2></div>
   </div>
   <div class="link-list">
-    <div class="sub-label">المراكز الأكاديمية</div>
+    <div class="sub-lbl">المراكز الأكاديمية</div>
     <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=374')"><div class="li-i ib-em">✅</div><div class="li-t"><h4>مركز ضمان الجودة والاعتماد</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=312')"><div class="li-i ib-bl">🌐</div><div class="li-t"><h4>مركز اللغات والترجمة</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=313')"><div class="li-i ib-vl">📡</div><div class="li-t"><h4>مركز التعلم المدمج</h4></div><span class="li-arr">‹</span></div>
@@ -953,57 +878,46 @@ body{
     <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=276')"><div class="li-i ib-am">👥</div><div class="li-t"><h4>مركز تنمية الموارد البشرية</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=382')"><div class="li-i ib-tl">📈</div><div class="li-t"><h4>مركز تطوير الأداء الجامعي</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=298')"><div class="li-i ib-gd">🏨</div><div class="li-t"><h4>مركز وفندق المؤتمرات</h4></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=38')"><div class="li-i ib-in">💡</div><div class="li-t"><h4>مركز المعلومات والتوثيق</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=27')"><div class="li-i ib-rd">🛡️</div><div class="li-t"><h4>مركز مكافحة الفساد</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=294')"><div class="li-i ib-bl">🌐</div><div class="li-t"><h4>مركز شبكة المعلومات</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=296')"><div class="li-i ib-cy">💻</div><div class="li-t"><h4>مركز التدريب على تكنولوجيا المعلومات</h4></div><span class="li-arr">‹</span></div>
-    <div class="sub-label">الوحدات التخصصية</div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=51')"><div class="li-i ib-rd">🏥</div><div class="li-t"><h4>المستشفى الجامعي</h4></div><span class="li-arr">‹</span></div>
+    <div class="sub-lbl">الوحدات التخصصية</div>
     <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=454')"><div class="li-i ib-gd">👨‍🎓</div><div class="li-t"><h4>وحدة متابعة الخريجين</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=345')"><div class="li-i ib-vl">⚙️</div><div class="li-t"><h4>وحدة تصميم وتطوير البرمجيات</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=28')"><div class="li-i ib-em">🌍</div><div class="li-t"><h4>وحدة التعاون الدولي</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.tico.bsu.edu.eg')"><div class="li-i ib-am">🔬</div><div class="li-t"><h4>مكتب نقل وتسويق التكنولوجيا</h4></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=346')"><div class="li-i ib-bl">📰</div><div class="li-t"><h4>وحدة النشر الدولي</h4></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=361')"><div class="li-i ib-tl">💰</div><div class="li-t"><h4>وحدة تمويل المشروعات البحثية</h4></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=412')"><div class="li-i ib-pk">📋</div><div class="li-t"><h4>وحدة إدارة المجلات العلمية</h4></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=447')"><div class="li-i ib-rd">🤝</div><div class="li-t"><h4>وحدة مناهضة العنف ضد المرأة</h4></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=289')"><div class="li-i ib-in">♿</div><div class="li-t"><h4>وحدة متحدي الإعاقة</h4></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=416')"><div class="li-i ib-gd">🏆</div><div class="li-t"><h4>مكتب التصنيف الدولي والتنمية المستدامة</h4></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=51')"><div class="li-i ib-rd">🏥</div><div class="li-t"><h4>المستشفى الجامعي</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=340')"><div class="li-i ib-am">🦺</div><div class="li-t"><h4>إدارة السلامة والصحة المهنية</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://www.bsu.edu.eg//Sector_Home.aspx?cat_id=411')"><div class="li-i ib-em">🌱</div><div class="li-t"><h4>الإدارة العامة للمشروعات البيئية</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Sector_Home.aspx?cat_id=447')"><div class="li-i ib-rd">🤝</div><div class="li-t"><h4>وحدة مناهضة العنف ضد المرأة</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=289')"><div class="li-i ib-in">♿</div><div class="li-t"><h4>وحدة متحدي الإعاقة</h4></div><span class="li-arr">‹</span></div>
   </div>
 </div>
 
-<!-- ═══════════════ روابط رسمية ═══════════════ -->
+<!-- ═══════ روابط رسمية ═══════ -->
 <div class="page" id="pg-links">
   <div class="sub-hdr">
     <div class="back-btn" onclick="goHome()">→</div>
     <div class="sub-icon ib-bl">🔗</div>
-    <div class="sub-hdr-txt"><h2>روابط رسمية مهمة</h2><p>الجامعة والمراكز</p></div>
+    <div class="sub-hdr-txt"><h2>روابط رسمية مهمة</h2></div>
   </div>
   <div class="link-list">
-    <div class="sub-label">الجامعة الرسمية</div>
     <div class="link-item" onclick="go('https://www.bsu.edu.eg')"><div class="li-i ib-gd">🏛️</div><div class="li-t"><h4>الموقع الرسمي للجامعة</h4><p>bsu.edu.eg</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ed_login.aspx')"><div class="li-i ib-gy">🔐</div><div class="li-t"><h4>صفحة الدخول الرسمية MIS</h4><p>ed_login.aspx</p></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.mis.bsu.edu.eg/umisswf/Registration/ed_login.aspx')"><div class="li-i ib-gy">🔐</div><div class="li-t"><h4>صفحة الدخول الرسمية MIS</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.mis.bsu.edu.eg/umisswf/UI/LoginPage.aspx')"><div class="li-i ib-vl">👨‍💼</div><div class="li-t"><h4>بوابة أعضاء هيئة التدريس</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://www.bsu.edu.eg/EmployeesData.aspx?cat_id=1')"><div class="li-i ib-bl">👥</div><div class="li-t"><h4>البحث عن موظف بمقر العمل</h4></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.bsu.edu.eg/Employees_Search.aspx?cat_id=1')"><div class="li-i ib-cy">🔍</div><div class="li-t"><h4>البحث عن موظف بالاسم</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://www.bsu.edu.eg/profsites.aspx?cat_id=1')"><div class="li-i ib-in">🌐</div><div class="li-t"><h4>المواقع الشخصية لأعضاء هيئة التدريس</h4></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://forms.gle/dzdB5t5kQFjLYJ3b9')"><div class="li-i ib-am">🏥</div><div class="li-t"><h4>استمارة الاشتراك في التأمين الطبي</h4><p>لأعضاء هيئة التدريس</p></div><span class="li-arr">‹</span></div>
-    <div class="sub-label">خدمات وظيفية</div>
-    <div class="link-item" onclick="go('http://www.bsu.edu.eg/BSU_Jobs.aspx?cat_id=1')"><div class="li-i ib-em">💼</div><div class="li-t"><h4>طلب الالتحاق بوظيفة</h4><p>بوابة التوظيف الجامعية</p></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://fekra.bsu.edu.eg')"><div class="li-i ib-vl">💡</div><div class="li-t"><h4>منصة فكرة — ريادة الأعمال</h4></div><span class="li-arr">‹</span></div>
-    <div class="sub-label">تواصل اجتماعي</div>
+    <div class="link-item" onclick="go('http://www.bsu.edu.eg/BSU_Jobs.aspx?cat_id=1')"><div class="li-i ib-em">💼</div><div class="li-t"><h4>بوابة التوظيف الجامعية</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://www.facebook.com/BeniSuefUniversity/')"><div class="li-i ib-bl">📘</div><div class="li-t"><h4>فيسبوك الجامعة الرسمي</h4></div><span class="li-arr">‹</span></div>
-    <div class="link-item" onclick="go('https://www.facebook.com/people/%D8%A7%D9%84%D8%B5%D9%81%D8%AD%D8%A9-%D8%A7%D9%84%D8%B1%D8%B3%D9%85%D9%8A%D8%A9-%D9%84%D9%85%D8%B1%D9%83%D8%B2-%D9%86%D8%B8%D9%85-%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA-%D8%A7%D9%84%D8%A5%D8%AF%D8%A7%D8%B1%D9%8A%D8%A9-%D8%A8%D8%AC%D8%A7%D9%85%D8%B9%D8%A9-%D8%A8%D9%86%D9%89-%D8%B3%D9%88%D9%8A%D9%81/100054484554193/')"><div class="li-i ib-in">📘</div><div class="li-t"><h4>فيسبوك مركز MIS الرسمي</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('http://www.bsu.edu.eg/Sector_Home.aspx?cat_id=293')"><div class="li-i ib-cy">ℹ️</div><div class="li-t"><h4>مركز نظم المعلومات MIS</h4></div><span class="li-arr">‹</span></div>
   </div>
   <div class="footer">© 2026 <strong>أوائل</strong> — جميع الحقوق محفوظة<br>بوابة التعليم الجامعي المصري</div>
 </div>
 
 </div><!-- end wrap -->
+</div><!-- end app -->
 
-<!-- Real Login Form -->
+<!-- Login Form -->
 <form id="loginForm" method="POST" action="https://www.mis.bsu.edu.eg/umisswf/Registration/ed_login.aspx">
   <input type="hidden" name="__VIEWSTATE"          value="wEPDwUKLTM0NDAzNDI3Ng9k"/>
   <input type="hidden" name="__VIEWSTATEGENERATOR" value="3639424D"/>
@@ -1014,23 +928,59 @@ body{
 </form>
 
 <script>
-/* STARS */
-(()=>{
-  const c=document.getElementById('stars');
-  for(let i=0;i<60;i++){
-    const s=document.createElement('div');
-    s.className='star';
-    const size=Math.random()<.25?3:2;
-    s.style.cssText=`top:${Math.random()*100}%;left:${Math.random()*100}%;
-      width:${size}px;height:${size}px;
-      --d:${2.5+Math.random()*4}s;--op:${.3+Math.random()*.65};
-      animation-delay:${Math.random()*5}s;`;
-    c.appendChild(s);
-  }
-})();
+/* ─── VALID CODES ───
+   Formula: code_num = (n² + 7n + 13) mod 97  → padded 3 digits
+   n=1→21, n=2→35, n=3→51, n=4→69, n=5→89, n=6→13, n=7→39, n=8→67, n=9→0→097, n=10→30
+*/
+const VALID_CODES = new Set([
+  'AWL-021','AWL-035','AWL-051','AWL-069','AWL-089',
+  'AWL-013','AWL-039','AWL-067','AWL-097','AWL-030'
+]);
+const GATE_KEY = 'awael_access_v1';
 
-/* LOAD CREDS */
+/* auto-format input */
+function formatCode(el){
+  let v = el.value.replace(/[^A-Za-z0-9]/g,'').toUpperCase();
+  if(v.length > 3) v = v.slice(0,3) + '-' + v.slice(3,6);
+  el.value = v;
+}
+
+/* check gate */
+function checkGate(){
+  const code = document.getElementById('gateInput').value.trim().toUpperCase();
+  if(VALID_CODES.has(code)){
+    sessionStorage.setItem(GATE_KEY,'1');
+    document.getElementById('gate-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    loadCreds();
+  } else {
+    const el = document.getElementById('gateErr');
+    el.textContent = '❌ الكود غير صحيح — تواصل مع مشرف المنصة';
+    const input = document.getElementById('gateInput');
+    input.classList.remove('shake');
+    void input.offsetWidth;
+    input.classList.add('shake');
+    setTimeout(()=>el.textContent='',3000);
+  }
+}
+
+/* check session on load */
 window.onload=()=>{
+  if(sessionStorage.getItem(GATE_KEY)==='1'){
+    document.getElementById('gate-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    loadCreds();
+  }
+};
+
+function logout(){
+  sessionStorage.removeItem(GATE_KEY);
+  document.getElementById('app').style.display='none';
+  document.getElementById('gate-screen').style.display='flex';
+  document.getElementById('gateInput').value='';
+}
+
+function loadCreds(){
   try{
     const s=localStorage.getItem('bsu_creds');
     if(s){
@@ -1041,15 +991,13 @@ window.onload=()=>{
       toggleLogin();
     }
   }catch(e){}
-};
+}
 
 function toggleLogin(){
   const b=document.getElementById('loginBody');
   const t=document.getElementById('loginToggle');
   const a=document.getElementById('ltArr');
-  b.classList.toggle('open');
-  t.classList.toggle('open');
-  a.classList.toggle('open');
+  b.classList.toggle('open');t.classList.toggle('open');a.classList.toggle('open');
 }
 
 function setStatus(m,t=''){
@@ -1075,16 +1023,13 @@ function showPage(id){
   document.getElementById(id).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
 function goHome(){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('home').classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
 function go(url){window.location.href=url;}
-
-document.addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('gate-screen').style.display!=='none')checkGate();});
 </script>
 </body>
 </html>
