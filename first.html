@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="theme-color" content="#f0f4ff">
-<title>أوائل — بوابة التعليم الجامعي</title>
+<title>أوائل - الخدمات الطلابية الجامعية </title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -408,6 +408,139 @@ body{
 }
 .footer strong{color:var(--p1);}
 
+/* ══════════════════════════════
+   UNIVERSITY SELECT GATE
+══════════════════════════════ */
+#gate-screen{padding:24px 16px;}
+.gate-wide{max-width:420px;}
+.uni-search{position:relative;margin-bottom:16px;}
+.uni-search input{
+  width:100%;padding:12px 42px 12px 16px;
+  background:var(--bg);border:2px solid var(--border);border-radius:12px;
+  color:var(--text);font-family:var(--font);font-size:14px;
+  outline:none;transition:border .2s,box-shadow .2s;text-align:right;
+}
+.uni-search input:focus{border-color:var(--p1);box-shadow:0 0 0 4px rgba(80,70,229,.1);}
+.uni-search .si{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:15px;color:var(--muted);}
+.uni-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:9px;
+  max-height:min(50vh,420px);overflow-y:auto;margin-bottom:6px;padding:2px;
+}
+.uni-card{
+  background:var(--card);border:1.5px solid var(--border);border-radius:14px;
+  padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:7px;
+  cursor:pointer;transition:all .15s;text-align:center;
+}
+.uni-card:hover{border-color:var(--p1);box-shadow:0 4px 16px rgba(80,70,229,.12);transform:translateY(-1px);}
+.uni-card:active{transform:scale(.96);}
+.uni-logo{
+  width:38px;height:38px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;color:#fff;
+  background:linear-gradient(135deg,var(--p1),var(--p2));
+}
+.uni-card h4{font-size:11px;font-weight:700;color:var(--text);line-height:1.3;}
+.uni-card p{font-size:8.5px;color:var(--muted2);margin-top:1px;}
+.uni-empty{grid-column:span 2;text-align:center;padding:24px 10px;color:var(--muted);font-size:12px;}
+.gate-back{
+  display:flex;align-items:center;gap:8px;margin-bottom:14px;
+  font-size:12px;color:var(--p1);font-weight:700;cursor:pointer;
+}
+.gate-sel-badge{
+  display:flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,rgba(80,70,229,.07),rgba(124,58,237,.05));
+  border:1.5px solid rgba(80,70,229,.18);border-radius:14px;
+  padding:12px 14px;margin-bottom:18px;text-align:right;
+}
+.gate-sel-badge .uni-logo{width:34px;height:34px;font-size:11px;}
+.gate-sel-badge h4{font-size:13px;font-weight:800;color:var(--text);}
+.gate-sel-badge p{font-size:10px;color:var(--muted);margin-top:1px;}
+
+/* ── JOIN / SUPPORT PAGE ── */
+.join-card{
+  background:var(--card);border:1.5px solid var(--border);border-radius:var(--r);
+  padding:18px 16px;margin-bottom:12px;box-shadow:0 2px 12px rgba(80,70,229,.05);
+}
+.join-card .ji{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;}
+.join-card h3{font-size:15px;font-weight:800;color:var(--text);margin-bottom:5px;}
+.join-card p{font-size:11.5px;color:var(--muted);line-height:1.8;margin-bottom:12px;}
+.btn-join{
+  display:inline-flex;align-items:center;gap:6px;width:100%;justify-content:center;
+  padding:11px;border:none;border-radius:10px;color:#fff;font-family:var(--font);
+  font-size:13px;font-weight:800;cursor:pointer;text-decoration:none;
+  background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 4px 16px rgba(37,211,102,.3);
+}
+/* region label inside the university grid */
+.uni-region-lbl{
+  grid-column:span 2;font-size:9px;letter-spacing:1.2px;color:var(--muted2);
+  text-transform:uppercase;font-weight:800;margin:8px 0 1px;padding:0 2px;
+}
+
+/* quick links under the gate card (join / admin) */
+.gate-join-link{
+  margin-top:16px;text-align:center;font-size:12px;font-weight:800;
+  color:#128c7e;cursor:pointer;padding:10px;border-radius:10px;
+  background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.2);
+}
+.gate-admin-link{
+  margin-top:10px;text-align:center;font-size:10px;color:var(--muted2);
+  cursor:pointer;text-decoration:underline;
+}
+
+/* standalone join screen (pre-login) */
+#join-screen,#admin-screen{
+  display:none;min-height:100vh;padding:24px 16px 60px;
+}
+.join-wrap{max-width:420px;margin:0 auto;}
+.join-back{
+  display:flex;align-items:center;gap:8px;margin-bottom:16px;
+  font-size:13px;color:var(--p1);font-weight:800;cursor:pointer;
+}
+.join-hdr{text-align:center;margin-bottom:18px;}
+.join-hdr .jh-logo{
+  width:56px;height:56px;border-radius:16px;margin:0 auto 10px;
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+  box-shadow:0 8px 24px rgba(37,211,102,.3);
+}
+.join-hdr h2{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--text);}
+.join-hdr p{font-size:12px;color:var(--muted);margin-top:4px;}
+
+.amt-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:12px;}
+.amt-btn{
+  padding:10px 4px;border-radius:10px;border:1.5px solid var(--border);
+  background:var(--bg);color:var(--text);font-family:var(--font);
+  font-size:12px;font-weight:800;cursor:pointer;text-align:center;
+}
+.amt-btn:hover{border-color:#25d366;background:rgba(37,211,102,.06);}
+.terms-toggle{
+  font-size:11px;color:var(--p1);font-weight:700;cursor:pointer;
+  text-decoration:underline;margin-bottom:10px;display:inline-block;
+}
+.terms-box{
+  display:none;font-size:11px;color:var(--muted);line-height:1.9;
+  background:var(--bg);border-radius:10px;padding:10px 12px;margin-bottom:12px;
+}
+.terms-box.open{display:block;}
+
+/* admin codes screen */
+.admin-row{
+  display:flex;align-items:center;gap:10px;padding:10px 12px;
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  margin-bottom:7px;
+}
+.admin-row .ar-logo{
+  width:32px;height:32px;border-radius:9px;flex-shrink:0;font-size:10px;font-weight:900;color:#fff;
+  background:linear-gradient(135deg,var(--p1),var(--p2));display:flex;align-items:center;justify-content:center;
+}
+.admin-row .ar-t{flex:1;min-width:0;}
+.admin-row .ar-t h4{font-size:12px;font-weight:800;color:var(--text);}
+.admin-row .ar-t p{font-size:10px;color:var(--muted);margin-top:1px;direction:ltr;text-align:right;}
+.admin-copy{
+  flex-shrink:0;padding:6px 10px;border-radius:8px;border:none;
+  background:rgba(80,70,229,.1);color:var(--p1);font-size:10px;font-weight:800;cursor:pointer;
+}
+.ib-in2{background:rgba(99,102,241,.12);}
 #loginForm{display:none;}
 </style>
 </head>
@@ -425,14 +558,33 @@ body{
      GATE SCREEN
 ══════════════════════════════ -->
 <div id="gate-screen">
-  <div class="gate-card">
+
+  <!-- STEP 1: pick university -->
+  <div class="gate-card gate-wide" id="gate-step-uni">
     <div class="gate-logo">✦</div>
     <div class="gate-title">أوائل</div>
-    <div class="gate-sub">بوابة التعليم الجامعي المصري<br>أدخل كود الوصول للمتابعة</div>
+    <div class="gate-sub">بوابة التعليم الجامعي المصري<br>اختر جامعتك للمتابعة</div>
+
+    <div class="uni-search">
+      <input type="text" id="uniSearch" placeholder="ابحث عن جامعتك..." autocomplete="off" spellcheck="false" oninput="renderUniList(this.value)"/>
+      <span class="si">🔍</span>
+    </div>
+
+    <div class="uni-grid" id="uniGrid"></div>
+
+    <div class="gate-join-link" onclick="showJoin()">🤝 اشترك · ساهم · كن شريك</div>
+    <div class="gate-footer">© 2026 أوائل — جميع الحقوق محفوظة</div>
+    <div class="gate-admin-link" onclick="showAdmin()">لوحة الأكواد (للمشرف)</div>
+  </div>
+
+  <!-- STEP 2: enter access code for chosen university -->
+  <div class="gate-card" id="gate-step-code" style="display:none;">
+    <div class="gate-back" onclick="backToUniList()">→ رجوع لاختيار الجامعة</div>
+    <div class="gate-sel-badge" id="gateSelBadge"></div>
 
     <div class="gate-field">
       <label>كود الوصول</label>
-      <input type="text" id="gateInput" placeholder="AWL-XXX"
+      <input type="text" id="gateInput" placeholder="XXX-YYY"
         maxlength="7" autocomplete="off" spellcheck="false"
         oninput="formatCode(this)"
         onkeydown="if(event.key==='Enter')checkGate()"/>
@@ -445,6 +597,74 @@ body{
       للتواصل: راسل مشرف المنصة
     </div>
     <div class="gate-footer">© 2026 أوائل — جميع الحقوق محفوظة</div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════
+     JOIN / SUPPORT — reachable before login
+══════════════════════════════ -->
+<div id="join-screen">
+  <div class="join-wrap">
+    <div class="join-back" onclick="hideJoin()">→ رجوع</div>
+    <div class="join-hdr">
+      <div class="jh-logo">🤝</div>
+      <h2>اشترك · ساهم · كن شريك</h2>
+      <p>كل الطرق بتوصلك بينا على واتساب</p>
+    </div>
+
+    <div class="join-card">
+      <div class="ji ib-vl">⭐</div>
+      <h3>اطلب اشتراك</h3>
+      <p>عايز تفعّل اشتراكك في منصة أوائل؟ ابعتلنا على واتساب وهنظبطلك الموضوع بسرعة.</p>
+      <a class="btn-join" onclick="go('https://wa.me/201007586279?text='+encodeURIComponent('مرحبًا، عايز أطلب اشتراك في منصة أوائل 🙌'));return false;">💬 تواصل على واتساب</a>
+    </div>
+
+    <div class="join-card">
+      <div class="ji ib-em">💙</div>
+      <h3>ساهم في المشروع</h3>
+      <p>لو حابب تدعم استمرارية وتطوير أوائل، اختار مبلغ تقريبي أو ابعتلنا مباشرة:</p>
+      <div class="amt-row">
+        <div class="amt-btn" onclick="contribute('50 جنيه')">50 ج</div>
+        <div class="amt-btn" onclick="contribute('100 جنيه')">100 ج</div>
+        <div class="amt-btn" onclick="contribute('مبلغ تاني')">مبلغ آخر</div>
+      </div>
+      <a class="btn-join" onclick="contribute('');return false;">💬 تواصل على واتساب</a>
+    </div>
+
+    <div class="join-card">
+      <div class="ji ib-gd">🚀</div>
+      <h3>كن شريك</h3>
+      <p>الشراكة بتديك حق اقتراح مباشر على صاحب المنصة، ونسبة <strong style="color:var(--p1);">5%</strong> من الأرباح.</p>
+      <span class="terms-toggle" onclick="this.nextElementSibling.classList.toggle('open')">اقرأ تفاصيل الشراكة كاملة ▾</span>
+      <div class="terms-box">
+        <strong style="color:var(--text);">شروط الشراكة:</strong><br>
+        ① الشريك بياخد نسبة 5% من صافي أرباح منصة أوائل.<br>
+        ② له حق تقديم اقتراحات مباشرة لصاحب المنصة بخصوص التطوير والتوسع.<br>
+        ③ القرار النهائي في تنفيذ أي اقتراح يرجع لصاحب المنصة.<br>
+        ④ الشراكة تُوثّق باتفاق مكتوب بين الطرفين قبل البدء.<br>
+        ⑤ التفاصيل النهائية (نسبة المجهود، المدة، الالتزامات) بتتحدد بالتواصل المباشر.
+      </div>
+      <a class="btn-join" onclick="go('https://wa.me/201007586279?text='+encodeURIComponent('مرحبًا، عايز أكون شريك في مشروع أوائل (نسبة 5% + صلاحية اقتراحات) 🤝'));return false;">💬 تواصل على واتساب</a>
+    </div>
+
+    <div class="footer">© 2026 <strong>أوائل</strong> — جميع الحقوق محفوظة</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     ADMIN CODES OVERVIEW (for platform owner)
+══════════════════════════════ -->
+<div id="admin-screen">
+  <div class="join-wrap">
+    <div class="join-back" onclick="hideAdmin()">→ رجوع</div>
+    <div class="join-hdr">
+      <div class="jh-logo" style="background:linear-gradient(135deg,var(--p1),var(--p2));box-shadow:0 8px 24px rgba(80,70,229,.3);">🗂️</div>
+      <h2>لوحة الأكواد</h2>
+      <p>مثال كود واحد صالح لكل جامعة (فيه 30 كود صالح لكل جامعة فعليًا)</p>
+    </div>
+    <div id="adminList"></div>
+    <div class="footer">© 2026 <strong>أوائل</strong> — جميع الحقوق محفوظة</div>
   </div>
 </div>
 
@@ -461,7 +681,7 @@ body{
     <div class="hdr-name">أوائل</div>
     <div class="hdr-sub">بوابة التعليم الجامعي</div>
   </div>
-  <span class="hdr-pill">MIS · 2026</span>
+  <span class="hdr-pill" id="hdrPill">MIS · 2026</span>
   <div class="hdr-exit" onclick="logout()" title="خروج">🚪</div>
 </div>
 
@@ -469,10 +689,19 @@ body{
 <div class="page active" id="home">
 
   <div class="hero">
-    <div class="hero-badge">✦ بوابتك الجامعية الذكية</div>
-    <h2>كل خدماتك في مكان واحد</h2>
-    <p>وصول سريع لنظام MIS ومنصات جامعة بني سويف والجامعات المصرية</p>
+    <div class="hero-badge" id="heroBadge">✦ بوابتك الجامعية الذكية</div>
+    <h2 id="heroTitle">كل خدماتك في مكان واحد</h2>
+    <p id="heroSub">وصول سريع لنظام MIS ومنصات جامعة بني سويف والجامعات المصرية</p>
   </div>
+
+  <div class="cat-card full" style="--hover-c:rgba(99,102,241,.35);margin-bottom:16px;" onclick="showPage('pg-mis-egypt')">
+    <div class="ci ib-in" style="width:40px;height:40px;border-radius:11px;font-size:18px;">🌍</div>
+    <div class="ct"><h3>خدمات كل جامعات مصر</h3><p>بوابات كل الجامعات الحكومية والأهلية والخاصة</p></div>
+    <span class="ct-arr">‹</span>
+  </div>
+
+  <!-- ══ يظهر فقط لطلاب بني سويف — خدماتها التفصيلية ══ -->
+  <div id="bsu-services">
 
   <!-- LOGIN -->
   <div class="login-box">
@@ -542,12 +771,6 @@ body{
       <div class="ct"><h3>مشروع التخرج</h3><p>محو الأمية</p></div>
     </div>
 
-    <div class="cat-card full" style="--hover-c:rgba(99,102,241,.35);" onclick="showPage('pg-mis-egypt')">
-      <div class="ci ib-in" style="width:40px;height:40px;border-radius:11px;font-size:18px;">🗺️</div>
-      <div class="ct"><h3>MIS مصر</h3><p>بوابات جامعات المحافظات</p></div>
-      <span class="ct-arr">‹</span>
-    </div>
-
     <div class="cat-card full" style="--hover-c:rgba(124,58,237,.35);" onclick="showPage('pg-reg')">
       <div class="ci ib-vl" style="width:40px;height:40px;border-radius:11px;font-size:18px;">🏛️</div>
       <div class="ct"><h3>تسجيل الكليات</h3><p>البوابات الخاصة بكل كلية</p></div>
@@ -573,6 +796,18 @@ body{
     </div>
 
   </div>
+  </div><!-- end bsu-services -->
+
+  <!-- ══ يظهر لأي جامعة غير بني سويف ══ -->
+  <div id="other-uni-notice" style="display:none;">
+    <div class="join-card">
+      <div class="ji ib-in">🏫</div>
+      <h3 id="otherUniTitle">خدمات جامعتك</h3>
+      <p>لسه بنجهّز صفحات الخدمات التفصيلية لجامعتك على أوائل. لحد ما نخلص، تقدر تدخل بشكل مباشر على البوابة الرسمية لجامعتك من هنا:</p>
+      <a class="btn-join" id="otherUniPortalBtn" style="background:linear-gradient(135deg,var(--p1),var(--p2));box-shadow:0 4px 16px rgba(80,70,229,.3);" href="#" onclick="return true;">🔗 بوابة الجامعة الرسمية</a>
+    </div>
+  </div>
+
   <div class="footer">© 2026 <strong>أوائل</strong> — جميع الحقوق محفوظة<br>بوابة التعليم الجامعي المصري</div>
 </div>
 
@@ -765,8 +1000,8 @@ body{
 <div class="page" id="pg-mis-egypt">
   <div class="sub-hdr">
     <div class="back-btn" onclick="goHome()">→</div>
-    <div class="sub-icon ib-in">🗺️</div>
-    <div class="sub-hdr-txt"><h2>MIS — الجامعات المصرية</h2></div>
+    <div class="sub-icon ib-in">🌍</div>
+    <div class="sub-hdr-txt"><h2>خدمات كل جامعات مصر</h2><p>حكومية · أهلية · خاصة</p></div>
   </div>
   <div class="link-list">
     <div class="sub-lbl">الصعيد الأوسط</div>
@@ -793,6 +1028,17 @@ body{
     <div class="link-item" onclick="go('https://mis.bie.edu.eg/student')"><div class="li-i ib-gd">🏫</div><div class="li-t"><h4>جامعة بورسعيد — MIS</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://www.luxor-univ.edu.eg/')"><div class="li-i ib-am">🏫</div><div class="li-t"><h4>جامعة الأقصر</h4></div><span class="li-arr">‹</span></div>
     <div class="link-item" onclick="go('https://www.asu.edu.eg/')"><div class="li-i ib-in">🏫</div><div class="li-t"><h4>جامعة أسوان</h4></div><span class="li-arr">‹</span></div>
+    <div class="sub-lbl">جامعات أهلية وخاصة</div>
+    <div class="link-item" onclick="go('https://www.aucegypt.edu')"><div class="li-i ib-gd">🎓</div><div class="li-t"><h4>الجامعة الأمريكية بالقاهرة — AUC</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.guc.edu.eg')"><div class="li-i ib-bl">🎓</div><div class="li-t"><h4>الجامعة الألمانية بالقاهرة — GUC</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.bue.edu.eg')"><div class="li-i ib-vl">🎓</div><div class="li-t"><h4>الجامعة البريطانية في مصر — BUE</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.o6u.edu.eg')"><div class="li-i ib-em">🎓</div><div class="li-t"><h4>جامعة 6 أكتوبر — O6U</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.fue.edu.eg')"><div class="li-i ib-cy">🎓</div><div class="li-t"><h4>جامعة المستقبل — FUE</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.must.edu.eg')"><div class="li-i ib-am">🎓</div><div class="li-t"><h4>جامعة مصر للعلوم والتكنولوجيا — MUST</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://nub.edu.eg')"><div class="li-i ib-pk">🎓</div><div class="li-t"><h4>جامعة النهضة ببني سويف — NUB</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.buc.edu.eg')"><div class="li-i ib-tl">🎓</div><div class="li-t"><h4>جامعة بدر بالقاهرة — BUC</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://www.acu.edu.eg')"><div class="li-i ib-in">🎓</div><div class="li-t"><h4>جامعة الأهرام الكندية — ACU</h4></div><span class="li-arr">‹</span></div>
+    <div class="link-item" onclick="go('https://sis-bsnu.bsu.edu.eg/DefaultApplicantNew.aspx')"><div class="li-i ib-gy">🎓</div><div class="li-t"><h4>جامعة بني سويف الأهلية</h4></div><span class="li-arr">‹</span></div>
   </div>
 </div>
 
@@ -928,15 +1174,105 @@ body{
 </form>
 
 <script>
-/* ─── VALID CODES ───
-   Formula: code_num = (n² + 7n + 13) mod 97  → padded 3 digits
-   n=1→21, n=2→35, n=3→51, n=4→69, n=5→89, n=6→13, n=7→39, n=8→67, n=9→0→097, n=10→30
+/* ─── UNIVERSITIES ───
+   Each keeps its old sequential number (n) — kept only as a historic label now,
+   NOT tied to a single access code anymore (per owner's request).
+   Access codes = "<3-letter code>-<suffix>", where <suffix> comes from a SHARED
+   pool of numbers (see VALID_SUFFIXES below), so the same numeric result works
+   across many universities — you can hand out lots of codes freely, not just
+   one fixed number per university.
 */
-const VALID_CODES = new Set([
-  'AWL-021','AWL-035','AWL-051','AWL-069','AWL-089',
-  'AWL-013','AWL-039','AWL-067','AWL-097','AWL-030'
-]);
+const UNIVERSITIES = [
+  {n:1,  code:'BUS', name:'جامعة بني سويف',              region:'الصعيد الأوسط',      portal:'https://www.mis.bsu.edu.eg/umisswf/Registration/ed_login.aspx'},
+  {n:2,  code:'SUV', name:'جامعة جنوب الوادي',            region:'الصعيد الأوسط',      portal:'http://mispg.svu.edu.eg/svu/UI/LoginPage.aspx'},
+  {n:3,  code:'MIN', name:'جامعة المنيا',                 region:'الصعيد الأوسط',      portal:'https://www.minia.edu.eg/minia/results2.aspx'},
+  {n:4,  code:'ASY', name:'جامعة أسيوط',                  region:'الصعيد الأوسط',      portal:'http://www.aun.edu.eg/main/'},
+  {n:5,  code:'SOH', name:'جامعة سوهاج',                  region:'الصعيد الأوسط',      portal:'https://www.sohag-univ.edu.eg/ar/'},
+  {n:6,  code:'FAY', name:'جامعة الفيوم',                 region:'الصعيد الأوسط',      portal:'https://www.fayoum.edu.eg/'},
+  {n:7,  code:'CAI', name:'جامعة القاهرة',                region:'القاهرة الكبرى',     portal:'https://cu.edu.eg/Home'},
+  {n:8,  code:'ASM', name:'جامعة عين شمس',                region:'القاهرة الكبرى',     portal:'https://ums.asu.edu.eg/App/Login_Form'},
+  {n:9,  code:'HEL', name:'جامعة حلوان',                  region:'القاهرة الكبرى',     portal:'https://www.helwan.edu.eg/'},
+  {n:10, code:'MAN', name:'جامعة المنصورة',               region:'الدلتا والشمال',     portal:'https://www.mans.edu.eg/ar'},
+  {n:11, code:'ALX', name:'جامعة الإسكندرية',             region:'الدلتا والشمال',     portal:'http://mis.alexu.edu.eg/umisapp/ui/loginpage.aspx'},
+  {n:12, code:'KFS', name:'جامعة كفر الشيخ',              region:'الدلتا والشمال',     portal:'https://mis.kfs.edu.eg/last_year/account/login'},
+  {n:13, code:'ZAG', name:'جامعة الزقازيق',               region:'الدلتا والشمال',     portal:'https://www.zu.edu.eg/ar-EG/Pages/default.aspx'},
+  {n:14, code:'TAN', name:'جامعة طنطا',                   region:'الدلتا والشمال',     portal:'https://www.tanta.edu.eg/ar/'},
+  {n:15, code:'DAM', name:'جامعة دمنهور',                 region:'الدلتا والشمال',     portal:'https://www.dmu.edu.eg/'},
+  {n:16, code:'MEN', name:'جامعة المنوفية',               region:'الدلتا والشمال',     portal:'https://www.menofia.edu.eg/'},
+  {n:17, code:'SUC', name:'جامعة قناة السويس',            region:'قناة السويس والجنوب', portal:'https://www.suezcanal.edu.eg/ar/'},
+  {n:18, code:'POR', name:'جامعة بورسعيد',                region:'قناة السويس والجنوب', portal:'https://mis.bie.edu.eg/student'},
+  {n:19, code:'LUX', name:'جامعة الأقصر',                 region:'قناة السويس والجنوب', portal:'https://www.luxor-univ.edu.eg/'},
+  {n:20, code:'ASW', name:'جامعة أسوان',                  region:'قناة السويس والجنوب', portal:'https://www.asu.edu.eg/'},
+  {n:21, code:'AUC', name:'الجامعة الأمريكية بالقاهرة',    region:'جامعات أهلية وخاصة', portal:'https://www.aucegypt.edu'},
+  {n:22, code:'GUC', name:'الجامعة الألمانية بالقاهرة',    region:'جامعات أهلية وخاصة', portal:'https://www.guc.edu.eg'},
+  {n:23, code:'BUE', name:'الجامعة البريطانية في مصر',     region:'جامعات أهلية وخاصة', portal:'https://www.bue.edu.eg'},
+  {n:24, code:'O6U', name:'جامعة 6 أكتوبر',               region:'جامعات أهلية وخاصة', portal:'https://www.o6u.edu.eg'},
+  {n:25, code:'FUE', name:'جامعة المستقبل',               region:'جامعات أهلية وخاصة', portal:'https://www.fue.edu.eg'},
+  {n:26, code:'MUS', name:'جامعة مصر للعلوم والتكنولوجيا', region:'جامعات أهلية وخاصة', portal:'https://www.must.edu.eg'},
+  {n:27, code:'NUB', name:'جامعة النهضة ببني سويف',        region:'جامعات أهلية وخاصة', portal:'https://nub.edu.eg'},
+  {n:28, code:'BUC', name:'جامعة بدر بالقاهرة',            region:'جامعات أهلية وخاصة', portal:'https://www.buc.edu.eg'},
+  {n:29, code:'ACU', name:'جامعة الأهرام الكندية',         region:'جامعات أهلية وخاصة', portal:'https://www.acu.edu.eg'},
+  {n:30, code:'BNU', name:'جامعة بني سويف الأهلية',        region:'جامعات أهلية وخاصة', portal:'https://sis-bsnu.bsu.edu.eg/DefaultApplicantNew.aspx'}
+];
+const REGION_ORDER = ['الصعيد الأوسط','القاهرة الكبرى','الدلتا والشمال','قناة السويس والجنوب','جامعات أهلية وخاصة'];
+
+/* ─── SHARED CODE POOL ───
+   suffix_k = (k + 14) × 3, for k = 1..POOL_SIZE, padded to 3 digits.
+   Any of these suffixes is valid with ANY university's 3-letter code —
+   the numeric part isn't locked to one specific university.
+*/
+const POOL_SIZE = 30;
+const VALID_SUFFIXES = new Set(Array.from({length:POOL_SIZE}, (_,i)=> String((i+1+14)*3).padStart(3,'0')));
+function sampleSuffix(){ return Array.from(VALID_SUFFIXES)[0]; } // e.g. "045" — used just for the admin example
+
 const GATE_KEY = 'awael_access_v1';
+const UNI_KEY  = 'awael_uni_v1';
+let selectedUni = null;
+
+/* render (and filter) university grid, grouped by region */
+function renderUniList(filter){
+  const grid = document.getElementById('uniGrid');
+  const q = (filter||'').trim();
+  const list = UNIVERSITIES.filter(u => !q || u.name.includes(q) || u.code.toLowerCase().includes(q.toLowerCase()));
+  if(!list.length){
+    grid.innerHTML = '<div class="uni-empty">😕 مفيش جامعة بالاسم ده<br>جرّب كلمة تانية</div>';
+    return;
+  }
+  let html = '';
+  REGION_ORDER.forEach(region=>{
+    const inRegion = list.filter(u=>u.region===region);
+    if(!inRegion.length) return;
+    html += `<div class="uni-region-lbl">${region}</div>`;
+    html += inRegion.map(u => `
+      <div class="uni-card" onclick="selectUni('${u.code}')">
+        <div class="uni-logo">${u.code}</div>
+        <h4>${u.name}</h4>
+        <p>${u.region}</p>
+      </div>`).join('');
+  });
+  grid.innerHTML = html;
+}
+
+/* pick a university → move to code entry step */
+function selectUni(code){
+  const u = UNIVERSITIES.find(x => x.code === code);
+  if(!u) return;
+  selectedUni = u;
+  document.getElementById('gateSelBadge').innerHTML =
+    `<div class="uni-logo">${u.code}</div><div><h4>${u.name}</h4><p>أدخل كود الوصول الخاص بالجامعة</p></div>`;
+  document.getElementById('gate-step-uni').style.display='none';
+  document.getElementById('gate-step-code').style.display='block';
+  document.getElementById('gateInput').value='';
+  document.getElementById('gateInput').placeholder = u.code+'-XXX';
+  document.getElementById('gateInput').focus();
+}
+
+function backToUniList(){
+  selectedUni = null;
+  document.getElementById('gate-step-code').style.display='none';
+  document.getElementById('gate-step-uni').style.display='block';
+  document.getElementById('gateErr').textContent='';
+}
 
 /* auto-format input */
 function formatCode(el){
@@ -945,14 +1281,19 @@ function formatCode(el){
   el.value = v;
 }
 
+function isValidCode(uniCode, input){
+  const parts = input.split('-');
+  return parts.length===2 && parts[0]===uniCode && VALID_SUFFIXES.has(parts[1]);
+}
+
 /* check gate */
 function checkGate(){
+  if(!selectedUni){ backToUniList(); return; }
   const code = document.getElementById('gateInput').value.trim().toUpperCase();
-  if(VALID_CODES.has(code)){
+  if(isValidCode(selectedUni.code, code)){
     sessionStorage.setItem(GATE_KEY,'1');
-    document.getElementById('gate-screen').style.display='none';
-    document.getElementById('app').style.display='block';
-    loadCreds();
+    sessionStorage.setItem(UNI_KEY, selectedUni.code);
+    enterApp(selectedUni);
   } else {
     const el = document.getElementById('gateErr');
     el.textContent = '❌ الكود غير صحيح — تواصل مع مشرف المنصة';
@@ -964,20 +1305,96 @@ function checkGate(){
   }
 }
 
+/* enter the app, personalized for the chosen university */
+function enterApp(u){
+  document.getElementById('gate-screen').style.display='none';
+  document.getElementById('join-screen').style.display='none';
+  document.getElementById('admin-screen').style.display='none';
+  document.getElementById('app').style.display='block';
+
+  document.getElementById('hdrPill').textContent = UNIVERSITIES.length+' جامعة · 2026';
+
+  if(u.code === 'BUS'){
+    document.getElementById('heroBadge').textContent = '✦ بوابتك الجامعية الذكية';
+    document.getElementById('heroTitle').textContent = 'كل خدماتك في مكان واحد';
+    document.getElementById('heroSub').textContent   = 'وصول سريع لنظام MIS ومنصات جامعة بني سويف';
+    document.getElementById('bsu-services').style.display = 'block';
+    document.getElementById('other-uni-notice').style.display = 'none';
+    loadCreds();
+  } else {
+    document.getElementById('heroBadge').textContent = '✦ '+u.name;
+    document.getElementById('heroTitle').textContent = 'أهلاً بيك في أوائل';
+    document.getElementById('heroSub').textContent   = 'خدمات '+u.name+' هتتوفر هنا قريب';
+    document.getElementById('bsu-services').style.display = 'none';
+    document.getElementById('other-uni-notice').style.display = 'block';
+    document.getElementById('otherUniTitle').textContent = 'خدمات '+u.name;
+    document.getElementById('otherUniPortalBtn').setAttribute('onclick', "go('"+u.portal+"');return false;");
+  }
+}
+
 /* check session on load */
 window.onload=()=>{
+  renderUniList('');
+  renderAdminList();
   if(sessionStorage.getItem(GATE_KEY)==='1'){
-    document.getElementById('gate-screen').style.display='none';
-    document.getElementById('app').style.display='block';
-    loadCreds();
+    const savedCode = sessionStorage.getItem(UNI_KEY);
+    const u = UNIVERSITIES.find(x=>x.code===savedCode) || UNIVERSITIES[0];
+    enterApp(u);
   }
 };
 
 function logout(){
   sessionStorage.removeItem(GATE_KEY);
+  sessionStorage.removeItem(UNI_KEY);
+  selectedUni = null;
   document.getElementById('app').style.display='none';
+  document.getElementById('gate-step-code').style.display='none';
+  document.getElementById('gate-step-uni').style.display='block';
   document.getElementById('gate-screen').style.display='flex';
-  document.getElementById('gateInput').value='';
+  document.getElementById('uniSearch').value='';
+  renderUniList('');
+}
+
+/* ─── JOIN / SUPPORT (pre-login) ─── */
+function showJoin(){
+  document.getElementById('gate-screen').style.display='none';
+  document.getElementById('join-screen').style.display='block';
+}
+function hideJoin(){
+  document.getElementById('join-screen').style.display='none';
+  document.getElementById('gate-screen').style.display='flex';
+}
+function contribute(amount){
+  const msg = amount ? `مرحبًا، عايز أساهم في دعم مشروع أوائل بمبلغ ${amount} 💙` : 'مرحبًا، عايز أساهم في دعم مشروع أوائل 💙';
+  go('https://wa.me/201007586279?text='+encodeURIComponent(msg));
+}
+
+/* ─── ADMIN CODES OVERVIEW ─── */
+function showAdmin(){
+  document.getElementById('gate-screen').style.display='none';
+  document.getElementById('admin-screen').style.display='block';
+}
+function hideAdmin(){
+  document.getElementById('admin-screen').style.display='none';
+  document.getElementById('gate-screen').style.display='flex';
+}
+function renderAdminList(){
+  const box = document.getElementById('adminList');
+  if(!box) return;
+  box.innerHTML = UNIVERSITIES.map(u => {
+    const example = u.code+'-'+sampleSuffix();
+    return `<div class="admin-row">
+      <div class="ar-logo">${u.code}</div>
+      <div class="ar-t"><h4>${u.name}</h4><p>${example}</p></div>
+      <button class="admin-copy" onclick="copyCode('${example}',this)">نسخ</button>
+    </div>`;
+  }).join('');
+}
+function copyCode(code, btn){
+  navigator.clipboard.writeText(code).then(()=>{
+    const old = btn.textContent; btn.textContent='✓ اتنسخ';
+    setTimeout(()=>btn.textContent=old, 1500);
+  }).catch(()=>{});
 }
 
 function loadCreds(){
@@ -1029,7 +1446,7 @@ function goHome(){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function go(url){window.location.href=url;}
-document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('gate-screen').style.display!=='none')checkGate();});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('gate-step-code').style.display!=='none')checkGate();});
 </script>
 </body>
 </html>
